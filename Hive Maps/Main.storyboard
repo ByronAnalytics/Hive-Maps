@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EMz-NG-LHD">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -874,7 +875,7 @@
                                 <segue destination="k16-rw-H8H" kind="unwind" unwindAction="unWindToHome:" id="meV-LY-6Ig"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Analyze" id="59Q-0i-YEQ">
+                        <barButtonItem key="rightBarButtonItem" title="Analyze" id="59Q-0i-YEQ">
                             <connections>
                                 <segue destination="TSe-42-orw" kind="presentation" identifier="visualizeDataSegue" id="Cwe-bM-qtM"/>
                             </connections>
