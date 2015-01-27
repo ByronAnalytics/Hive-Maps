@@ -20,9 +20,6 @@
 		5245A5741A5A7169002DBA4B /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5731A5A7169002DBA4B /* SettingsTableViewController.m */; };
 		5245A5771A5A72C7002DBA4B /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5761A5A72C7002DBA4B /* DetailsTableViewController.m */; };
 		52508F8D1A745397007EF20D /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52508F8C1A745397007EF20D /* RateView.m */; };
-		52508F911A7455AF007EF20D /* kermit_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 52508F8E1A7455AF007EF20D /* kermit_empty.png */; };
-		52508F921A7455AF007EF20D /* kermit_full.png in Resources */ = {isa = PBXBuildFile; fileRef = 52508F8F1A7455AF007EF20D /* kermit_full.png */; };
-		52508F931A7455AF007EF20D /* kermit_half.png in Resources */ = {isa = PBXBuildFile; fileRef = 52508F901A7455AF007EF20D /* kermit_half.png */; };
 		52593AB71A59FF3200EB5A1D /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52593AB61A59FF3200EB5A1D /* MainTableViewController.m */; };
 		52593AB91A5A01EE00EB5A1D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52593AB81A5A01EE00EB5A1D /* CoreData.framework */; };
 		525BE5F01A5A244D000324CA /* MakeHiveObsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */; };
@@ -80,9 +77,6 @@
 		5245A5761A5A72C7002DBA4B /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
 		52508F8B1A745397007EF20D /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		52508F8C1A745397007EF20D /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
-		52508F8E1A7455AF007EF20D /* kermit_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kermit_empty.png; sourceTree = "<group>"; };
-		52508F8F1A7455AF007EF20D /* kermit_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kermit_full.png; sourceTree = "<group>"; };
-		52508F901A7455AF007EF20D /* kermit_half.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kermit_half.png; sourceTree = "<group>"; };
 		52593AB51A59FF3200EB5A1D /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
 		52593AB61A59FF3200EB5A1D /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		52593AB81A5A01EE00EB5A1D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -177,9 +171,6 @@
 				52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */,
 				52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */,
 				52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */,
-				52508F8E1A7455AF007EF20D /* kermit_empty.png */,
-				52508F8F1A7455AF007EF20D /* kermit_full.png */,
-				52508F901A7455AF007EF20D /* kermit_half.png */,
 			);
 			name = "Star Images";
 			sourceTree = "<group>";
@@ -392,9 +383,6 @@
 				52B9EA401A77FFFE004BAA89 /* TEXASHALF.png in Resources */,
 				52B9EA3F1A77FFFE004BAA89 /* TEXASFULL.png in Resources */,
 				5270C6AD1A59FBA000F0C1B0 /* LaunchScreen.xib in Resources */,
-				52508F911A7455AF007EF20D /* kermit_empty.png in Resources */,
-				52508F931A7455AF007EF20D /* kermit_half.png in Resources */,
-				52508F921A7455AF007EF20D /* kermit_full.png in Resources */,
 				5270C6AA1A59FBA000F0C1B0 /* Images.xcassets in Resources */,
 				52B9EA3E1A77FFFE004BAA89 /* TEXASEMPTY.png in Resources */,
 				528C34551A5A1DEE00DB9539 /* Main.storyboard in Resources */,

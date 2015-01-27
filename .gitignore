@@ -16,6 +16,6 @@
 \'a0\
 # Exclude personal Xcode user settings\
 xcuserdata/ \
-.DS_Store\
-UserInterfaceState.xcuserstate\
+*.DS_Store\
+*UserInterfaceState.xcuserstate\
 }
