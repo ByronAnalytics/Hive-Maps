@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="BoxData" representedClassName="BoxData" syncable="YES">
+        <attribute name="frameHeight" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="frameWidth" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="nameBoxType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numFrames" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="BoxObservation" representedClassName="BoxObservation" syncable="YES">
+        <attribute name="buildOut" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="framesBrood" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="framesBuildOut" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="framesHoney" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="framesWorkers" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="observationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="siteHiveBox" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hiveBox" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveBox" inverseName="boxObservations" inverseEntity="HiveBox" syncable="YES"/>
+        <relationship name="hiveObservation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveObservation" inverseName="boxObservations" inverseEntity="HiveObservation" syncable="YES"/>
+    </entity>
+    <entity name="HiveBox" representedClassName="HiveBox" syncable="YES">
+        <attribute name="boxID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="boxType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="numFrames" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="boxData" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="BoxData" syncable="YES"/>
+        <relationship name="boxObservations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BoxObservation" inverseName="hiveBox" inverseEntity="BoxObservation" syncable="YES"/>
+        <relationship name="hiveDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveDetails" inverseName="hiveBoxes" inverseEntity="HiveDetails" syncable="YES"/>
+    </entity>
+    <entity name="HiveDetails" representedClassName="HiveDetails" syncable="YES">
+        <attribute name="currentQueenSource" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hiveID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hiveLatitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="hiveLongitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="requeenedOn" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="siteName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="hiveBoxes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HiveBox" inverseName="hiveDetail" inverseEntity="HiveBox" syncable="YES"/>
+        <relationship name="hiveObservations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HiveObservation" inverseName="hiveDetail" inverseEntity="HiveObservation" syncable="YES"/>
+        <relationship name="lastObservation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveObservation" inverseName="lastObservation" inverseEntity="HiveObservation" syncable="YES"/>
+    </entity>
+    <entity name="HiveObservation" representedClassName="HiveObservation" syncable="YES">
+        <attribute name="aggressionLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="commentBox" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cupsInsur" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="drone" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="healthStatus" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="observationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="observedQueen" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="propolisObserved" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="queenPerformance" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="queenSource" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="requeened" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="siteHive" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="swarm" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="treatment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="treatmentStage" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="boxObservations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BoxObservation" inverseName="hiveObservation" inverseEntity="BoxObservation" syncable="YES"/>
+        <relationship name="hiveDetail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveDetails" inverseName="hiveObservations" inverseEntity="HiveDetails" syncable="YES"/>
+        <relationship name="lastObservation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveDetails" inverseName="lastObservation" inverseEntity="HiveDetails" syncable="YES"/>
+        <relationship name="weatherObservation" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="WeatherObservation" inverseName="hiveObservation" inverseEntity="WeatherObservation" syncable="YES"/>
+    </entity>
+    <entity name="WeatherObservation" representedClassName="WeatherObservation" syncable="YES">
+        <attribute name="dateWeatherObs" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="precip1hr" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="precip24hr" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="siteHive" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stationDistance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stationID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stationLat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stationLong" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stationType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="windDir" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="windSpeed" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="hiveObservation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HiveObservation" inverseName="weatherObservation" inverseEntity="HiveObservation" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="BoxData" positionX="-191" positionY="-135" width="128" height="103"/>
+        <element name="HiveDetails" positionX="-191" positionY="144" width="128" height="193"/>
+        <element name="HiveBox" positionX="-2" positionY="-169" width="128" height="148"/>
+        <element name="BoxObservation" positionX="0" positionY="9" width="128" height="178"/>
+        <element name="HiveObservation" positionX="196" positionY="9" width="128" height="328"/>
+        <element name="WeatherObservation" positionX="378" positionY="38" width="128" height="268"/>
+    </elements>
+</model>

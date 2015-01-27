@@ -1,0 +1,1 @@
+PODS_HIVE_MAPS_COREPLOT_OTHER_LDFLAGS = -framework "QuartzCore"

@@ -1,0 +1,713 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		407820629A32CB4547FBEE69 /* libPods-Hive Maps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */; };
+		5202236C1A7189D6008C8553 /* Hive_Maps.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5202236A1A7189D6008C8553 /* Hive_Maps.xcdatamodeld */; };
+		520223781A7192C6008C8553 /* WeatherObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223771A7192C6008C8553 /* WeatherObservation.m */; };
+		5202237B1A7192C6008C8553 /* BoxData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5202237A1A7192C6008C8553 /* BoxData.m */; };
+		520223811A71932A008C8553 /* HiveBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223801A71932A008C8553 /* HiveBox.m */; };
+		520223841A719344008C8553 /* BoxObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223831A719344008C8553 /* BoxObservation.m */; };
+		520223871A719363008C8553 /* HiveObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223861A719363008C8553 /* HiveObservation.m */; };
+		5202238A1A71BFB0008C8553 /* HiveDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223891A71BFB0008C8553 /* HiveDetails.m */; };
+		5245A56E1A5A6F3C002DBA4B /* AddHiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A56D1A5A6F3C002DBA4B /* AddHiveTableViewController.m */; };
+		5245A5711A5A7038002DBA4B /* AddBoxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5701A5A7038002DBA4B /* AddBoxTableViewController.m */; };
+		5245A5741A5A7169002DBA4B /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5731A5A7169002DBA4B /* SettingsTableViewController.m */; };
+		5245A5771A5A72C7002DBA4B /* DetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5761A5A72C7002DBA4B /* DetailsTableViewController.m */; };
+		52508F8D1A745397007EF20D /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 52508F8C1A745397007EF20D /* RateView.m */; };
+		52508F911A7455AF007EF20D /* kermit_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 52508F8E1A7455AF007EF20D /* kermit_empty.png */; };
+		52508F921A7455AF007EF20D /* kermit_full.png in Resources */ = {isa = PBXBuildFile; fileRef = 52508F8F1A7455AF007EF20D /* kermit_full.png */; };
+		52508F931A7455AF007EF20D /* kermit_half.png in Resources */ = {isa = PBXBuildFile; fileRef = 52508F901A7455AF007EF20D /* kermit_half.png */; };
+		52593AB71A59FF3200EB5A1D /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52593AB61A59FF3200EB5A1D /* MainTableViewController.m */; };
+		52593AB91A5A01EE00EB5A1D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52593AB81A5A01EE00EB5A1D /* CoreData.framework */; };
+		525BE5F01A5A244D000324CA /* MakeHiveObsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */; };
+		5266884E1A5F3E7100727BB5 /* SingleHivePlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5266884D1A5F3E7100727BB5 /* SingleHivePlotViewController.m */; };
+		526688511A5F3EF500727BB5 /* MultiHivePlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 526688501A5F3EF500727BB5 /* MultiHivePlotViewController.m */; };
+		5270C69C1A59FBA000F0C1B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5270C69B1A59FBA000F0C1B0 /* main.m */; };
+		5270C69F1A59FBA000F0C1B0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5270C69E1A59FBA000F0C1B0 /* AppDelegate.m */; };
+		5270C6AA1A59FBA000F0C1B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5270C6A91A59FBA000F0C1B0 /* Images.xcassets */; };
+		5270C6AD1A59FBA000F0C1B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */; };
+		5270C6B91A59FBA000F0C1B0 /* Hive_MapsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5270C6B81A59FBA000F0C1B0 /* Hive_MapsTests.m */; };
+		528C34551A5A1DEE00DB9539 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 528C34541A5A1DEE00DB9539 /* Main.storyboard */; };
+		529C68A71A69901D0047C680 /* MakeBoxObservationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529C68A61A69901D0047C680 /* MakeBoxObservationTableViewController.m */; };
+		529F277C1A5A5FCC009A30A9 /* GetWeatherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F277A1A5A5FCC009A30A9 /* GetWeatherTableViewController.m */; };
+		52ADD9CD1A6460A1002347A1 /* DefaultValuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ADD9CC1A6460A1002347A1 /* DefaultValuesTableViewController.m */; };
+		52B9EA3E1A77FFFE004BAA89 /* TEXASEMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */; };
+		52B9EA3F1A77FFFE004BAA89 /* TEXASFULL.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */; };
+		52B9EA401A77FFFE004BAA89 /* TEXASHALF.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */; };
+		52CEE21B1A6DEC7000CEB07D /* HiveBoxesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEE21A1A6DEC7000CEB07D /* HiveBoxesTableViewController.m */; };
+		52CEE2201A6EEFF300CEB07D /* Old Code Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */; };
+		52EDB79A1A7045F60074377A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EDB7991A7045F60074377A /* CoreLocation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5270C6B31A59FBA000F0C1B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5270C68E1A59FBA000F0C1B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5270C6951A59FBA000F0C1B0;
+			remoteInfo = "Hive Maps";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hive Maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5202236B1A7189D6008C8553 /* Hive_Maps.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hive_Maps.xcdatamodel; sourceTree = "<group>"; };
+		520223761A7192C6008C8553 /* WeatherObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherObservation.h; sourceTree = "<group>"; };
+		520223771A7192C6008C8553 /* WeatherObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherObservation.m; sourceTree = "<group>"; };
+		520223791A7192C6008C8553 /* BoxData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxData.h; sourceTree = "<group>"; };
+		5202237A1A7192C6008C8553 /* BoxData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxData.m; sourceTree = "<group>"; };
+		5202237F1A71932A008C8553 /* HiveBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveBox.h; sourceTree = "<group>"; };
+		520223801A71932A008C8553 /* HiveBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveBox.m; sourceTree = "<group>"; };
+		520223821A719344008C8553 /* BoxObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxObservation.h; sourceTree = "<group>"; };
+		520223831A719344008C8553 /* BoxObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxObservation.m; sourceTree = "<group>"; };
+		520223851A719363008C8553 /* HiveObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveObservation.h; sourceTree = "<group>"; };
+		520223861A719363008C8553 /* HiveObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveObservation.m; sourceTree = "<group>"; };
+		520223881A71BFB0008C8553 /* HiveDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveDetails.h; sourceTree = "<group>"; };
+		520223891A71BFB0008C8553 /* HiveDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveDetails.m; sourceTree = "<group>"; };
+		5245A56C1A5A6F3C002DBA4B /* AddHiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHiveTableViewController.h; sourceTree = "<group>"; };
+		5245A56D1A5A6F3C002DBA4B /* AddHiveTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHiveTableViewController.m; sourceTree = "<group>"; };
+		5245A56F1A5A7038002DBA4B /* AddBoxTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBoxTableViewController.h; sourceTree = "<group>"; };
+		5245A5701A5A7038002DBA4B /* AddBoxTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBoxTableViewController.m; sourceTree = "<group>"; };
+		5245A5721A5A7169002DBA4B /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		5245A5731A5A7169002DBA4B /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
+		5245A5751A5A72C7002DBA4B /* DetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewController.h; sourceTree = "<group>"; };
+		5245A5761A5A72C7002DBA4B /* DetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewController.m; sourceTree = "<group>"; };
+		52508F8B1A745397007EF20D /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
+		52508F8C1A745397007EF20D /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
+		52508F8E1A7455AF007EF20D /* kermit_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kermit_empty.png; sourceTree = "<group>"; };
+		52508F8F1A7455AF007EF20D /* kermit_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kermit_full.png; sourceTree = "<group>"; };
+		52508F901A7455AF007EF20D /* kermit_half.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kermit_half.png; sourceTree = "<group>"; };
+		52593AB51A59FF3200EB5A1D /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		52593AB61A59FF3200EB5A1D /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
+		52593AB81A5A01EE00EB5A1D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		525BE5EE1A5A244D000324CA /* MakeHiveObsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeHiveObsTableViewController.h; sourceTree = "<group>"; };
+		525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeHiveObsTableViewController.m; sourceTree = "<group>"; };
+		5266884C1A5F3E7100727BB5 /* SingleHivePlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleHivePlotViewController.h; sourceTree = "<group>"; };
+		5266884D1A5F3E7100727BB5 /* SingleHivePlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleHivePlotViewController.m; sourceTree = "<group>"; };
+		5266884F1A5F3EF500727BB5 /* MultiHivePlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiHivePlotViewController.h; sourceTree = "<group>"; };
+		526688501A5F3EF500727BB5 /* MultiHivePlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiHivePlotViewController.m; sourceTree = "<group>"; };
+		5270C6961A59FBA000F0C1B0 /* Hive Maps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hive Maps.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5270C69A1A59FBA000F0C1B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5270C69B1A59FBA000F0C1B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5270C69D1A59FBA000F0C1B0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5270C69E1A59FBA000F0C1B0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5270C6A91A59FBA000F0C1B0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5270C6AC1A59FBA000F0C1B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		5270C6B21A59FBA000F0C1B0 /* Hive MapsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hive MapsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5270C6B71A59FBA000F0C1B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5270C6B81A59FBA000F0C1B0 /* Hive_MapsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Hive_MapsTests.m; sourceTree = "<group>"; };
+		528C34541A5A1DEE00DB9539 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		529C68A51A69901D0047C680 /* MakeBoxObservationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBoxObservationTableViewController.h; sourceTree = "<group>"; };
+		529C68A61A69901D0047C680 /* MakeBoxObservationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBoxObservationTableViewController.m; sourceTree = "<group>"; };
+		529F277A1A5A5FCC009A30A9 /* GetWeatherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWeatherTableViewController.m; sourceTree = "<group>"; };
+		529F277D1A5A5FF2009A30A9 /* GetWeatherTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetWeatherTableViewController.h; sourceTree = "<group>"; };
+		52ADD9CB1A6460A1002347A1 /* DefaultValuesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultValuesTableViewController.h; sourceTree = "<group>"; };
+		52ADD9CC1A6460A1002347A1 /* DefaultValuesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultValuesTableViewController.m; sourceTree = "<group>"; };
+		52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASEMPTY.png; sourceTree = "<group>"; };
+		52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASFULL.png; sourceTree = "<group>"; };
+		52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASHALF.png; sourceTree = "<group>"; };
+		52CEE2191A6DEC7000CEB07D /* HiveBoxesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveBoxesTableViewController.h; sourceTree = "<group>"; };
+		52CEE21A1A6DEC7000CEB07D /* HiveBoxesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveBoxesTableViewController.m; sourceTree = "<group>"; };
+		52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Old Code Storage.m"; sourceTree = "<group>"; };
+		52EDB7991A7045F60074377A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7F6C319CB264F916C862B7B9 /* Pods-Hive Maps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive Maps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps.debug.xcconfig"; sourceTree = "<group>"; };
+		87FE16095083AC6A89238EC2 /* Pods-Hive Maps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive Maps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5270C6931A59FBA000F0C1B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52EDB79A1A7045F60074377A /* CoreLocation.framework in Frameworks */,
+				52593AB91A5A01EE00EB5A1D /* CoreData.framework in Frameworks */,
+				407820629A32CB4547FBEE69 /* libPods-Hive Maps.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5270C6AF1A59FBA000F0C1B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5245A56A1A5A67A0002DBA4B /* Observe Data View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5245A5751A5A72C7002DBA4B /* DetailsTableViewController.h */,
+				5245A5761A5A72C7002DBA4B /* DetailsTableViewController.m */,
+				5266884C1A5F3E7100727BB5 /* SingleHivePlotViewController.h */,
+				5266884D1A5F3E7100727BB5 /* SingleHivePlotViewController.m */,
+				5266884F1A5F3EF500727BB5 /* MultiHivePlotViewController.h */,
+				526688501A5F3EF500727BB5 /* MultiHivePlotViewController.m */,
+			);
+			name = "Observe Data View Controllers";
+			sourceTree = "<group>";
+		};
+		5245A56B1A5A6DD0002DBA4B /* SetUp View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5245A5721A5A7169002DBA4B /* SettingsTableViewController.h */,
+				5245A5731A5A7169002DBA4B /* SettingsTableViewController.m */,
+				5245A56F1A5A7038002DBA4B /* AddBoxTableViewController.h */,
+				5245A5701A5A7038002DBA4B /* AddBoxTableViewController.m */,
+				5245A56C1A5A6F3C002DBA4B /* AddHiveTableViewController.h */,
+				5245A56D1A5A6F3C002DBA4B /* AddHiveTableViewController.m */,
+				52ADD9CB1A6460A1002347A1 /* DefaultValuesTableViewController.h */,
+				52ADD9CC1A6460A1002347A1 /* DefaultValuesTableViewController.m */,
+				52CEE2191A6DEC7000CEB07D /* HiveBoxesTableViewController.h */,
+				52CEE21A1A6DEC7000CEB07D /* HiveBoxesTableViewController.m */,
+			);
+			name = "SetUp View Controllers";
+			sourceTree = "<group>";
+		};
+		52508F941A7455B5007EF20D /* Star Images */ = {
+			isa = PBXGroup;
+			children = (
+				52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */,
+				52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */,
+				52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */,
+				52508F8E1A7455AF007EF20D /* kermit_empty.png */,
+				52508F8F1A7455AF007EF20D /* kermit_full.png */,
+				52508F901A7455AF007EF20D /* kermit_half.png */,
+			);
+			name = "Star Images";
+			sourceTree = "<group>";
+		};
+		5270C68D1A59FBA000F0C1B0 = {
+			isa = PBXGroup;
+			children = (
+				5270C6981A59FBA000F0C1B0 /* Hive Maps */,
+				5270C6B51A59FBA000F0C1B0 /* Hive MapsTests */,
+				5270C6971A59FBA000F0C1B0 /* Products */,
+				52593AB81A5A01EE00EB5A1D /* CoreData.framework */,
+				684613173CD0A3E2833EBB51 /* Pods */,
+				566956A89C49E9DF1B29C1C2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5270C6971A59FBA000F0C1B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5270C6961A59FBA000F0C1B0 /* Hive Maps.app */,
+				5270C6B21A59FBA000F0C1B0 /* Hive MapsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5270C6981A59FBA000F0C1B0 /* Hive Maps */ = {
+			isa = PBXGroup;
+			children = (
+				52508F941A7455B5007EF20D /* Star Images */,
+				52508F8B1A745397007EF20D /* RateView.h */,
+				52508F8C1A745397007EF20D /* RateView.m */,
+				52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */,
+				5270C6A91A59FBA000F0C1B0 /* Images.xcassets */,
+				5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */,
+				528C34541A5A1DEE00DB9539 /* Main.storyboard */,
+				5270C69D1A59FBA000F0C1B0 /* AppDelegate.h */,
+				5270C69E1A59FBA000F0C1B0 /* AppDelegate.m */,
+				5245A56B1A5A6DD0002DBA4B /* SetUp View Controllers */,
+				5245A56A1A5A67A0002DBA4B /* Observe Data View Controllers */,
+				528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */,
+				528C344F1A5A142400DB9539 /* CoreData */,
+				5270C6991A59FBA000F0C1B0 /* Supporting Files */,
+			);
+			path = "Hive Maps";
+			sourceTree = "<group>";
+		};
+		5270C6991A59FBA000F0C1B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5270C69A1A59FBA000F0C1B0 /* Info.plist */,
+				5270C69B1A59FBA000F0C1B0 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5270C6B51A59FBA000F0C1B0 /* Hive MapsTests */ = {
+			isa = PBXGroup;
+			children = (
+				5270C6B81A59FBA000F0C1B0 /* Hive_MapsTests.m */,
+				5270C6B61A59FBA000F0C1B0 /* Supporting Files */,
+			);
+			path = "Hive MapsTests";
+			sourceTree = "<group>";
+		};
+		5270C6B61A59FBA000F0C1B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5270C6B71A59FBA000F0C1B0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		528C344F1A5A142400DB9539 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5202236A1A7189D6008C8553 /* Hive_Maps.xcdatamodeld */,
+				520223881A71BFB0008C8553 /* HiveDetails.h */,
+				520223891A71BFB0008C8553 /* HiveDetails.m */,
+				520223851A719363008C8553 /* HiveObservation.h */,
+				520223861A719363008C8553 /* HiveObservation.m */,
+				520223821A719344008C8553 /* BoxObservation.h */,
+				520223831A719344008C8553 /* BoxObservation.m */,
+				5202237F1A71932A008C8553 /* HiveBox.h */,
+				520223801A71932A008C8553 /* HiveBox.m */,
+				520223791A7192C6008C8553 /* BoxData.h */,
+				5202237A1A7192C6008C8553 /* BoxData.m */,
+				520223761A7192C6008C8553 /* WeatherObservation.h */,
+				520223771A7192C6008C8553 /* WeatherObservation.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				52593AB51A59FF3200EB5A1D /* MainTableViewController.h */,
+				52593AB61A59FF3200EB5A1D /* MainTableViewController.m */,
+				525BE5EE1A5A244D000324CA /* MakeHiveObsTableViewController.h */,
+				525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */,
+				529C68A51A69901D0047C680 /* MakeBoxObservationTableViewController.h */,
+				529C68A61A69901D0047C680 /* MakeBoxObservationTableViewController.m */,
+				529F277D1A5A5FF2009A30A9 /* GetWeatherTableViewController.h */,
+				529F277A1A5A5FCC009A30A9 /* GetWeatherTableViewController.m */,
+			);
+			name = "Collect Data View Controllers";
+			sourceTree = "<group>";
+		};
+		566956A89C49E9DF1B29C1C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52EDB7991A7045F60074377A /* CoreLocation.framework */,
+				13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		684613173CD0A3E2833EBB51 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F6C319CB264F916C862B7B9 /* Pods-Hive Maps.debug.xcconfig */,
+				87FE16095083AC6A89238EC2 /* Pods-Hive Maps.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5270C6951A59FBA000F0C1B0 /* Hive Maps */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5270C6BC1A59FBA000F0C1B0 /* Build configuration list for PBXNativeTarget "Hive Maps" */;
+			buildPhases = (
+				FCA07888EF8693F6AC1085A9 /* Check Pods Manifest.lock */,
+				5270C6921A59FBA000F0C1B0 /* Sources */,
+				5270C6931A59FBA000F0C1B0 /* Frameworks */,
+				5270C6941A59FBA000F0C1B0 /* Resources */,
+				52F7A00B1A707959009B7400 /* Update Build Version */,
+				A086B4ED09309D8FE85E1CC3 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Hive Maps";
+			productName = "Hive Maps";
+			productReference = 5270C6961A59FBA000F0C1B0 /* Hive Maps.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5270C6B11A59FBA000F0C1B0 /* Hive MapsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5270C6BF1A59FBA000F0C1B0 /* Build configuration list for PBXNativeTarget "Hive MapsTests" */;
+			buildPhases = (
+				5270C6AE1A59FBA000F0C1B0 /* Sources */,
+				5270C6AF1A59FBA000F0C1B0 /* Frameworks */,
+				5270C6B01A59FBA000F0C1B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5270C6B41A59FBA000F0C1B0 /* PBXTargetDependency */,
+			);
+			name = "Hive MapsTests";
+			productName = "Hive MapsTests";
+			productReference = 5270C6B21A59FBA000F0C1B0 /* Hive MapsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5270C68E1A59FBA000F0C1B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = HiveMaps;
+				TargetAttributes = {
+					5270C6951A59FBA000F0C1B0 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = B68V74EU8K;
+					};
+					5270C6B11A59FBA000F0C1B0 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 5270C6951A59FBA000F0C1B0;
+					};
+				};
+			};
+			buildConfigurationList = 5270C6911A59FBA000F0C1B0 /* Build configuration list for PBXProject "Hive Maps" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5270C68D1A59FBA000F0C1B0;
+			productRefGroup = 5270C6971A59FBA000F0C1B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5270C6951A59FBA000F0C1B0 /* Hive Maps */,
+				5270C6B11A59FBA000F0C1B0 /* Hive MapsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5270C6941A59FBA000F0C1B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B9EA401A77FFFE004BAA89 /* TEXASHALF.png in Resources */,
+				52B9EA3F1A77FFFE004BAA89 /* TEXASFULL.png in Resources */,
+				5270C6AD1A59FBA000F0C1B0 /* LaunchScreen.xib in Resources */,
+				52508F911A7455AF007EF20D /* kermit_empty.png in Resources */,
+				52508F931A7455AF007EF20D /* kermit_half.png in Resources */,
+				52508F921A7455AF007EF20D /* kermit_full.png in Resources */,
+				5270C6AA1A59FBA000F0C1B0 /* Images.xcassets in Resources */,
+				52B9EA3E1A77FFFE004BAA89 /* TEXASEMPTY.png in Resources */,
+				528C34551A5A1DEE00DB9539 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5270C6B01A59FBA000F0C1B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		52F7A00B1A707959009B7400 /* Update Build Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\")\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n";
+		};
+		A086B4ED09309D8FE85E1CC3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FCA07888EF8693F6AC1085A9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5270C6921A59FBA000F0C1B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				520223841A719344008C8553 /* BoxObservation.m in Sources */,
+				52CEE2201A6EEFF300CEB07D /* Old Code Storage.m in Sources */,
+				5245A5771A5A72C7002DBA4B /* DetailsTableViewController.m in Sources */,
+				5270C69F1A59FBA000F0C1B0 /* AppDelegate.m in Sources */,
+				529F277C1A5A5FCC009A30A9 /* GetWeatherTableViewController.m in Sources */,
+				5270C69C1A59FBA000F0C1B0 /* main.m in Sources */,
+				52ADD9CD1A6460A1002347A1 /* DefaultValuesTableViewController.m in Sources */,
+				5245A5741A5A7169002DBA4B /* SettingsTableViewController.m in Sources */,
+				520223781A7192C6008C8553 /* WeatherObservation.m in Sources */,
+				52593AB71A59FF3200EB5A1D /* MainTableViewController.m in Sources */,
+				5202238A1A71BFB0008C8553 /* HiveDetails.m in Sources */,
+				52508F8D1A745397007EF20D /* RateView.m in Sources */,
+				520223811A71932A008C8553 /* HiveBox.m in Sources */,
+				52CEE21B1A6DEC7000CEB07D /* HiveBoxesTableViewController.m in Sources */,
+				5245A56E1A5A6F3C002DBA4B /* AddHiveTableViewController.m in Sources */,
+				520223871A719363008C8553 /* HiveObservation.m in Sources */,
+				5202237B1A7192C6008C8553 /* BoxData.m in Sources */,
+				5202236C1A7189D6008C8553 /* Hive_Maps.xcdatamodeld in Sources */,
+				526688511A5F3EF500727BB5 /* MultiHivePlotViewController.m in Sources */,
+				5266884E1A5F3E7100727BB5 /* SingleHivePlotViewController.m in Sources */,
+				525BE5F01A5A244D000324CA /* MakeHiveObsTableViewController.m in Sources */,
+				529C68A71A69901D0047C680 /* MakeBoxObservationTableViewController.m in Sources */,
+				5245A5711A5A7038002DBA4B /* AddBoxTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5270C6AE1A59FBA000F0C1B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5270C6B91A59FBA000F0C1B0 /* Hive_MapsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5270C6B41A59FBA000F0C1B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5270C6951A59FBA000F0C1B0 /* Hive Maps */;
+			targetProxy = 5270C6B31A59FBA000F0C1B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5270C6AC1A59FBA000F0C1B0 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5270C6BA1A59FBA000F0C1B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5270C6BB1A59FBA000F0C1B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5270C6BD1A59FBA000F0C1B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F6C319CB264F916C862B7B9 /* Pods-Hive Maps.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3;
+				INFOPLIST_FILE = "Hive Maps/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		5270C6BE1A59FBA000F0C1B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87FE16095083AC6A89238EC2 /* Pods-Hive Maps.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3;
+				INFOPLIST_FILE = "Hive Maps/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		5270C6C01A59FBA000F0C1B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Hive MapsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hive Maps.app/Hive Maps";
+			};
+			name = Debug;
+		};
+		5270C6C11A59FBA000F0C1B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Hive MapsTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hive Maps.app/Hive Maps";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5270C6911A59FBA000F0C1B0 /* Build configuration list for PBXProject "Hive Maps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5270C6BA1A59FBA000F0C1B0 /* Debug */,
+				5270C6BB1A59FBA000F0C1B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5270C6BC1A59FBA000F0C1B0 /* Build configuration list for PBXNativeTarget "Hive Maps" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5270C6BD1A59FBA000F0C1B0 /* Debug */,
+				5270C6BE1A59FBA000F0C1B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5270C6BF1A59FBA000F0C1B0 /* Build configuration list for PBXNativeTarget "Hive MapsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5270C6C01A59FBA000F0C1B0 /* Debug */,
+				5270C6C11A59FBA000F0C1B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5202236A1A7189D6008C8553 /* Hive_Maps.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5202236B1A7189D6008C8553 /* Hive_Maps.xcdatamodel */,
+			);
+			currentVersion = 5202236B1A7189D6008C8553 /* Hive_Maps.xcdatamodel */;
+			path = Hive_Maps.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5270C68E1A59FBA000F0C1B0 /* Project object */;
+}
