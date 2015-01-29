@@ -31,13 +31,14 @@
 		5270C6AD1A59FBA000F0C1B0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */; };
 		5270C6B91A59FBA000F0C1B0 /* Hive_MapsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5270C6B81A59FBA000F0C1B0 /* Hive_MapsTests.m */; };
 		52825A4D1A79A1EF002AA1C4 /* HiveMapsDataTool.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 52825A4C1A79A1EF002AA1C4 /* HiveMapsDataTool.sqlite */; };
+		528A3B421A7AA939007F2BFC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 528A3B411A7AA939007F2BFC /* MessageUI.framework */; };
+		528A3B441A7AB6C7007F2BFC /* TEXASHALF.png in Resources */ = {isa = PBXBuildFile; fileRef = 528A3B431A7AB6C7007F2BFC /* TEXASHALF.png */; };
+		528A3B461A7AB77C007F2BFC /* CodeStorage in Resources */ = {isa = PBXBuildFile; fileRef = 528A3B451A7AB77C007F2BFC /* CodeStorage */; };
 		528C34551A5A1DEE00DB9539 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 528C34541A5A1DEE00DB9539 /* Main.storyboard */; };
 		529C68A71A69901D0047C680 /* MakeBoxObservationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529C68A61A69901D0047C680 /* MakeBoxObservationTableViewController.m */; };
 		529F277C1A5A5FCC009A30A9 /* GetWeatherTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 529F277A1A5A5FCC009A30A9 /* GetWeatherTableViewController.m */; };
-		52ADD9CD1A6460A1002347A1 /* DefaultValuesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52ADD9CC1A6460A1002347A1 /* DefaultValuesTableViewController.m */; };
 		52B9EA3E1A77FFFE004BAA89 /* TEXASEMPTY.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */; };
 		52B9EA3F1A77FFFE004BAA89 /* TEXASFULL.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */; };
-		52B9EA401A77FFFE004BAA89 /* TEXASHALF.png in Resources */ = {isa = PBXBuildFile; fileRef = 52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */; };
 		52CEE21B1A6DEC7000CEB07D /* HiveBoxesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEE21A1A6DEC7000CEB07D /* HiveBoxesTableViewController.m */; };
 		52CEE2201A6EEFF300CEB07D /* Old Code Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */; };
 		52EDB79A1A7045F60074377A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EDB7991A7045F60074377A /* CoreLocation.framework */; };
@@ -98,16 +99,16 @@
 		5270C6B71A59FBA000F0C1B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5270C6B81A59FBA000F0C1B0 /* Hive_MapsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Hive_MapsTests.m; sourceTree = "<group>"; };
 		52825A4C1A79A1EF002AA1C4 /* HiveMapsDataTool.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = HiveMapsDataTool.sqlite; path = "../../../../Library/Developer/CoreSimulator/Devices/0DC1A0DA-392A-47EA-84F7-033464D9920E/data/Containers/Data/Application/00B48896-CD88-4443-A07C-A4A4E6D05A4D/Documents/HiveMapsDataTool.sqlite"; sourceTree = "<group>"; };
+		528A3B411A7AA939007F2BFC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		528A3B431A7AB6C7007F2BFC /* TEXASHALF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASHALF.png; sourceTree = "<group>"; };
+		528A3B451A7AB77C007F2BFC /* CodeStorage */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CodeStorage; sourceTree = "<group>"; };
 		528C34541A5A1DEE00DB9539 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		529C68A51A69901D0047C680 /* MakeBoxObservationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeBoxObservationTableViewController.h; sourceTree = "<group>"; };
 		529C68A61A69901D0047C680 /* MakeBoxObservationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeBoxObservationTableViewController.m; sourceTree = "<group>"; };
 		529F277A1A5A5FCC009A30A9 /* GetWeatherTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWeatherTableViewController.m; sourceTree = "<group>"; };
 		529F277D1A5A5FF2009A30A9 /* GetWeatherTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetWeatherTableViewController.h; sourceTree = "<group>"; };
-		52ADD9CB1A6460A1002347A1 /* DefaultValuesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultValuesTableViewController.h; sourceTree = "<group>"; };
-		52ADD9CC1A6460A1002347A1 /* DefaultValuesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultValuesTableViewController.m; sourceTree = "<group>"; };
 		52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASEMPTY.png; sourceTree = "<group>"; };
 		52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASFULL.png; sourceTree = "<group>"; };
-		52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TEXASHALF.png; sourceTree = "<group>"; };
 		52CEE2191A6DEC7000CEB07D /* HiveBoxesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveBoxesTableViewController.h; sourceTree = "<group>"; };
 		52CEE21A1A6DEC7000CEB07D /* HiveBoxesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveBoxesTableViewController.m; sourceTree = "<group>"; };
 		52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Old Code Storage.m"; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528A3B421A7AA939007F2BFC /* MessageUI.framework in Frameworks */,
 				52EDB79A1A7045F60074377A /* CoreLocation.framework in Frameworks */,
 				52593AB91A5A01EE00EB5A1D /* CoreData.framework in Frameworks */,
 				407820629A32CB4547FBEE69 /* libPods-Hive Maps.a in Frameworks */,
@@ -159,8 +161,6 @@
 				5245A5701A5A7038002DBA4B /* AddBoxTableViewController.m */,
 				5245A56C1A5A6F3C002DBA4B /* AddHiveTableViewController.h */,
 				5245A56D1A5A6F3C002DBA4B /* AddHiveTableViewController.m */,
-				52ADD9CB1A6460A1002347A1 /* DefaultValuesTableViewController.h */,
-				52ADD9CC1A6460A1002347A1 /* DefaultValuesTableViewController.m */,
 				52CEE2191A6DEC7000CEB07D /* HiveBoxesTableViewController.h */,
 				52CEE21A1A6DEC7000CEB07D /* HiveBoxesTableViewController.m */,
 			);
@@ -171,8 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */,
+				528A3B431A7AB6C7007F2BFC /* TEXASHALF.png */,
 				52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */,
-				52B9EA3D1A77FFFE004BAA89 /* TEXASHALF.png */,
 			);
 			name = "Star Images";
 			sourceTree = "<group>";
@@ -222,6 +222,7 @@
 		5270C6991A59FBA000F0C1B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				528A3B451A7AB77C007F2BFC /* CodeStorage */,
 				52825A4C1A79A1EF002AA1C4 /* HiveMapsDataTool.sqlite */,
 				5270C69A1A59FBA000F0C1B0 /* Info.plist */,
 				5270C69B1A59FBA000F0C1B0 /* main.m */,
@@ -284,6 +285,7 @@
 		566956A89C49E9DF1B29C1C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				528A3B411A7AA939007F2BFC /* MessageUI.framework */,
 				52EDB7991A7045F60074377A /* CoreLocation.framework */,
 				13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */,
 			);
@@ -383,12 +385,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52B9EA401A77FFFE004BAA89 /* TEXASHALF.png in Resources */,
 				52B9EA3F1A77FFFE004BAA89 /* TEXASFULL.png in Resources */,
 				5270C6AD1A59FBA000F0C1B0 /* LaunchScreen.xib in Resources */,
 				5270C6AA1A59FBA000F0C1B0 /* Images.xcassets in Resources */,
+				528A3B461A7AB77C007F2BFC /* CodeStorage in Resources */,
 				52B9EA3E1A77FFFE004BAA89 /* TEXASEMPTY.png in Resources */,
 				52825A4D1A79A1EF002AA1C4 /* HiveMapsDataTool.sqlite in Resources */,
+				528A3B441A7AB6C7007F2BFC /* TEXASHALF.png in Resources */,
 				528C34551A5A1DEE00DB9539 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,7 +463,6 @@
 				5270C69F1A59FBA000F0C1B0 /* AppDelegate.m in Sources */,
 				529F277C1A5A5FCC009A30A9 /* GetWeatherTableViewController.m in Sources */,
 				5270C69C1A59FBA000F0C1B0 /* main.m in Sources */,
-				52ADD9CD1A6460A1002347A1 /* DefaultValuesTableViewController.m in Sources */,
 				5245A5741A5A7169002DBA4B /* SettingsTableViewController.m in Sources */,
 				520223781A7192C6008C8553 /* WeatherObservation.m in Sources */,
 				52593AB71A59FF3200EB5A1D /* MainTableViewController.m in Sources */,

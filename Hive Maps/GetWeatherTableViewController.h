@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <AFNetworking/AFNetworking.h>
+#import <MessageUI/MessageUI.h>
 
 @class HiveObservation;
 
-@interface GetWeatherTableViewController : UITableViewController <UIScrollViewDelegate>
+@interface GetWeatherTableViewController : UITableViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>
 
 //Core Data Elements
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+
 #import "HiveDetails.h"
 #import "HiveBox.h"
 
-@interface HiveBoxesTableViewController : UITableViewController
+@interface HiveBoxesTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) HiveDetails *hive;
-
 
 - (IBAction)unwindToBoxDetails:(UIStoryboardSegue *)segue;
 

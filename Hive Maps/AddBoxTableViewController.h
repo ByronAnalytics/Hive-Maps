@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface AddBoxTableViewController : UITableViewController <UITextFieldDelegate>
+@interface AddBoxTableViewController : UITableViewController <UITextFieldDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

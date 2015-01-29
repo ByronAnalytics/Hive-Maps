@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MessageUI/MessageUI.h>
 
 #import "HiveBox.h"
 #import "HiveDetails.h"
 
 UIPickerView *boxPicker;
 
-@interface AddHiveTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate,  UITextFieldDelegate, UIAlertViewDelegate>
+@interface AddHiveTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate,  UITextFieldDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 // Core Data Objects
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

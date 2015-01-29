@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "RateView.h"
+#import <MessageUI/MessageUI.h>
 
 @class HiveDetails, HiveObservation;
 
-@interface DetailsTableViewController : UITableViewController <RateViewDelegate>
+@interface DetailsTableViewController : UITableViewController <RateViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) HiveDetails *hive;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HiveDetails.h"
 #import "HiveObservation.h"
+#import <MessageUI/MessageUI.h>
 
-@interface MakeBoxObservationTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface MakeBoxObservationTableViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, MFMailComposeViewControllerDelegate>
 
 //Core Data elements
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

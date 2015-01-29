@@ -109,6 +109,12 @@
     commentTextField.textColor = [UIColor blueColor];
     commentTextField.delegate = self;
     
+    //email Bug Report
+    UISwipeGestureRecognizer *swipeRightForEmail = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeToEmail:)];
+    swipeRightForEmail.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeRightForEmail.numberOfTouchesRequired = 2;
+    [self.tableView addGestureRecognizer:swipeRightForEmail];
+
 }
 
 - (BOOL) textViewShouldBeginEditing:(UITextField *)textField{
@@ -448,5 +454,53 @@
 -(IBAction)cancelToObsrvHive:(UIStoryboardSegue *)segue{
 }
 
+#pragma mark ----------- Email Bug Report -----------
+- (void)swipeToEmail:(UISwipeGestureRecognizer *)sender {
+    NSString *viewString = @"Observe Hive";
+    
+    // Email Subject
+    NSString *emailTitle = @"Hive Maps Bug Report to Developer";
+    // Email Content
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    NSString *deviceType = [UIDevice currentDevice].model;
+    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\niOS: %@, Device: %@\nCurrent View:%@",currSysVer, deviceType, viewString];
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:@"kwbyron@byronanalytics.com"];
+    NSArray *ccRecipents = [NSArray arrayWithObject:@"quentinalexander2000@gmail.com"];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    [mc setCcRecipients:ccRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+    
+    
+}
 
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 @end

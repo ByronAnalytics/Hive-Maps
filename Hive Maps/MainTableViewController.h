@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface MainTableViewController : UITableViewController 
+@interface MainTableViewController : UITableViewController <MFMailComposeViewControllerDelegate>
+//@property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipGesture;
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (weak, nonatomic) NSIndexPath *accIndexPath;
+//- (IBAction)swipeToEmail:(UISwipeGestureRecognizer *)sender;
 
 @end

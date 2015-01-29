@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MessageUI/MessageUI.h>
 
 #import "HiveDetails.h"
 #import "HiveObservation.h"
 #import "WeatherObservation.h"
 #import "RateView.h"
 
-@interface MakeHiveObsTableViewController : UITableViewController <UIAlertViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, RateViewDelegate>
+@interface MakeHiveObsTableViewController : UITableViewController <UIAlertViewDelegate, CLLocationManagerDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate, RateViewDelegate>
 
 //Core Data elements
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
