@@ -213,18 +213,17 @@
 		5270C6981A59FBA000F0C1B0 /* Hive Maps */ = {
 			isa = PBXGroup;
 			children = (
-				52508F941A7455B5007EF20D /* Star Images */,
-				5234F03A1A79BDC60038E298 /* Worker Classes */,
-				52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */,
-				5270C6A91A59FBA000F0C1B0 /* Images.xcassets */,
-				5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */,
 				528C34541A5A1DEE00DB9539 /* Main.storyboard */,
 				5270C69D1A59FBA000F0C1B0 /* AppDelegate.h */,
 				5270C69E1A59FBA000F0C1B0 /* AppDelegate.m */,
+				52593AB51A59FF3200EB5A1D /* MainTableViewController.h */,
+				52593AB61A59FF3200EB5A1D /* MainTableViewController.m */,
 				5245A56B1A5A6DD0002DBA4B /* SetUp View Controllers */,
 				5245A56A1A5A67A0002DBA4B /* Observe Data View Controllers */,
 				528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */,
 				528C344F1A5A142400DB9539 /* CoreData */,
+				5234F03A1A79BDC60038E298 /* Worker Classes */,
+				52508F941A7455B5007EF20D /* Star Images */,
 				5270C6991A59FBA000F0C1B0 /* Supporting Files */,
 			);
 			path = "Hive Maps";
@@ -233,6 +232,9 @@
 		5270C6991A59FBA000F0C1B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5270C6A91A59FBA000F0C1B0 /* Images.xcassets */,
+				5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */,
+				52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */,
 				5270C69A1A59FBA000F0C1B0 /* Info.plist */,
 				5270C69B1A59FBA000F0C1B0 /* main.m */,
 			);
@@ -279,8 +281,6 @@
 		528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				52593AB51A59FF3200EB5A1D /* MainTableViewController.h */,
-				52593AB61A59FF3200EB5A1D /* MainTableViewController.m */,
 				525BE5EE1A5A244D000324CA /* MakeHiveObsTableViewController.h */,
 				525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */,
 				529C68A51A69901D0047C680 /* MakeBoxObservationTableViewController.h */,

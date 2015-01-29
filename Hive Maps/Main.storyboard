@@ -2558,6 +2558,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubj-dF-imn" userLabel="Plot Window">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mZk-fW-Fcl" appends="YES" id="x1t-Hn-2jU"/>
+                                </connections>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-iH-CjT">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -2568,12 +2572,28 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="40" style="plain" systemItem="flexibleSpace" id="iUG-R9-Yrf"/>
-                                    <barButtonItem title="Variables" id="z1U-0p-DIv"/>
-                                    <barButtonItem title="Weather" id="oaT-72-gbS"/>
-                                    <barButtonItem title="Events" id="bmI-RE-807"/>
+                                    <barButtonItem title="Variables" id="z1U-0p-DIv">
+                                        <connections>
+                                            <action selector="variablesButton:" destination="uNd-5o-jIy" id="u2H-S2-9DN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Weather" id="oaT-72-gbS">
+                                        <connections>
+                                            <action selector="weatherButton:" destination="uNd-5o-jIy" id="NnZ-Pu-88J"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Events" id="bmI-RE-807">
+                                        <connections>
+                                            <action selector="eventsButton:" destination="uNd-5o-jIy" id="1sZ-17-CZ3"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="J8H-uh-EUk"/>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="uNd-5o-jIy" id="XTc-7m-rzg"/>
+                                </connections>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y48-QH-ULr">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y48-QH-ULr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2615,6 +2635,10 @@
                                         <include reference="oKw-Cg-Neb"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="uNd-5o-jIy" id="pSv-DF-G4M"/>
+                                    <outlet property="delegate" destination="uNd-5o-jIy" id="LkN-mT-dzX"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2644,6 +2668,9 @@
                                 <exclude reference="ubj-dF-imn"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="azS-8j-XPf"/>
+                                <exclude reference="iEb-fb-DUL"/>
+                                <exclude reference="okA-iF-Vca"/>
                                 <exclude reference="0e2-C4-LiV"/>
                                 <exclude reference="9MZ-ph-vto"/>
                                 <exclude reference="C0L-nY-gbh"/>
@@ -2656,9 +2683,6 @@
                                 <exclude reference="Lbx-y4-CkO"/>
                                 <exclude reference="fn8-xe-dsB"/>
                                 <exclude reference="qMk-J5-ceK"/>
-                                <exclude reference="azS-8j-XPf"/>
-                                <exclude reference="iEb-fb-DUL"/>
-                                <exclude reference="okA-iF-Vca"/>
                                 <exclude reference="Zvj-jb-3OS"/>
                             </mask>
                         </variation>
@@ -2683,6 +2707,9 @@
                                 <include reference="ubj-dF-imn"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="azS-8j-XPf"/>
+                                <include reference="iEb-fb-DUL"/>
+                                <include reference="okA-iF-Vca"/>
                                 <include reference="0e2-C4-LiV"/>
                                 <include reference="L5X-8D-Uf2"/>
                                 <exclude reference="LAx-Kp-2Ic"/>
@@ -2693,17 +2720,23 @@
                                 <include reference="vt7-dC-nVj"/>
                                 <include reference="Lbx-y4-CkO"/>
                                 <include reference="fn8-xe-dsB"/>
-                                <include reference="azS-8j-XPf"/>
-                                <include reference="iEb-fb-DUL"/>
-                                <include reference="okA-iF-Vca"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Explore Hive" id="UQS-FN-PaN" userLabel="Explore Hive"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="plotElementsTableView" destination="y48-QH-ULr" id="YHS-ig-bRg"/>
+                        <outlet property="toolbar" destination="rCa-iH-CjT" id="E5e-nG-nRH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZfF-1T-cr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="YKW-X7-Miu" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="mZk-fW-Fcl">
+                    <connections>
+                        <action selector="plotWindowTaped:" destination="uNd-5o-jIy" id="Gza-3B-fMc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3618" y="1725"/>
         </scene>
@@ -3289,9 +3322,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d25-ae-MxT" userLabel="Plot Window">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="207" y="44" width="593" height="507"/>
-                                </variation>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncs-O3-jKI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -3307,7 +3337,7 @@
                                     <barButtonItem title="Events" id="OLP-xO-VQY"/>
                                 </items>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-0L-Y3U">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-0L-Y3U">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3344,8 +3374,7 @@
                                         <include reference="nVv-Gd-ghV"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="44" width="199" height="507"/>
+                                <variation key="widthClass=regular">
                                     <mask key="constraints">
                                         <include reference="xQZ-Gu-91S"/>
                                     </mask>
@@ -3379,21 +3408,21 @@
                                 <exclude reference="d25-ae-MxT"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="xEE-ZA-BL7"/>
-                                <exclude reference="bgm-Hc-P19"/>
-                                <exclude reference="0Cv-6Z-LuY"/>
-                                <exclude reference="2Q3-eE-XFS"/>
-                                <exclude reference="BWK-6b-gMp"/>
-                                <exclude reference="ESn-Xa-qTS"/>
-                                <exclude reference="Y8N-9a-D1b"/>
-                                <exclude reference="8bg-1P-aXe"/>
-                                <exclude reference="b8Q-Ch-PD0"/>
-                                <exclude reference="6bn-Cc-Xgq"/>
-                                <exclude reference="vWx-UY-9gr"/>
-                                <exclude reference="DR1-ya-E8x"/>
                                 <exclude reference="HY3-Dr-2hE"/>
                                 <exclude reference="HtT-Kt-xXk"/>
                                 <exclude reference="oFC-oc-AtY"/>
+                                <exclude reference="0Cv-6Z-LuY"/>
+                                <exclude reference="2Q3-eE-XFS"/>
+                                <exclude reference="8bg-1P-aXe"/>
+                                <exclude reference="BWK-6b-gMp"/>
+                                <exclude reference="ESn-Xa-qTS"/>
+                                <exclude reference="Y8N-9a-D1b"/>
+                                <exclude reference="bgm-Hc-P19"/>
+                                <exclude reference="xEE-ZA-BL7"/>
+                                <exclude reference="6bn-Cc-Xgq"/>
+                                <exclude reference="DR1-ya-E8x"/>
+                                <exclude reference="b8Q-Ch-PD0"/>
+                                <exclude reference="vWx-UY-9gr"/>
                                 <exclude reference="Tdw-JJ-AJZ"/>
                             </mask>
                         </variation>
@@ -3402,14 +3431,14 @@
                                 <include reference="rZs-0L-Y3U"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="bgm-Hc-P19"/>
                                 <include reference="0Cv-6Z-LuY"/>
+                                <include reference="ESn-Xa-qTS"/>
+                                <include reference="bgm-Hc-P19"/>
+                                <exclude reference="gZM-a6-Dy2"/>
                                 <exclude reference="u3O-8j-UhC"/>
                                 <exclude reference="zIg-l0-gWl"/>
-                                <exclude reference="gZM-a6-Dy2"/>
-                                <include reference="ESn-Xa-qTS"/>
-                                <include reference="b8Q-Ch-PD0"/>
                                 <include reference="DR1-ya-E8x"/>
+                                <include reference="b8Q-Ch-PD0"/>
                                 <include reference="Tdw-JJ-AJZ"/>
                             </mask>
                         </variation>
@@ -3418,19 +3447,19 @@
                                 <include reference="d25-ae-MxT"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="xEE-ZA-BL7"/>
-                                <include reference="2Q3-eE-XFS"/>
-                                <exclude reference="u3O-8j-UhC"/>
-                                <include reference="BWK-6b-gMp"/>
-                                <exclude reference="zIg-l0-gWl"/>
-                                <exclude reference="gZM-a6-Dy2"/>
-                                <include reference="Y8N-9a-D1b"/>
-                                <include reference="8bg-1P-aXe"/>
-                                <include reference="6bn-Cc-Xgq"/>
-                                <include reference="vWx-UY-9gr"/>
                                 <include reference="HY3-Dr-2hE"/>
                                 <include reference="HtT-Kt-xXk"/>
                                 <include reference="oFC-oc-AtY"/>
+                                <include reference="2Q3-eE-XFS"/>
+                                <include reference="8bg-1P-aXe"/>
+                                <include reference="BWK-6b-gMp"/>
+                                <include reference="Y8N-9a-D1b"/>
+                                <exclude reference="gZM-a6-Dy2"/>
+                                <exclude reference="u3O-8j-UhC"/>
+                                <include reference="xEE-ZA-BL7"/>
+                                <exclude reference="zIg-l0-gWl"/>
+                                <include reference="6bn-Cc-Xgq"/>
+                                <include reference="vWx-UY-9gr"/>
                             </mask>
                         </variation>
                     </view>
