@@ -234,6 +234,9 @@
 		5270C6991A59FBA000F0C1B0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5270C6A91A59FBA000F0C1B0 /* Images.xcassets */,
+				5270C6AB1A59FBA000F0C1B0 /* LaunchScreen.xib */,
+				52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */,
 				52C247AB1A7C529E00DB3797 /* HiveMapsDataTool.sqlite */,
 				528A3B451A7AB77C007F2BFC /* CodeStorage */,
 				5270C69A1A59FBA000F0C1B0 /* Info.plist */,
