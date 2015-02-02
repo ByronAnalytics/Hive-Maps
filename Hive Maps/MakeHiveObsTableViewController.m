@@ -30,6 +30,7 @@
 
 @interface MakeHiveObsTableViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *treatmentAlert;
+@property (weak, nonatomic) IBOutlet UILabel *queenStarRatingLabel;
 
 @end
 
@@ -195,8 +196,11 @@
     }
 }
 
+
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating {
     queenRating = [NSNumber numberWithFloat: rating];
+    self.queenStarRatingLabel.text = [NSString stringWithFormat:@"%.1f", rating];
+    [self.tableView reloadData];
 }
 
 - (IBAction)requeenSwitchChanged:(id)sender {

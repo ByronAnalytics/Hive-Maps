@@ -6,14 +6,15 @@
 //  Copyright (c) 2015 HiveMaps. All rights reserved.
 //
 /* #################### TO DO ####################
-  - dictionaries are unordered... maybe paired arrays? variablesArray & variableSelectedArray
-  - didSelectRow to toggle dictionary value YES/NO
-  - Graphing window
+ -Data Class is implimeneted, setup graphing
+ 
   - can toolbar hide?
  
 */
 
 #import "SingleHivePlotViewController.h"
+#import "ProcessDataForPlotting.h"
+#import "DataLuggage.h"
 
 @interface SingleHivePlotViewController ()
 
@@ -32,12 +33,15 @@
 @property (nonatomic, strong) NSMutableArray *eventsSelectedArray;
 @property (nonatomic, strong) NSMutableArray *eventsSelectedCellsArray;
 
+@property (nonatomic, strong) ProcessDataForPlotting *plotData;
+
 @end
 
 @implementation SingleHivePlotViewController
 //Plot Setup
 @synthesize plotElementsTableView;
-
+@synthesize plotData;
+@synthesize hive;
 
 //Plot Window
 @synthesize hostView;
@@ -59,9 +63,14 @@
 @synthesize eventsSelectedArray;
 @synthesize eventsSelectedCellsArray;
 
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self initPlot];
+ 
+    self.hive = [[DataLuggage sharedObject] hive];
+    NSSet *hiveObservations = hive.hiveObservations;
+    NSLog(@"Number Observations: %lu", (unsigned long)hiveObservations.count);
     
     //Set plotting Elements:
     variablesArray = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
@@ -79,6 +88,9 @@
     self.plotElementsDisplayed = NO;
     plotElementsTableView.hidden = YES;
     
+    plotData = [[ProcessDataForPlotting alloc] init];
+    [plotData generateDataArrays:self.hive];
+    NSLog(@"Temp Array: %@", plotData.temperature);
 }
 
 - (void)viewDidAppear:(BOOL)animated {

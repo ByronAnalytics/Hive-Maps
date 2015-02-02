@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
+#import "HiveDetails.h"
 
 @interface SingleHivePlotViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CPTScatterPlotDataSource>
+
+@property (strong, nonatomic) HiveDetails *hive;
 
 // Plot Setup
 @property (nonatomic, strong) CPTGraphHostingView *hostView;

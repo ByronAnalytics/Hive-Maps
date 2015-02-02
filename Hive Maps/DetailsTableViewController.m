@@ -17,7 +17,9 @@
 #import "MainTableViewController.h"
 #import "AddHiveTableViewController.h"
 #import "HiveBoxesTableViewController.h"
+#import "SingleHivePlotViewController.h"
 
+#import "DataLuggage.h"
 //Core Data Elements
 #import "HiveDetails.h"
 #import "HiveObservation.h"
@@ -53,9 +55,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     managedObjectContext = [appDelegate managedObjectContext];
     self.navigationItem.title = hive.hiveID;
-    self.navigationController.toolbarHidden = NO;
-          NSLog(@"Hive Details For: %@", hive);
-    
+    self.navigationController.toolbarHidden = NO;    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -74,12 +74,10 @@
     
     //Queen Performance Rating
     self.queenRatingView.rating = [lastObservation.queenPerformance floatValue];
-    NSLog(@"Rating: %f", [lastObservation.queenPerformance floatValue] );
     self.queenRatingView.editable = NO;
     self.queenRatingView.maxRating = 5;
     self.queenRatingView.delegate = self;
    
-    NSLog(@"health: %@", lastObservation.healthStatus);
     if ([lastObservation.healthStatus integerValue] == 0) {
         healthStatusOut.text = @"Healthy";
     } else {
@@ -173,7 +171,6 @@
 }
 
 - (void) calcHiveValues{
-    NSLog(@"Calc Hive Values");
     
     NSSet *boxes = lastObservation.boxObservations;
    // NSLog(@"Boxes: %@", [boxes valueForKey:@"boxID"]);
@@ -183,9 +180,7 @@
     float framesHoney = 0;
     
     for (id box in boxes) {
-        NSLog(@"Box Values: %@", box);
         framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
-        NSLog(@"framesBrood: %.2f", framesBrood);
         framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
         framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
     }
@@ -219,10 +214,12 @@
         UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
         HiveBoxesTableViewController *hiveBoxTVC = (HiveBoxesTableViewController *) [navController topViewController];
         hiveBoxTVC.hive = hive;
+
         
-        NSLog(@"Source Hive: %@", hive);
-    
-        
+    } else if ([[segue identifier] isEqualToString:@"visualizeDataSegue"]){
+        [[DataLuggage sharedObject] setHive:hive];
+        NSLog(@"Data Luggage Value: %@", [[DataLuggage sharedObject] hive]);
+
     }
     
     

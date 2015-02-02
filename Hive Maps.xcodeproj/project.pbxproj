@@ -15,6 +15,7 @@
 		520223841A719344008C8553 /* BoxObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223831A719344008C8553 /* BoxObservation.m */; };
 		520223871A719363008C8553 /* HiveObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223861A719363008C8553 /* HiveObservation.m */; };
 		5202238A1A71BFB0008C8553 /* HiveDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223891A71BFB0008C8553 /* HiveDetails.m */; };
+		521CCDC41A7FE70500133FF3 /* DataLuggage.m in Sources */ = {isa = PBXBuildFile; fileRef = 521CCDC31A7FE70500133FF3 /* DataLuggage.m */; };
 		5234F0391A79ADB70038E298 /* ProcessDataForPlotting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5234F0381A79ADB70038E298 /* ProcessDataForPlotting.m */; };
 		5245A56E1A5A6F3C002DBA4B /* AddHiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A56D1A5A6F3C002DBA4B /* AddHiveTableViewController.m */; };
 		5245A5711A5A7038002DBA4B /* AddBoxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5701A5A7038002DBA4B /* AddBoxTableViewController.m */; };
@@ -68,6 +69,8 @@
 		520223861A719363008C8553 /* HiveObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveObservation.m; sourceTree = "<group>"; };
 		520223881A71BFB0008C8553 /* HiveDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveDetails.h; sourceTree = "<group>"; };
 		520223891A71BFB0008C8553 /* HiveDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveDetails.m; sourceTree = "<group>"; };
+		521CCDC21A7FE70500133FF3 /* DataLuggage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLuggage.h; sourceTree = "<group>"; };
+		521CCDC31A7FE70500133FF3 /* DataLuggage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLuggage.m; sourceTree = "<group>"; };
 		5234F0371A79ADB70038E298 /* ProcessDataForPlotting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessDataForPlotting.h; sourceTree = "<group>"; };
 		5234F0381A79ADB70038E298 /* ProcessDataForPlotting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessDataForPlotting.m; sourceTree = "<group>"; };
 		5245A56C1A5A6F3C002DBA4B /* AddHiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHiveTableViewController.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				5234F0381A79ADB70038E298 /* ProcessDataForPlotting.m */,
 				52508F8B1A745397007EF20D /* RateView.h */,
 				52508F8C1A745397007EF20D /* RateView.m */,
+				521CCDC21A7FE70500133FF3 /* DataLuggage.h */,
+				521CCDC31A7FE70500133FF3 /* DataLuggage.m */,
 			);
 			name = "Worker Classes";
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 				5270C69F1A59FBA000F0C1B0 /* AppDelegate.m in Sources */,
 				5234F0391A79ADB70038E298 /* ProcessDataForPlotting.m in Sources */,
 				529F277C1A5A5FCC009A30A9 /* GetWeatherTableViewController.m in Sources */,
+				521CCDC41A7FE70500133FF3 /* DataLuggage.m in Sources */,
 				5270C69C1A59FBA000F0C1B0 /* main.m in Sources */,
 				52ADD9CD1A6460A1002347A1 /* DefaultValuesTableViewController.m in Sources */,
 				5245A5741A5A7169002DBA4B /* SettingsTableViewController.m in Sources */,

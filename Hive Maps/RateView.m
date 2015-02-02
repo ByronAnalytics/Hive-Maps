@@ -150,23 +150,28 @@
     
     self.rating = newRating;
     NSLog(@"Rating: %f", newRating);
-    
+    [self.delegate rateView:self ratingDidChange:self.rating];
+
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self];
     [self handleTouchAtLocation:touchLocation];
+
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint touchLocation = [touch locationInView:self];
     [self handleTouchAtLocation:touchLocation];
+
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.delegate rateView:self ratingDidChange:self.rating];
+    UITouch *touch = [touches anyObject];
+    CGPoint touchLocation = [touch locationInView:self];
+    [self handleTouchAtLocation:touchLocation];
 }
 
 @end
