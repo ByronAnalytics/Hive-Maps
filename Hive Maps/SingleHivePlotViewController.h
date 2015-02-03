@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
+#import "HiveDetails.h"
 
 @interface SingleHivePlotViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CPTScatterPlotDataSource>
+
+@property (strong, nonatomic) HiveDetails *hive;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 // Plot Setup
 @property (nonatomic, strong) CPTGraphHostingView *hostView;
@@ -17,11 +21,13 @@
 // Toolbar Setup
 @property (weak, nonatomic) IBOutlet UITableView *plotElementsTableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *variablesButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *weatherButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *eventsButton;
 
 //Actions
 - (IBAction)variablesButton:(id)sender;
 - (IBAction)weatherButton:(id)sender;
 - (IBAction)eventsButton:(id)sender;
-- (IBAction)plotWindowTaped:(id)sender;
 
 @end

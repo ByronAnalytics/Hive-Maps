@@ -1,75 +1,76 @@
 /*
-- (void) formatAgeTextField{
-    // The time interval
-    NSTimeInterval theTimeInterval = [self.hive.startDate timeIntervalSinceNow] * -1;
+- (void)generateDataArrays:(HiveDetails *)hive{
+    NSSet *hiveObservations = hive.hiveObservations;
     
-    // Get the system calendar
-    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+    NSLog(@"Number Observations: %lu", (unsigned long)hiveObservations.count);
     
-    // Create the NSDates
-    NSDate *date1 = [[NSDate alloc] init];
-    NSDate *date2 = [[NSDate alloc] initWithTimeInterval:theTimeInterval sinceDate:date1];
+    //sort set by date
+    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"observationDate" ascending:YES]];
+    NSArray *sortedObservations = [[hiveObservations allObjects] sortedArrayUsingDescriptors:sortDescriptors];
     
-    // Get conversion to months, days, hours, minutes
-    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
     
-    NSDateComponents *breakdownInfo = [sysCalendar components:unitFlags fromDate:date1  toDate:date2  options:0];
-    NSString *age = nil;
-    
-    if([breakdownInfo year] > 0 ){  // If hive is more then a year old, display age as YY:MM
-        if ([breakdownInfo month] > 0) {
-            if([breakdownInfo year] >= 2){ //pluralize years
-                if([breakdownInfo month] >= 2){ //pluralize months
-                    age = [NSString stringWithFormat:@"%ld years, %ld months", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld years, %ld month", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                }
-            } else {
-                if([breakdownInfo month] >= 2){
-                    age = [NSString stringWithFormat:@"%ld year, %ld months", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld year, %ld month", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                }
-            }
-            
-        } else { // hive is between 12 and 13 months old
-            if([breakdownInfo year] >= 2){ //pluralize years
-                if([breakdownInfo day] >= 2){ //pluralize months
-                    age = [NSString stringWithFormat:@"%ld years, %ld days", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld years, %ld day", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                }
-            } else {
-                if([breakdownInfo month] >= 2){
-                    age = [NSString stringWithFormat:@"%ld year, %ld days", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld year, %ld day", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                }
-            }
-            
+    for (id obs in sortedObservations) {
+        
+        //Dependent Variable (Time)
+        [self.date addObject:[obs valueForKey:@"observationDate"]];
+        NSLog(@"Date %@", [obs valueForKey:@"observationDate"]);
+        
+        //Independent Variables
+        NSSet *boxes = [obs valueForKey:@"boxObservations"];
+        float framesBrood = 0;
+        float framesWorkers = 0;
+        float framesHoney = 0;
+        
+        for (id box in boxes) {
+            framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
+            framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
+            framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
         }
-    } else if ([breakdownInfo month] > 0) {
-        if([breakdownInfo month] >= 2){
-            if ([breakdownInfo day] >=2){
-                age = [NSString stringWithFormat:@"%ld months, %ld days", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-            } else {
-                age = [NSString stringWithFormat:@"%ld months, %ld day", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-            }
-        } else {
-            if ([breakdownInfo day] >=2){
-                age = [NSString stringWithFormat:@"%ld month, %ld days", (long)[breakdownInfo month], (long)[breakdownInfo day]];
-            } else {
-                age = [NSString stringWithFormat:@"%ld month, %ld day", (long)[breakdownInfo month], (long)[breakdownInfo day]];
-            }
-        }
-    } else {
-        if ([breakdownInfo day] >=2){
-            age = [NSString stringWithFormat:@"%ld days", (long)[breakdownInfo day]];
-        } else {
-            age = [NSString stringWithFormat:@"%ld day", (long)[breakdownInfo day]];
-        }
+        
+        [self.broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
+        [self.honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
+        [self.workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
+        
+        //   WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
+        //[self.temperature addObject:weather.temperature];
+        // [self.humidity addObject:weather.humidity];
+        // [self.pressure addObject:weather.pressure];
+        // [self.windSpeed addObject:weather.windSpeed];
+        
+        //Discrete Events
+        [self.didRequeen addObject:[obs valueForKey:@"requeened"]];
+        [self.wasSick addObject:[obs valueForKey:@"healthStatus"]];
+        [self.obsQueen addObject:[obs valueForKey:@"observedQueen"]];
+        [self.obsInsuranceCups addObject:[obs valueForKey:@"cupsInsur"]];
+        [self.obsDrones addObject:[obs valueForKey:@"drone"]];
+        [self.osbSwarming addObject:[obs valueForKey:@"swarm"]];
+        //Hover Descriptors
+        [self.queenSource addObject:[obs valueForKey:@"queenSource"]];
+        [self.diseaseTreatment addObject:[obs valueForKey:@"treatment"]];
     }
-    ageOut.text = age;
+    
     
 }
- */
+
+- (void)totalBoxes:(HiveObservation *)hiveObservation{
+    NSSet *boxes = hiveObservation.boxObservations;
+    
+    float framesBrood = 0;
+    float framesWorkers = 0;
+    float framesHoney = 0;
+    
+    for (id box in boxes) {
+        NSLog(@"Sum Boxes loop");
+        framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
+        framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
+        framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
+    }
+    
+    [self.broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
+    [honeyTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
+    [self.workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
+    NSLog(@"Frames Honey: %f", framesHoney);
+    NSLog(@"Honey Array: %@", self.honeyTotals);
+    
+}
+*/

@@ -30,6 +30,7 @@
 
 @interface MakeHiveObsTableViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *treatmentAlert;
+@property (weak, nonatomic) IBOutlet UILabel *queenStarRatingLabel;
 
 @end
 
@@ -201,8 +202,11 @@
     }
 }
 
+
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating {
     queenRating = [NSNumber numberWithFloat: rating];
+    self.queenStarRatingLabel.text = [NSString stringWithFormat:@"%.1f", rating];
+    [self.tableView reloadData];
 }
 
 - (IBAction)requeenSwitchChanged:(id)sender {
@@ -360,6 +364,9 @@
     hiveObservation.treatmentStage = treatmentStatus;
     hiveObservation.commentBox = commentTextField.text;
     hive.lastObservation = hiveObservation;
+    [hive addHiveObservationsObject:hiveObservation];
+    
+    
     
     NSError *error = nil;
     if (![_managedObjectContext save:&error]) {
