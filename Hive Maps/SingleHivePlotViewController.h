@@ -13,6 +13,7 @@
 @interface SingleHivePlotViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CPTScatterPlotDataSource>
 
 @property (strong, nonatomic) HiveDetails *hive;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 // Plot Setup
 @property (nonatomic, strong) CPTGraphHostingView *hostView;

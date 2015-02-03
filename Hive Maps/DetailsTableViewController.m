@@ -61,7 +61,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     lastObservation = hive.lastObservation;
     
-    
     siteNameOut.text = hive.siteName;
     hiveIDOut.text = hive.hiveID;
     
@@ -90,7 +89,6 @@
     [dateformat setDateFormat:@"MM-dd-yyyy"];
     lastSampleDateOut.text = [dateformat stringFromDate:lastObservation.observationDate];
     [self calcHiveValues];
-
 }
 
 - (void)rateView:(RateView *)rateView ratingDidChange:(float)rating{
@@ -218,8 +216,7 @@
         
     } else if ([[segue identifier] isEqualToString:@"visualizeDataSegue"]){
         [[DataLuggage sharedObject] setHive:hive];
-        NSLog(@"Data Luggage Value: %@", [[DataLuggage sharedObject] hive]);
-
+        
     }
     
     

@@ -12,6 +12,7 @@
 @interface DataLuggage : NSObject
 
 @property (nonatomic, strong) HiveDetails *hive;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 + (DataLuggage *)sharedObject;
 

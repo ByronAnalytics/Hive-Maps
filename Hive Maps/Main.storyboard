@@ -2670,7 +2670,6 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Explore Hive" id="UQS-FN-PaN" userLabel="Explore Hive"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="eventsButton" destination="bmI-RE-807" id="qEr-nK-Hwa"/>
                         <outlet property="plotElementsTableView" destination="y48-QH-ULr" id="YHS-ig-bRg"/>
@@ -3465,7 +3464,6 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Compare Hives" id="a1Q-MN-KPI"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inv-9S-UnH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="gEl-f9-CAq" userLabel="Exit" sceneMemberID="exit"/>

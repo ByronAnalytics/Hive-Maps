@@ -358,6 +358,9 @@
     hiveObservation.treatmentStage = treatmentStatus;
     hiveObservation.commentBox = commentTextField.text;
     hive.lastObservation = hiveObservation;
+    [hive addHiveObservationsObject:hiveObservation];
+    
+    
     
     NSError *error = nil;
     if (![_managedObjectContext save:&error]) {

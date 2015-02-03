@@ -15,6 +15,8 @@
 #import "SingleHivePlotViewController.h"
 #import "ProcessDataForPlotting.h"
 #import "DataLuggage.h"
+#import "AppDelegate.h"
+#import "HiveObservation.h"
 
 @interface SingleHivePlotViewController ()
 
@@ -63,14 +65,21 @@
 @synthesize eventsSelectedArray;
 @synthesize eventsSelectedCellsArray;
 
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self initPlot];
- 
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
+
     self.hive = [[DataLuggage sharedObject] hive];
-    NSSet *hiveObservations = hive.hiveObservations;
-    NSLog(@"Number Observations: %lu", (unsigned long)hiveObservations.count);
+   
+    plotData = [[ProcessDataForPlotting alloc] init];
+    [plotData generateDataArrays:self.hive];
+    NSLog(@"Plot Data: %@", plotData.honeyTotals);
     
     //Set plotting Elements:
     variablesArray = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
@@ -88,13 +97,6 @@
     self.plotElementsDisplayed = NO;
     plotElementsTableView.hidden = YES;
     
-    plotData = [[ProcessDataForPlotting alloc] init];
-    [plotData generateDataArrays:self.hive];
-    NSLog(@"Temp Array: %@", plotData.temperature);
-}
-
-- (void)viewDidAppear:(BOOL)animated {
- 
 }
 
 
@@ -167,7 +169,7 @@
     }
 }
 
-#pragma mark - Chart behavior
+#pragma mark ------------ Chart behavior -----------
 -(void)initPlot {
     [self configureHost];
     [self configureGraph];
@@ -187,7 +189,7 @@
 -(void)configureAxes {
 }
 
-#pragma mark - CPTPlotDataSource methods
+#pragma mark ----------- CPTPlotDataSource methods -----------
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
     return 0;
 }
