@@ -37,6 +37,7 @@
 
 @property (nonatomic, strong) ProcessDataForPlotting *plotData;
 
+@property (nonatomic, strong) NSDictionary *plotElementsDictionary; //holds potential plot elements
 @end
 
 @implementation SingleHivePlotViewController
@@ -54,6 +55,7 @@
 //In Class Variables
 @synthesize plotElementsGroup;
 
+@synthesize plotElementsDictionary;
 @synthesize tableArray;
 @synthesize variablesArray;
 @synthesize variablesSelectedArray;
@@ -65,9 +67,7 @@
 @synthesize eventsSelectedArray;
 @synthesize eventsSelectedCellsArray;
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
-}
+float maxYValue;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -79,7 +79,6 @@
    
     plotData = [[ProcessDataForPlotting alloc] init];
     [plotData generateDataArrays:self.hive];
-    NSLog(@"Plot Data: %@", plotData.honeyTotals);
     
     //Set plotting Elements:
     variablesArray = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
@@ -97,6 +96,12 @@
     self.plotElementsDisplayed = NO;
     plotElementsTableView.hidden = YES;
     
+    //Setup Dictionary to communicate between selected Elements and Data
+    NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames", @"Queen Performance", @"Temperature", @"Humidity", @"Pressure", @"Wind Speed"];
+    NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary, plotData.queenPerformanceDictionary, plotData.temperatureDictionary, plotData.humidityDictionary, plotData.pressureDictionary, plotData.windSpeedDictionary];
+    
+    plotElementsDictionary = [NSDictionary dictionaryWithObjects:plotElementValues forKeys:plotElementKeys];
+
 }
 
 
@@ -178,9 +183,43 @@
 }
 
 -(void)configureHost {
+    self.hostView = [(CPTGraphHostingView *) [CPTGraphHostingView alloc] initWithFrame:self.view.bounds];
+    self.hostView.allowPinchScaling = YES;
+    [self.view addSubview:self.hostView];
 }
 
 -(void)configureGraph {
+    //Initiate and Set Theme ****Currently plain white - user setting later??
+    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
+    self.hostView.hostedGraph = graph;
+    [graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
+    graph.paddingBottom = 30.0f;
+    graph.paddingLeft = 30.0f;
+    graph.paddingTop = -1.0f;
+    graph.paddingRight = -5.0;
+    
+    //Setup Title
+    NSString *title = [NSString stringWithFormat:@" Hive Productivity Data for %@", hive.hiveID];
+    graph.title = title;
+    
+    //Text Style
+    CPTMutableTextStyle *titleStyle = [CPTMutableTextStyle textStyle];
+    titleStyle.color = [CPTColor blackColor];
+    titleStyle.fontName = @"Helvetica-Bold";
+    titleStyle.fontSize = 16.0f;
+    graph.titleTextStyle = titleStyle;
+    graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
+    graph.titleDisplacement = CGPointMake(0.0f, -16.0f);
+    
+    //Setup Plotting Space
+    CGFloat xMin = 0.0f;
+    CGFloat xMax = [[plotData.dateDictionary valueForKey:@"range"] floatValue]; // number of days of observations
+    CGFloat yMin = 0.0f;
+    CGFloat yMax = maxYValue;
+    
+    
+    
+    
 }
 
 -(void)configurePlots {
@@ -190,6 +229,29 @@
 }
 
 #pragma mark ----------- CPTPlotDataSource methods -----------
+-(void)updatePlotData{
+    //Generate array of selected plot elements
+    NSMutableSet *selectedPlotElementArrays = [[NSMutableSet alloc]init];
+    
+    for (id key in variablesSelectedArray) {
+        [selectedPlotElementArrays addObject:[plotElementsDictionary objectForKey:key]];
+    }
+    
+    for (id key in weatherSelectedArray) {
+        [selectedPlotElementArrays addObject:[plotElementsDictionary objectForKey:key]];
+    }
+   
+    //Set maxY value for establishing plot space
+    float maxRange = 0;
+    for (id element in selectedPlotElementArrays) {
+        float range = [[element valueForKey:@"range"] floatValue];
+        if(range > maxRange) maxRange = range;
+    }
+    maxYValue = maxRange;
+    
+}
+
+
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
     return 0;
 }
@@ -203,6 +265,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+//#####################################################################
 #pragma mark ----------- TABLE VIEW DATA SOURCE / DELEGATE -----------
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

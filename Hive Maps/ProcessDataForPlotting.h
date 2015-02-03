@@ -12,7 +12,12 @@
 
 @interface ProcessDataForPlotting : NSObject
 
-@property (nonatomic, strong, readonly) NSMutableArray *dateArray, *broodTotals, *honeyTotals, *workerTotals, *temperature, *humidity, *pressure, *windSpeed; //hive parameters and covariates
+@property (nonatomic, strong, readonly) NSDictionary *dateDictionary, *broodDictionary, *honeyDictionary, *workerDictionary, *queenPerformanceDictionary, *temperatureDictionary, *humidityDictionary, *pressureDictionary, *windSpeedDictionary;
+
+//##################################
+
+@property (nonatomic, strong, readonly) NSMutableArray *dateArray, *broodTotals, *honeyTotals, *workerTotals, *queenPerformance, *temperature, *humidity, *pressure, *windSpeed; //hive parameters and covariates
+
 @property (nonatomic, strong, readonly) NSMutableArray  *didRequeen, *wasSick, *obsQueen, *obsInsuranceCups, *obsDrones, *obsSwarming; //boolean values
 @property (nonatomic, strong, readonly) NSMutableArray *siteHive, *queenSource, *diseaseTreatment; //descriptors for 'hover over' displays
 

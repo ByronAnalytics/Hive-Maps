@@ -906,7 +906,7 @@
                                 <segue destination="k16-rw-H8H" kind="unwind" unwindAction="unWindToHome:" id="meV-LY-6Ig"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Analyze" id="59Q-0i-YEQ">
+                        <barButtonItem key="rightBarButtonItem" title="Analyze" id="59Q-0i-YEQ">
                             <connections>
                                 <segue destination="TSe-42-orw" kind="presentation" identifier="visualizeDataSegue" id="Cwe-bM-qtM"/>
                             </connections>
@@ -2327,8 +2327,6 @@
         <!--Explore Hive-->
         <scene sceneID="wEH-8t-7kg">
             <objects>
-                <exit id="YKW-X7-Miu" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZfF-1T-cr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="uNd-5o-jIy" customClass="SingleHivePlotViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xIr-AB-1Ba"/>
@@ -2338,7 +2336,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubj-dF-imn" userLabel="Plot Window">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubj-dF-imn" userLabel="Plot Window" customClass="CPTGraphHostingView">
                                 <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -2440,21 +2438,23 @@
                     <tabBarItem key="tabBarItem" title="Explore Hive" id="UQS-FN-PaN" userLabel="Explore Hive"/>
                     <connections>
                         <outlet property="eventsButton" destination="bmI-RE-807" id="qEr-nK-Hwa"/>
+                        <outlet property="hostView" destination="ubj-dF-imn" id="dGv-cw-gVr"/>
                         <outlet property="plotElementsTableView" destination="y48-QH-ULr" id="YHS-ig-bRg"/>
                         <outlet property="toolbar" destination="rCa-iH-CjT" id="E5e-nG-nRH"/>
                         <outlet property="variablesButton" destination="z1U-0p-DIv" id="0ca-SH-UQk"/>
                         <outlet property="weatherButton" destination="oaT-72-gbS" id="dzk-3n-Qhp"/>
                     </connections>
                 </viewController>
+                <exit id="YKW-X7-Miu" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZfF-1T-cr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3458" y="1733"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar Navigation Controller-->
         <scene sceneID="FSp-gK-71f">
             <objects>
-                <tabBarController id="TSe-42-orw" sceneMemberID="viewController">
+                <tabBarController id="TSe-42-orw" customClass="TabBarNavigationController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="tb5-Rm-KYN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3222,6 +3222,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XfV-hP-5c5"/>
+        <segue reference="VIN-Ku-dJP"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,8 +10,6 @@ Data arrays for each variable are created and stored in instance for this class 
  
  */
 
-
-
 #import "ProcessDataForPlotting.h"
 #import "HiveObservation.h"
 #import "BoxObservation.h"
@@ -21,9 +19,11 @@ Data arrays for each variable are created and stored in instance for this class 
 @implementation ProcessDataForPlotting
 
 @synthesize dateArray;
-@synthesize honeyTotals, broodTotals, workerTotals, temperature, humidity, pressure, windSpeed;
+@synthesize honeyTotals, broodTotals, workerTotals, queenPerformance, temperature, humidity, pressure, windSpeed;
 @synthesize didRequeen, wasSick, obsQueen, obsInsuranceCups, obsDrones, obsSwarming;
 @synthesize siteHive, queenSource, diseaseTreatment;
+
+@synthesize dateDictionary, broodDictionary, honeyDictionary, workerDictionary, queenPerformanceDictionary, temperatureDictionary, humidityDictionary, pressureDictionary, windSpeedDictionary;
 
 - (void)generateDataArrays:(HiveDetails *)hive{
   //initialize arrays
@@ -31,6 +31,7 @@ Data arrays for each variable are created and stored in instance for this class 
     honeyTotals = [[NSMutableArray alloc] init];
     broodTotals = [[NSMutableArray alloc] init];
     workerTotals = [[NSMutableArray alloc] init];
+    queenPerformance = [[NSMutableArray alloc]init];
     temperature = [[NSMutableArray alloc] init];
     humidity = [[NSMutableArray alloc] init];
     pressure = [[NSMutableArray alloc] init];
@@ -70,32 +71,80 @@ Data arrays for each variable are created and stored in instance for this class 
             framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
         }
         
-        [self.broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
-        [self.honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
-        [self.workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
-        
-        //   WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
-        //[self.temperature addObject:weather.temperature];
-        // [self.humidity addObject:weather.humidity];
-        // [self.pressure addObject:weather.pressure];
-        // [self.windSpeed addObject:weather.windSpeed];
+        [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
+        [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
+        [workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
+        [queenPerformance addObject:[sortedObservations valueForKey:@"queenPerformance"]];
+        WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
+        [temperature addObject:weather.temperature];
+        [humidity addObject:weather.humidity];
+        [pressure addObject:weather.pressure];
+        [windSpeed addObject:weather.windSpeed];
         
         //Discrete Events
-        [self.didRequeen addObject:[obs valueForKey:@"requeened"]];
-        [self.wasSick addObject:[obs valueForKey:@"healthStatus"]];
-        [self.obsQueen addObject:[obs valueForKey:@"observedQueen"]];
-        [self.obsInsuranceCups addObject:[obs valueForKey:@"cupsInsur"]];
-        [self.obsDrones addObject:[obs valueForKey:@"drone"]];
-        [self.obsSwarming addObject:[obs valueForKey:@"swarm"]];
+        [didRequeen addObject:[obs valueForKey:@"requeened"]];
+        [wasSick addObject:[obs valueForKey:@"healthStatus"]];
+        [obsQueen addObject:[obs valueForKey:@"observedQueen"]];
+        [obsInsuranceCups addObject:[obs valueForKey:@"cupsInsur"]];
+        [obsDrones addObject:[obs valueForKey:@"drone"]];
+        [obsSwarming addObject:[obs valueForKey:@"swarm"]];
         //Hover Descriptors
-        [self.queenSource addObject:[obs valueForKey:@"queenSource"]];
-        [self.diseaseTreatment addObject:[obs valueForKey:@"treatment"]];
+        [queenSource addObject:[obs valueForKey:@"queenSource"]];
+        [diseaseTreatment addObject:[obs valueForKey:@"treatment"]];
      
     }
+    [self defineDictionaries:hive];
+    
 }
 
-    
 
+//3-number distribution for each plot element, @[min, range, max]
+-(void)defineDictionaries:(HiveDetails *)hive{
+    
+    //setup y-value dictionaries
+    broodDictionary = [self calcRange:broodTotals];
+    honeyDictionary = [self calcRange:honeyTotals];
+    workerDictionary = [self calcRange:workerTotals];
+    queenPerformanceDictionary = [self calcRange:queenPerformance];
+    temperatureDictionary = [self calcRange:temperature];
+    humidityDictionary = [self calcRange:humidity];
+    pressureDictionary = [self calcRange:pressure];
+    windSpeedDictionary = [self calcRange:windSpeed];
+    
+    //Setup Date Dictionary
+    NSDate *firstDate = dateArray[0];
+    NSDate *lastDate = dateArray[dateArray.count-1];
+    
+    NSTimeInterval dateIntervalinSec = [lastDate timeIntervalSinceDate:firstDate];
+    int secInDay = 86400;
+    NSNumber *rangeX = [NSNumber numberWithInteger:dateIntervalinSec / secInDay];
+    NSDate *minX = dateArray[0];
+    NSDate *maxX = dateArray[dateArray.count-1];
+    dateDictionary = [NSDictionary dictionaryWithObjects:@[dateArray, minX, rangeX, maxX]
+                                                 forKeys:@[@"data", @"minValue", @"range", @"maxValue"]];
+    
+}
+    
+-(NSDictionary *)calcRange:(NSArray*)plotElement{
+    NSNumber *minValue, *rangeValue, *maxValue;
+    
+    float xmax = -MAXFLOAT; //system max value for datatype float
+    float xmin = MAXFLOAT;
+    for (NSNumber *num in plotElement) {
+        float x = num.floatValue;
+        if (x < xmin) xmin = x;
+        if (x > xmax) xmax = x;
+    }
+    
+    float range = xmax - xmin;
+    minValue = [NSNumber numberWithFloat:xmin];
+    rangeValue = [NSNumber numberWithFloat:range];
+    maxValue = [NSNumber numberWithFloat:xmax];
+    
+    NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[plotElement, minValue, rangeValue, maxValue]
+                                forKeys:@[@"data", @"minValue", @"range", @"maxValue"]];
+    return dataDictionary;
+}
 
 
 @end
