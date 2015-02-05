@@ -16,7 +16,8 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 // Plot Setup
-@property (nonatomic, strong) IBOutlet CPTGraphHostingView *hostView;
+@property (nonatomic, strong) CPTGraphHostingView *hostView;
+@property (weak, nonatomic) IBOutlet UIView *plotSpaceUIView;
 
 // Toolbar Setup
 @property (weak, nonatomic) IBOutlet UITableView *plotElementsTableView;

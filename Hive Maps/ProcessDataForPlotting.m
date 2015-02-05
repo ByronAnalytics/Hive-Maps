@@ -75,11 +75,11 @@ Data arrays for each variable are created and stored in instance for this class 
         [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
         [workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
         [queenPerformance addObject:[sortedObservations valueForKey:@"queenPerformance"]];
-        WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
-        [temperature addObject:weather.temperature];
-        [humidity addObject:weather.humidity];
-        [pressure addObject:weather.pressure];
-        [windSpeed addObject:weather.windSpeed];
+        //WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
+        //[temperature addObject:weather.temperature];
+        //[humidity addObject:weather.humidity];
+        //[pressure addObject:weather.pressure];
+        //[windSpeed addObject:weather.windSpeed];
         
         //Discrete Events
         [didRequeen addObject:[obs valueForKey:@"requeened"]];
@@ -94,9 +94,18 @@ Data arrays for each variable are created and stored in instance for this class 
      
     }
     [self defineDictionaries:hive];
-    
+    [self definePlotSymbolArray];
+    [self defineColorArray];
 }
 
+-(void)definePlotSymbolArray{
+    self.plotSymbolArray = [NSArray arrayWithObjects:@"crossPlotSymbol", @"ellipsePlotSymbol", @"rectanglePlotSymbol", @"plusPlotSymbol", @"starPlotSymbol", @"diamondPlotSymbol", @"trainglePlotSymbol", @"pentagonPlotSymbol", @"hexagonPlotSymbol", @"snowPlotSymbol", @"dashPlotSymbol", nil];
+}
+
+-(void)defineColorArray{
+    self.colorArray = [NSArray arrayWithObjects:@"blackColor", @"redColor", @"greenColor", @"orangeColor", @"blueColor", @"purpleColor", @"cyanColor", @"brownColor", @"magentaColor", @"grayColor", @"yellowColor", nil];
+    
+}
 
 //3-number distribution for each plot element, @[min, range, max]
 -(void)defineDictionaries:(HiveDetails *)hive{
@@ -105,11 +114,11 @@ Data arrays for each variable are created and stored in instance for this class 
     broodDictionary = [self calcRange:broodTotals];
     honeyDictionary = [self calcRange:honeyTotals];
     workerDictionary = [self calcRange:workerTotals];
-    queenPerformanceDictionary = [self calcRange:queenPerformance];
-    temperatureDictionary = [self calcRange:temperature];
-    humidityDictionary = [self calcRange:humidity];
-    pressureDictionary = [self calcRange:pressure];
-    windSpeedDictionary = [self calcRange:windSpeed];
+    //queenPerformanceDictionary = [self calcRange:queenPerformance];
+   // temperatureDictionary = [self calcRange:temperature];
+    //humidityDictionary = [self calcRange:humidity];
+   // pressureDictionary = [self calcRange:pressure];
+   // windSpeedDictionary = [self calcRange:windSpeed];
     
     //Setup Date Dictionary
     NSDate *firstDate = dateArray[0];

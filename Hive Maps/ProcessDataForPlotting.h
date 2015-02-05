@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong, readonly) NSMutableArray  *didRequeen, *wasSick, *obsQueen, *obsInsuranceCups, *obsDrones, *obsSwarming; //boolean values
 @property (nonatomic, strong, readonly) NSMutableArray *siteHive, *queenSource, *diseaseTreatment; //descriptors for 'hover over' displays
-
+@property (nonatomic, strong) NSArray *plotSymbolArray, *colorArray;
 
 - (void)generateDataArrays:(HiveDetails *)hive;
 

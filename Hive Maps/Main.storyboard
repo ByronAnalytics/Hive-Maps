@@ -2336,16 +2336,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubj-dF-imn" userLabel="Plot Window" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="44" width="800" height="307"/>
-                                </variation>
-                            </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-iH-CjT">
+                            <toolbar opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-iH-CjT">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="PQt-W1-UbY"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="done" systemItem="done" id="ws7-Dp-Gq2">
                                         <connections>
@@ -2377,11 +2372,19 @@
                                     <outlet property="delegate" destination="uNd-5o-jIy" id="XTc-7m-rzg"/>
                                 </connections>
                             </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubj-dF-imn" userLabel="Plot Window" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="44" width="800" height="307"/>
+                                </variation>
+                            </view>
                             <tableView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y48-QH-ULr">
                                 <rect key="frame" x="0.0" y="44" width="194" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="194" id="gLl-nS-OUD"/>
+                                    <constraint firstAttribute="width" constant="194" id="oVs-aq-Uct"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="plotElementCell" textLabel="afj-L9-GsK" style="IBUITableViewCellStyleDefault" id="MbT-TD-dnV">
@@ -2413,16 +2416,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rCa-iH-CjT" firstAttribute="leading" secondItem="Tx5-pI-lTc" secondAttribute="leading" id="EDs-y3-W49"/>
-                            <constraint firstAttribute="trailing" secondItem="ubj-dF-imn" secondAttribute="trailing" id="Elr-on-8Q5"/>
-                            <constraint firstItem="rCa-iH-CjT" firstAttribute="top" secondItem="Tx5-pI-lTc" secondAttribute="top" id="GAU-bt-qoJ"/>
-                            <constraint firstItem="ubj-dF-imn" firstAttribute="bottom" secondItem="kJ9-eV-KZX" secondAttribute="top" id="IQ2-He-p8h"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="bottom" secondItem="kJ9-eV-KZX" secondAttribute="top" id="SNg-GY-kYP"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="top" secondItem="rCa-iH-CjT" secondAttribute="bottom" id="TED-bG-bJ5"/>
-                            <constraint firstItem="ubj-dF-imn" firstAttribute="trailing" secondItem="rCa-iH-CjT" secondAttribute="trailing" id="avw-nC-tjl"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="leading" secondItem="ubj-dF-imn" secondAttribute="leading" id="kwk-hZ-bNx"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="top" secondItem="ubj-dF-imn" secondAttribute="top" id="n3k-76-Tiw"/>
-                            <constraint firstItem="ubj-dF-imn" firstAttribute="leading" secondItem="rCa-iH-CjT" secondAttribute="leading" id="ssl-Db-hAE"/>
+                            <constraint firstItem="ubj-dF-imn" firstAttribute="leading" secondItem="rCa-iH-CjT" secondAttribute="leading" id="1WY-JB-f5H"/>
+                            <constraint firstItem="rCa-iH-CjT" firstAttribute="top" secondItem="Tx5-pI-lTc" secondAttribute="top" id="9dX-C9-P2p"/>
+                            <constraint firstItem="ubj-dF-imn" firstAttribute="top" secondItem="rCa-iH-CjT" secondAttribute="bottom" id="NPv-WB-Iip"/>
+                            <constraint firstItem="rCa-iH-CjT" firstAttribute="trailing" secondItem="ubj-dF-imn" secondAttribute="trailing" id="OzC-8r-YtR"/>
+                            <constraint firstAttribute="trailing" secondItem="rCa-iH-CjT" secondAttribute="trailing" id="UFj-I9-QlL"/>
+                            <constraint firstItem="y48-QH-ULr" firstAttribute="leading" secondItem="ubj-dF-imn" secondAttribute="leading" id="XaZ-YM-8kF"/>
+                            <constraint firstItem="y48-QH-ULr" firstAttribute="leading" secondItem="Tx5-pI-lTc" secondAttribute="leading" id="eJP-Pj-i81"/>
+                            <constraint firstItem="y48-QH-ULr" firstAttribute="bottom" secondItem="kJ9-eV-KZX" secondAttribute="top" id="oDr-cD-zV8"/>
+                            <constraint firstItem="y48-QH-ULr" firstAttribute="top" secondItem="ubj-dF-imn" secondAttribute="top" id="pbJ-pU-pTi"/>
+                            <constraint firstItem="ubj-dF-imn" firstAttribute="bottom" secondItem="kJ9-eV-KZX" secondAttribute="top" id="zZQ-o9-GgP"/>
                         </constraints>
                         <variation key="heightClass=compact">
                             <mask key="subviews">
@@ -2438,8 +2441,8 @@
                     <tabBarItem key="tabBarItem" title="Explore Hive" id="UQS-FN-PaN" userLabel="Explore Hive"/>
                     <connections>
                         <outlet property="eventsButton" destination="bmI-RE-807" id="qEr-nK-Hwa"/>
-                        <outlet property="hostView" destination="ubj-dF-imn" id="dGv-cw-gVr"/>
                         <outlet property="plotElementsTableView" destination="y48-QH-ULr" id="YHS-ig-bRg"/>
+                        <outlet property="plotSpaceUIView" destination="ubj-dF-imn" id="sqn-6b-uZ7"/>
                         <outlet property="toolbar" destination="rCa-iH-CjT" id="E5e-nG-nRH"/>
                         <outlet property="variablesButton" destination="z1U-0p-DIv" id="0ca-SH-UQk"/>
                         <outlet property="weatherButton" destination="oaT-72-gbS" id="dzk-3n-Qhp"/>

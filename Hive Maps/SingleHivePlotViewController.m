@@ -48,7 +48,7 @@
 
 //Plot Window
 @synthesize hostView;
-
+@synthesize plotSpaceUIView;
 //Toolbar Buttons
 @synthesize toolbar;
 
@@ -72,6 +72,7 @@ float maxYValue;
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self initPlot];
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
 
@@ -97,20 +98,31 @@ float maxYValue;
     plotElementsTableView.hidden = YES;
     
     //Setup Dictionary to communicate between selected Elements and Data
+    NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames"];
+    NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary];
+    
+    /* FULL DATA SET TO BE LATER IMPLIMENTED AFTER WEATHER/QUEEN PERFORMANCE DEBUG
     NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames", @"Queen Performance", @"Temperature", @"Humidity", @"Pressure", @"Wind Speed"];
     NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary, plotData.queenPerformanceDictionary, plotData.temperatureDictionary, plotData.humidityDictionary, plotData.pressureDictionary, plotData.windSpeedDictionary];
+    */
     
     plotElementsDictionary = [NSDictionary dictionaryWithObjects:plotElementValues forKeys:plotElementKeys];
 
+    
+    NSLog(@"plot View Bounds:%@ origin: %@", NSStringFromCGSize(self.view.bounds.size), NSStringFromCGPoint(self.view.bounds.origin));
+    NSLog(@"plot View Bounds:%@ origin: %@", NSStringFromCGSize(self.view.bounds.size), NSStringFromCGPoint(self.view.bounds.origin));
+    
 }
 
 
 -(void)updatePlotElementsTableView{
     if (!self.isPlotElementsDisplayed) {  // plotElements Displayed == NO
         plotElementsTableView.hidden = YES;
-    
+            [self.view bringSubviewToFront:self.hostView];
+        
     } else {
         plotElementsTableView.hidden = NO;
+        [self.view sendSubviewToBack:self.hostView]; // push plot to background
         
         if ([plotElementsGroup isEqualToString:@"Variables"]) {
             tableArray = variablesArray;
@@ -183,20 +195,25 @@ float maxYValue;
 }
 
 -(void)configureHost {
-    self.hostView = [(CPTGraphHostingView *) [CPTGraphHostingView alloc] initWithFrame:self.view.bounds];
+    // 1 - Set up view frame
+    CGRect parentRect = self.view.bounds;
+    CGSize toolbarSize = self.toolbar.bounds.size;
+    parentRect = CGRectMake(parentRect.origin.x,
+                            (parentRect.origin.y + toolbarSize.height),
+                           parentRect.size.width,
+                           (parentRect.size.height - 2 * toolbarSize.height));
+    //2 - Create host view
+    self.hostView = [(CPTGraphHostingView *) [CPTGraphHostingView alloc] initWithFrame:parentRect];
     self.hostView.allowPinchScaling = YES;
     [self.view addSubview:self.hostView];
+
 }
 
 -(void)configureGraph {
     //Initiate and Set Theme ****Currently plain white - user setting later??
     CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
-    self.hostView.hostedGraph = graph;
     [graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
-    graph.paddingBottom = 30.0f;
-    graph.paddingLeft = 30.0f;
-    graph.paddingTop = -1.0f;
-    graph.paddingRight = -5.0;
+    self.hostView.hostedGraph = graph;
     
     //Setup Title
     NSString *title = [NSString stringWithFormat:@" Hive Productivity Data for %@", hive.hiveID];
@@ -211,18 +228,68 @@ float maxYValue;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
     graph.titleDisplacement = CGPointMake(0.0f, -16.0f);
     
-    //Setup Plotting Space
-    CGFloat xMin = 0.0f;
-    CGFloat xMax = [[plotData.dateDictionary valueForKey:@"range"] floatValue]; // number of days of observations
-    CGFloat yMin = 0.0f;
-    CGFloat yMax = maxYValue;
-    
-    
-    
-    
+    //Manipulate padding for desired effect....
+    graph.paddingBottom = 5.0f;
+    graph.paddingLeft = 30.0f;
+    graph.paddingTop = 5.0f;
+    graph.paddingRight = 30.0;
+   
+    //Setup Plotting Space - Might Not Be needed, used in BarPlot example but not scatter
+        //CGFloat xMin = 0.0f;
+        //CGFloat xMax = [[plotData.dateDictionary valueForKey:@"range"] floatValue]; // number of days of observations
+        //CGFloat yMin = 0.0f;
+        //CGFloat yMax = maxYValue;
+
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
+    plotSpace.allowsUserInteraction = YES;
 }
 
 -(void)configurePlots {
+    //Get Graph and PlotSpace
+    CPTGraph *graph = self.hostView.hostedGraph;
+    CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
+    
+    NSMutableArray *plots = [[NSMutableArray alloc] init];
+    //array for color
+    //array for symbol
+    // merge weather and varaible arrays
+    
+    //Generate Plots
+    int i = 0;
+    for (id element in variablesSelectedArray) {
+        CPTScatterPlot *xyPlot = [[CPTScatterPlot alloc] init];
+        xyPlot.dataSource = self;
+        xyPlot.identifier = variablesSelectedArray[i];
+        [graph addPlot:xyPlot toPlotSpace:plotSpace];
+        
+        CPTColor *xyColor = plotData.colorArray[i];
+        
+        CPTMutableLineStyle *xyPlotLineStyle = [xyPlot.dataLineStyle mutableCopy];
+        xyPlotLineStyle.lineWidth = 2.5;
+        xyPlotLineStyle.lineColor = xyColor;
+        xyPlot.dataLineStyle = xyPlotLineStyle;
+        
+        CPTMutableLineStyle *xyPlotSymbolLineStyle = [CPTMutableLineStyle lineStyle];
+        xyPlotSymbolLineStyle.lineColor = xyColor;
+        CPTPlotSymbol *xyPlotSymbol = (CPTPlotSymbol *) plotData.plotSymbolArray;
+        xyPlotSymbol.fill = [CPTFill fillWithColor:xyColor];
+        xyPlotSymbol.lineStyle = xyPlotSymbolLineStyle;
+        xyPlotSymbol.size = CGSizeMake(6.0f, 6.0f);
+        xyPlot.plotSymbol = xyPlotSymbol;
+        
+        [plots addObject:xyPlot];
+        i++;
+    }
+    // 3 - Set up plot space
+    [plotSpace scaleToFitPlots:plots];
+    CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
+    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+    plotSpace.xRange = xRange;
+    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
+    plotSpace.yRange = yRange;
+
+    
 }
 
 -(void)configureAxes {
@@ -253,10 +320,22 @@ float maxYValue;
 
 
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot {
-    return 0;
+    return plotData.dateArray.count;
 }
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     return [NSDecimalNumber zero];
 }
 
