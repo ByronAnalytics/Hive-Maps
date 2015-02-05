@@ -9,6 +9,7 @@ Data arrays for each variable are created and stored in instance for this class 
  
  
  */
+#import "CorePlot-CocoaTouch.h"
 
 #import "ProcessDataForPlotting.h"
 #import "HiveObservation.h"
@@ -69,11 +70,14 @@ Data arrays for each variable are created and stored in instance for this class 
             framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
             framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
             framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
+            NSLog(@"Frames Honey: %f", framesHoney);
+            NSLog(@"Frames Workers: %f", framesWorkers);
+            
         }
         
         [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
         [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
-        [workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
+        [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
         [queenPerformance addObject:[sortedObservations valueForKey:@"queenPerformance"]];
         //WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
         //[temperature addObject:weather.temperature];
@@ -99,11 +103,11 @@ Data arrays for each variable are created and stored in instance for this class 
 }
 
 -(void)definePlotSymbolArray{
-    self.plotSymbolArray = [NSArray arrayWithObjects:@"crossPlotSymbol", @"ellipsePlotSymbol", @"rectanglePlotSymbol", @"plusPlotSymbol", @"starPlotSymbol", @"diamondPlotSymbol", @"trainglePlotSymbol", @"pentagonPlotSymbol", @"hexagonPlotSymbol", @"snowPlotSymbol", @"dashPlotSymbol", nil];
+    self.plotSymbolArray = [NSArray arrayWithObjects:[CPTPlotSymbol crossPlotSymbol], [CPTPlotSymbol ellipsePlotSymbol], [CPTPlotSymbol rectanglePlotSymbol], [CPTPlotSymbol plusPlotSymbol], [CPTPlotSymbol starPlotSymbol], [CPTPlotSymbol diamondPlotSymbol], [CPTPlotSymbol trianglePlotSymbol], [CPTPlotSymbol pentagonPlotSymbol], [CPTPlotSymbol hexagonPlotSymbol], [CPTPlotSymbol snowPlotSymbol], [CPTPlotSymbol dashPlotSymbol], nil];
 }
 
 -(void)defineColorArray{
-    self.colorArray = [NSArray arrayWithObjects:@"blackColor", @"redColor", @"greenColor", @"orangeColor", @"blueColor", @"purpleColor", @"cyanColor", @"brownColor", @"magentaColor", @"grayColor", @"yellowColor", nil];
+    self.colorArray = [NSArray arrayWithObjects:[CPTColor blackColor], [CPTColor redColor], [CPTColor greenColor], [CPTColor orangeColor], [CPTColor blueColor], [CPTColor purpleColor], [CPTColor cyanColor], [CPTColor brownColor], [CPTColor magentaColor], [CPTColor grayColor], [CPTColor yellowColor], nil];
     
 }
 

@@ -36,7 +36,8 @@
 @property (nonatomic, strong) NSMutableArray *eventsSelectedCellsArray;
 
 @property (nonatomic, strong) ProcessDataForPlotting *plotData;
-
+@property (nonatomic, strong) CPTGraph *graph;
+@property (nonatomic, strong) NSMutableArray *plots;
 @property (nonatomic, strong) NSDictionary *plotElementsDictionary; //holds potential plot elements
 @end
 
@@ -45,10 +46,13 @@
 @synthesize plotElementsTableView;
 @synthesize plotData;
 @synthesize hive;
+@synthesize plots;
 
 //Plot Window
 @synthesize hostView;
 @synthesize plotSpaceUIView;
+@synthesize graph;
+
 //Toolbar Buttons
 @synthesize toolbar;
 
@@ -70,14 +74,15 @@
 float maxYValue;
 
 - (void)viewDidLoad{
+    self.hive = [[DataLuggage sharedObject] hive];
+   
     [super viewDidLoad];
     [self initPlot];
     
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [appDelegate managedObjectContext];
 
-    self.hive = [[DataLuggage sharedObject] hive];
-   
+    
     plotData = [[ProcessDataForPlotting alloc] init];
     [plotData generateDataArrays:self.hive];
     
@@ -97,6 +102,8 @@ float maxYValue;
     self.plotElementsDisplayed = NO;
     plotElementsTableView.hidden = YES;
     
+    plots = [[NSMutableArray alloc] init];
+    
     //Setup Dictionary to communicate between selected Elements and Data
     NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames"];
     NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary];
@@ -107,11 +114,8 @@ float maxYValue;
     */
     
     plotElementsDictionary = [NSDictionary dictionaryWithObjects:plotElementValues forKeys:plotElementKeys];
+    NSLog(@"HIVE in viewLoad: %@", hive.hiveID);
 
-    
-    NSLog(@"plot View Bounds:%@ origin: %@", NSStringFromCGSize(self.view.bounds.size), NSStringFromCGPoint(self.view.bounds.origin));
-    NSLog(@"plot View Bounds:%@ origin: %@", NSStringFromCGSize(self.view.bounds.size), NSStringFromCGPoint(self.view.bounds.origin));
-    
 }
 
 
@@ -119,7 +123,7 @@ float maxYValue;
     if (!self.isPlotElementsDisplayed) {  // plotElements Displayed == NO
         plotElementsTableView.hidden = YES;
             [self.view bringSubviewToFront:self.hostView];
-        
+        [self updatePlotData];
     } else {
         plotElementsTableView.hidden = NO;
         [self.view sendSubviewToBack:self.hostView]; // push plot to background
@@ -211,12 +215,14 @@ float maxYValue;
 
 -(void)configureGraph {
     //Initiate and Set Theme ****Currently plain white - user setting later??
-    CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
+    graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
     [graph applyTheme:[CPTTheme themeNamed:kCPTPlainWhiteTheme]];
     self.hostView.hostedGraph = graph;
     
     //Setup Title
     NSString *title = [NSString stringWithFormat:@" Hive Productivity Data for %@", hive.hiveID];
+    NSLog(@"HIVE in Graph: %@", hive.hiveID);
+    
     graph.title = title;
     
     //Text Style
@@ -246,10 +252,9 @@ float maxYValue;
 
 -(void)configurePlots {
     //Get Graph and PlotSpace
-    CPTGraph *graph = self.hostView.hostedGraph;
+    graph = self.hostView.hostedGraph;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     
-    NSMutableArray *plots = [[NSMutableArray alloc] init];
     //array for color
     //array for symbol
     // merge weather and varaible arrays
@@ -271,7 +276,7 @@ float maxYValue;
         
         CPTMutableLineStyle *xyPlotSymbolLineStyle = [CPTMutableLineStyle lineStyle];
         xyPlotSymbolLineStyle.lineColor = xyColor;
-        CPTPlotSymbol *xyPlotSymbol = (CPTPlotSymbol *) plotData.plotSymbolArray;
+        CPTPlotSymbol *xyPlotSymbol = (CPTPlotSymbol *) plotData.plotSymbolArray[i];
         xyPlotSymbol.fill = [CPTFill fillWithColor:xyColor];
         xyPlotSymbol.lineStyle = xyPlotSymbolLineStyle;
         xyPlotSymbol.size = CGSizeMake(6.0f, 6.0f);
@@ -288,34 +293,112 @@ float maxYValue;
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
     [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
     plotSpace.yRange = yRange;
-
     
 }
 
 -(void)configureAxes {
+    // 1 - Create styles
+    CPTMutableTextStyle *axisTitleStyle = [CPTMutableTextStyle textStyle];
+    axisTitleStyle.color = [CPTColor whiteColor];
+    axisTitleStyle.fontName = @"Helvetica-Bold";
+    axisTitleStyle.fontSize = 12.0f;
+    CPTMutableLineStyle *axisLineStyle = [CPTMutableLineStyle lineStyle];
+    axisLineStyle.lineWidth = 2.0f;
+    axisLineStyle.lineColor = [CPTColor whiteColor];
+    CPTMutableTextStyle *axisTextStyle = [[CPTMutableTextStyle alloc] init];
+    axisTextStyle.color = [CPTColor whiteColor];
+    axisTextStyle.fontName = @"Helvetica-Bold";
+    axisTextStyle.fontSize = 11.0f;
+    CPTMutableLineStyle *tickLineStyle = [CPTMutableLineStyle lineStyle];
+    tickLineStyle.lineColor = [CPTColor whiteColor];
+    tickLineStyle.lineWidth = 2.0f;
+    CPTMutableLineStyle *gridLineStyle = [CPTMutableLineStyle lineStyle];
+    tickLineStyle.lineColor = [CPTColor blackColor];
+    tickLineStyle.lineWidth = 1.0f;
+    
+    // 2 - Get axis set
+    CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
+   
+    // 3 - Configure x-axis
+    CPTAxis *x = axisSet.xAxis;
+    x.title = @"Day of Month";
+    x.titleTextStyle = axisTitleStyle;
+    x.titleOffset = 15.0f;
+    x.axisLineStyle = axisLineStyle;
+    x.labelingPolicy = CPTAxisLabelingPolicyNone;
+    x.labelTextStyle = axisTextStyle;
+    x.majorTickLineStyle = axisLineStyle;
+    x.majorTickLength = 4.0f;
+    x.tickDirection = CPTSignNegative;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+
+    CGFloat dateCount = [plotData.dateArray count];
+    NSMutableSet *xLabels = [NSMutableSet setWithCapacity:dateCount];
+    NSMutableSet *xLocations = [NSMutableSet setWithCapacity:dateCount];
+    NSInteger i = 0;
+    for (NSDate *date in plotData.dateArray) {
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[dateFormat stringFromDate:date]  textStyle:x.labelTextStyle];
+        CGFloat location = i++;
+        label.tickLocation = CPTDecimalFromCGFloat(location);
+        label.offset = x.majorTickLength;
+        if (label) {
+            [xLabels addObject:label];
+            [xLocations addObject:[NSNumber numberWithFloat:location]];
+        }
+    }
+    x.axisLabels = xLabels;
+    x.majorTickLocations = xLocations;
+    
+    // 4 - Configure y-axis
+    CPTAxis *y = axisSet.yAxis;
+    y.title = @"# Frames";
+    y.titleTextStyle = axisTitleStyle;
+    y.titleOffset = -40.0f;
+    y.axisLineStyle = axisLineStyle;
+    y.majorGridLineStyle = gridLineStyle;
+    y.labelingPolicy = CPTAxisLabelingPolicyNone;
+    y.labelTextStyle = axisTextStyle;
+    y.labelOffset = 16.0f;
+    y.majorTickLineStyle = axisLineStyle;
+    y.majorTickLength = 4.0f;
+    y.minorTickLength = 2.0f;
+    y.tickDirection = CPTSignPositive;
+    NSInteger majorIncrement = 100;
+    NSInteger minorIncrement = 50;
+    CGFloat yMax = 700.0f;  // should determine dynamically based on max price
+    NSMutableSet *yLabels = [NSMutableSet set];
+    NSMutableSet *yMajorLocations = [NSMutableSet set];
+    NSMutableSet *yMinorLocations = [NSMutableSet set];
+    for (NSInteger j = minorIncrement; j <= yMax; j += minorIncrement) {
+        NSUInteger mod = j % majorIncrement;
+        if (mod == 0) {
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%i", j] textStyle:y.labelTextStyle];
+            NSDecimal location = CPTDecimalFromInteger(j);
+            label.tickLocation = location;
+            label.offset = -y.majorTickLength - y.labelOffset;
+            if (label) {
+                [yLabels addObject:label];
+            }
+            [yMajorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:location]];
+        } else {
+            [yMinorLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(j)]];
+        }
+    }
+    y.axisLabels = yLabels;    
+    y.majorTickLocations = yMajorLocations;
+    y.minorTickLocations = yMinorLocations;
 }
 
 #pragma mark ----------- CPTPlotDataSource methods -----------
 -(void)updatePlotData{
-    //Generate array of selected plot elements
-    NSMutableSet *selectedPlotElementArrays = [[NSMutableSet alloc]init];
     
-    for (id key in variablesSelectedArray) {
-        [selectedPlotElementArrays addObject:[plotElementsDictionary objectForKey:key]];
-    }
+    self.graph = nil;
     
-    for (id key in weatherSelectedArray) {
-        [selectedPlotElementArrays addObject:[plotElementsDictionary objectForKey:key]];
-    }
-   
-    //Set maxY value for establishing plot space
-    float maxRange = 0;
-    for (id element in selectedPlotElementArrays) {
-        float range = [[element valueForKey:@"range"] floatValue];
-        if(range > maxRange) maxRange = range;
-    }
-    maxYValue = maxRange;
-    
+    [self configureGraph];
+    [self configurePlots];
+    [self configureAxes];
 }
 
 
@@ -325,17 +408,21 @@ float maxYValue;
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index {
 
+    NSInteger valueCount = plotData.dateArray.count;
+    NSArray *data = [[plotElementsDictionary valueForKey:(NSString *)plot.identifier] valueForKey:@"data"];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    switch (fieldEnum) {
+        case CPTScatterPlotFieldX: //X-position of data point
+            if (index < valueCount) {
+                return [NSNumber numberWithUnsignedInteger:index];
+            }
+            break;
+            
+        case CPTScatterPlotFieldY: //Y-position of data point at index i
+            
+            return data[index];
+            break;
+    }
     return [NSDecimalNumber zero];
 }
 
