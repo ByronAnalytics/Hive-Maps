@@ -2327,8 +2327,6 @@
         <!--Explore Hive-->
         <scene sceneID="wEH-8t-7kg">
             <objects>
-                <exit id="YKW-X7-Miu" userLabel="Exit" sceneMemberID="exit"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZfF-1T-cr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="uNd-5o-jIy" customClass="SingleHivePlotViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xIr-AB-1Ba"/>
@@ -2446,6 +2444,8 @@
                         <outlet property="weatherButton" destination="oaT-72-gbS" id="dzk-3n-Qhp"/>
                     </connections>
                 </viewController>
+                <exit id="YKW-X7-Miu" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZfF-1T-cr7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3458" y="1733"/>
         </scene>
