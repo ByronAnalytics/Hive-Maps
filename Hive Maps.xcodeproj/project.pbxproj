@@ -16,6 +16,7 @@
 		520223871A719363008C8553 /* HiveObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223861A719363008C8553 /* HiveObservation.m */; };
 		5202238A1A71BFB0008C8553 /* HiveDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223891A71BFB0008C8553 /* HiveDetails.m */; };
 		521CCDC41A7FE70500133FF3 /* DataLuggage.m in Sources */ = {isa = PBXBuildFile; fileRef = 521CCDC31A7FE70500133FF3 /* DataLuggage.m */; };
+		521CCDCD1A805CDE00133FF3 /* TabBarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521CCDCC1A805CDE00133FF3 /* TabBarNavigationController.m */; };
 		5234F0391A79ADB70038E298 /* ProcessDataForPlotting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5234F0381A79ADB70038E298 /* ProcessDataForPlotting.m */; };
 		5245A56E1A5A6F3C002DBA4B /* AddHiveTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A56D1A5A6F3C002DBA4B /* AddHiveTableViewController.m */; };
 		5245A5711A5A7038002DBA4B /* AddBoxTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5245A5701A5A7038002DBA4B /* AddBoxTableViewController.m */; };
@@ -73,6 +74,8 @@
 		520223891A71BFB0008C8553 /* HiveDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveDetails.m; sourceTree = "<group>"; };
 		521CCDC21A7FE70500133FF3 /* DataLuggage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLuggage.h; sourceTree = "<group>"; };
 		521CCDC31A7FE70500133FF3 /* DataLuggage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLuggage.m; sourceTree = "<group>"; };
+		521CCDCB1A805CDE00133FF3 /* TabBarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarNavigationController.h; sourceTree = "<group>"; };
+		521CCDCC1A805CDE00133FF3 /* TabBarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarNavigationController.m; sourceTree = "<group>"; };
 		5234F0371A79ADB70038E298 /* ProcessDataForPlotting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessDataForPlotting.h; sourceTree = "<group>"; };
 		5234F0381A79ADB70038E298 /* ProcessDataForPlotting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessDataForPlotting.m; sourceTree = "<group>"; };
 		5245A56C1A5A6F3C002DBA4B /* AddHiveTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHiveTableViewController.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				5266884D1A5F3E7100727BB5 /* SingleHivePlotViewController.m */,
 				5266884F1A5F3EF500727BB5 /* MultiHivePlotViewController.h */,
 				526688501A5F3EF500727BB5 /* MultiHivePlotViewController.m */,
+				521CCDCB1A805CDE00133FF3 /* TabBarNavigationController.h */,
+				521CCDCC1A805CDE00133FF3 /* TabBarNavigationController.m */,
 			);
 			name = "Observe Data View Controllers";
 			sourceTree = "<group>";
@@ -228,7 +233,6 @@
 				5245A56B1A5A6DD0002DBA4B /* SetUp View Controllers */,
 				5245A56A1A5A67A0002DBA4B /* Observe Data View Controllers */,
 				528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */,
-				528C344F1A5A142400DB9539 /* CoreData */,
 				5234F03A1A79BDC60038E298 /* Worker Classes */,
 				52508F941A7455B5007EF20D /* Star Images */,
 				5270C6991A59FBA000F0C1B0 /* Supporting Files */,
@@ -290,6 +294,7 @@
 		528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				528C344F1A5A142400DB9539 /* CoreData */,
 				525BE5EE1A5A244D000324CA /* MakeHiveObsTableViewController.h */,
 				525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */,
 				529C68A51A69901D0047C680 /* MakeBoxObservationTableViewController.h */,
@@ -499,6 +504,7 @@
 				525BE5F01A5A244D000324CA /* MakeHiveObsTableViewController.m in Sources */,
 				529C68A71A69901D0047C680 /* MakeBoxObservationTableViewController.m in Sources */,
 				5245A5711A5A7038002DBA4B /* AddBoxTableViewController.m in Sources */,
+				521CCDCD1A805CDE00133FF3 /* TabBarNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

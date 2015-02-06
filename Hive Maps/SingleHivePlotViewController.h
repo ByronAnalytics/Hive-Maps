@@ -17,6 +17,7 @@
 
 // Plot Setup
 @property (nonatomic, strong) CPTGraphHostingView *hostView;
+@property (weak, nonatomic) IBOutlet UIView *plotSpaceUIView;
 
 // Toolbar Setup
 @property (weak, nonatomic) IBOutlet UITableView *plotElementsTableView;

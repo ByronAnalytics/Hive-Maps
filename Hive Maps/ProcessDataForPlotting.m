@@ -9,8 +9,7 @@ Data arrays for each variable are created and stored in instance for this class 
  
  
  */
-
-
+#import "CorePlot-CocoaTouch.h"
 
 #import "ProcessDataForPlotting.h"
 #import "HiveObservation.h"
@@ -21,9 +20,11 @@ Data arrays for each variable are created and stored in instance for this class 
 @implementation ProcessDataForPlotting
 
 @synthesize dateArray;
-@synthesize honeyTotals, broodTotals, workerTotals, temperature, humidity, pressure, windSpeed;
+@synthesize honeyTotals, broodTotals, workerTotals, queenPerformance, temperature, humidity, pressure, windSpeed;
 @synthesize didRequeen, wasSick, obsQueen, obsInsuranceCups, obsDrones, obsSwarming;
 @synthesize siteHive, queenSource, diseaseTreatment;
+
+@synthesize dateDictionary, broodDictionary, honeyDictionary, workerDictionary, queenPerformanceDictionary, temperatureDictionary, humidityDictionary, pressureDictionary, windSpeedDictionary;
 
 - (void)generateDataArrays:(HiveDetails *)hive{
   //initialize arrays
@@ -31,6 +32,7 @@ Data arrays for each variable are created and stored in instance for this class 
     honeyTotals = [[NSMutableArray alloc] init];
     broodTotals = [[NSMutableArray alloc] init];
     workerTotals = [[NSMutableArray alloc] init];
+    queenPerformance = [[NSMutableArray alloc]init];
     temperature = [[NSMutableArray alloc] init];
     humidity = [[NSMutableArray alloc] init];
     pressure = [[NSMutableArray alloc] init];
@@ -68,33 +70,114 @@ Data arrays for each variable are created and stored in instance for this class 
             framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
             framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
             framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
+            
         }
         
-        [self.broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
-        [self.honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
-        [self.workerTotals addObject:[NSNumber numberWithFloat:framesHoney]];
+        [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
+        [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
+        [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
+        [queenPerformance addObject:[obs valueForKey:@"queenPerformance"]];
         
-        //   WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
-        //[self.temperature addObject:weather.temperature];
-        // [self.humidity addObject:weather.humidity];
-        // [self.pressure addObject:weather.pressure];
-        // [self.windSpeed addObject:weather.windSpeed];
+        if ([obs valueForKey:@"weatherObservation"]) {
+            [temperature addObject:[obs valueForKeyPath:@"weatherObservation.temperature"]];
+            [humidity addObject:[obs valueForKeyPath:@"weatherObservation.humidity"]];
+            [pressure addObject:[obs valueForKeyPath:@"weatherObservation.pressure"]];
+            [windSpeed addObject:[obs valueForKeyPath:@"weatherObservation.windSpeed"]];
+        } else {
+            [temperature addObject:[NSNull null]];
+            [humidity addObject:[NSNull null]];
+            [pressure addObject:[NSNull null]];
+            [windSpeed addObject:[NSNull null]];
+        }
         
         //Discrete Events
-        [self.didRequeen addObject:[obs valueForKey:@"requeened"]];
-        [self.wasSick addObject:[obs valueForKey:@"healthStatus"]];
-        [self.obsQueen addObject:[obs valueForKey:@"observedQueen"]];
-        [self.obsInsuranceCups addObject:[obs valueForKey:@"cupsInsur"]];
-        [self.obsDrones addObject:[obs valueForKey:@"drone"]];
-        [self.obsSwarming addObject:[obs valueForKey:@"swarm"]];
+        [didRequeen addObject:[obs valueForKey:@"requeened"]];
+        [wasSick addObject:[obs valueForKey:@"healthStatus"]];
+        [obsQueen addObject:[obs valueForKey:@"observedQueen"]];
+        [obsInsuranceCups addObject:[obs valueForKey:@"cupsInsur"]];
+        [obsDrones addObject:[obs valueForKey:@"drone"]];
+        [obsSwarming addObject:[obs valueForKey:@"swarm"]];
         //Hover Descriptors
-        [self.queenSource addObject:[obs valueForKey:@"queenSource"]];
-        [self.diseaseTreatment addObject:[obs valueForKey:@"treatment"]];
+        [queenSource addObject:[obs valueForKey:@"queenSource"]];
+        [diseaseTreatment addObject:[obs valueForKey:@"treatment"]];
      
     }
+    [self defineDictionaries:hive];
+    [self definePlotSymbolArray];
+    [self defineColorArray];    
 }
 
+-(void)definePlotSymbolArray{
+    self.plotSymbolArray = [NSArray arrayWithObjects: [CPTPlotSymbol rectanglePlotSymbol],  [CPTPlotSymbol pentagonPlotSymbol], [CPTPlotSymbol dashPlotSymbol], nil];
+}
+
+-(void)defineColorArray{
+    self.colorArray = [NSArray arrayWithObjects: [CPTColor greenColor], [CPTColor orangeColor],   [CPTColor grayColor], nil];
     
+}
+
+//3-number distribution for each plot element, @[min, range, max]
+-(void)defineDictionaries:(HiveDetails *)hive{
+    
+    //setup y-value dictionaries //data name symbol color
+    broodDictionary = [self calcRange:broodTotals:@"Brood Frames":[CPTPlotSymbol plusPlotSymbol]:[CPTColor brownColor]];
+    honeyDictionary = [self calcRange:honeyTotals:@"Honey Frames":[CPTPlotSymbol hexagonPlotSymbol]:[CPTColor yellowColor]];
+    workerDictionary = [self calcRange:workerTotals:@"Worker Frames":[CPTPlotSymbol trianglePlotSymbol]:[CPTColor redColor]];
+    queenPerformanceDictionary = [self calcRange:queenPerformance:@"Queen Performance":[CPTPlotSymbol starPlotSymbol]:[CPTColor magentaColor]];
+    temperatureDictionary = [self calcRange:temperature:@"Temperature":[CPTPlotSymbol snowPlotSymbol]:[CPTColor cyanColor]];
+    humidityDictionary = [self calcRange:humidity:@"Humidity":[CPTPlotSymbol crossPlotSymbol]:[CPTColor blueColor]];
+    pressureDictionary = [self calcRange:pressure:@"Pressure":[CPTPlotSymbol ellipsePlotSymbol]:[CPTColor purpleColor]];
+    windSpeedDictionary = [self calcRange:windSpeed:@"Wind Speed":[CPTPlotSymbol diamondPlotSymbol]:[CPTColor blackColor]];
+    
+    //Setup Date Dictionary
+    NSDate *firstDate = dateArray[0];
+    NSDate *lastDate = dateArray[dateArray.count-1];
+    
+    NSTimeInterval dateIntervalinSec = [lastDate timeIntervalSinceDate:firstDate];
+    int secInDay = 86400;
+    NSNumber *rangeX = [NSNumber numberWithInteger:dateIntervalinSec / secInDay];
+    NSDate *minX = dateArray[0];
+    NSDate *maxX = dateArray[dateArray.count-1];
+    dateDictionary = [NSDictionary dictionaryWithObjects:@[dateArray, minX, rangeX, maxX]
+                                                 forKeys:@[@"data", @"minValue", @"range", @"maxValue"]];
+    
+}
+    
+-(NSDictionary *)calcRange:(NSArray*)plotElement :(NSString*)identifier :(CPTPlotSymbol*)symbol :(CPTColor*)color{
+    NSNumber *minValue, *rangeValue, *maxValue;
+    
+    float xmax = -MAXFLOAT; //system max value for datatype float
+    float xmin = MAXFLOAT;
+    for (NSNumber *num in plotElement) {
+        if(num == (id)[NSNull null] || num == nil){
+            NSLog(@"NULL VALUE");
+        } else {
+            float x = num.floatValue;
+            if (x < xmin) xmin = x;
+            if (x > xmax) xmax = x;
+        }
+    }
+    
+    if (xmax == MAXFLOAT) {
+       
+        NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[[NSNull null], [NSNull null], [NSNull null],[NSNull null], identifier, symbol, color]
+                                                                   forKeys:@[@"data", @"minValue", @"range", @"maxValue", @"identifier", @"symbol", @"color"]];
+        return dataDictionary;
+        
+    } else {
+    
+        float range = xmax - xmin;
+        minValue = [NSNumber numberWithFloat:xmin];
+        rangeValue = [NSNumber numberWithFloat:range];
+        maxValue = [NSNumber numberWithFloat:xmax];
+    
+        NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[plotElement, minValue, rangeValue, maxValue, identifier, symbol, color]
+                                                                   forKeys:@[@"data", @"minValue", @"range", @"maxValue", @"identifier", @"symbol", @"color"]];
+        return dataDictionary;
+    }
+      
+    
+}
 
 
 
