@@ -39,6 +39,8 @@
 @property (nonatomic, strong) CPTGraph *graph;
 @property (nonatomic, strong) NSMutableArray *plots;
 @property (nonatomic, strong) NSDictionary *plotElementsDictionary; //holds potential plot elements
+@property (nonatomic, strong) NSMutableDictionary *selectedElementsDictionary; //copy of plotElementsDictionary with selected elements.// should replace variables, weather, and events array
+
 @end
 
 @implementation SingleHivePlotViewController
@@ -60,12 +62,14 @@
 @synthesize plotElementsGroup;
 
 @synthesize plotElementsDictionary;
+@synthesize selectedElementsDictionary;
+
 @synthesize tableArray;
 @synthesize variablesArray;
-@synthesize variablesSelectedArray;
+//@synthesize variablesSelectedArray;
 @synthesize variablesSelectedCellsArray;
 @synthesize weatherArray;
-@synthesize weatherSelectedArray;
+//@synthesize weatherSelectedArray;
 @synthesize weatherSelectedCellsArray;
 @synthesize eventsArray;
 @synthesize eventsSelectedArray;
@@ -88,11 +92,11 @@ float maxYValue;
     
     //Set plotting Elements:
     variablesArray = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
-    variablesSelectedArray = [[NSMutableArray alloc] init];
+    //variablesSelectedArray = [[NSMutableArray alloc] init];
     variablesSelectedCellsArray = [[NSMutableArray alloc] init];
     
     weatherArray = @[@"Temperature", @"Humidity", @"Pressure", @"Wind Speed"];
-    weatherSelectedArray  = [[NSMutableArray alloc] init];
+    //weatherSelectedArray  = [[NSMutableArray alloc] init];
     weatherSelectedCellsArray  = [[NSMutableArray alloc] init];
     
     eventsArray = @[@"Re-queened", @"Illness", @"Drone Cells", @"Insurance Cups", @"Swarming"];
@@ -105,17 +109,17 @@ float maxYValue;
     plots = [[NSMutableArray alloc] init];
     
     //Setup Dictionary to communicate between selected Elements and Data
-    NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames"];
-    NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary];
+   // NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
+  //  NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.queenPerformanceDictionary,  plotData.workerDictionary];
     
-    /* FULL DATA SET TO BE LATER IMPLIMENTED AFTER WEATHER/QUEEN PERFORMANCE DEBUG
+    // FULL DATA SET TO BE LATER IMPLIMENTED AFTER WEATHER/QUEEN PERFORMANCE DEBUG
     NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames", @"Queen Performance", @"Temperature", @"Humidity", @"Pressure", @"Wind Speed"];
     NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary, plotData.queenPerformanceDictionary, plotData.temperatureDictionary, plotData.humidityDictionary, plotData.pressureDictionary, plotData.windSpeedDictionary];
-    */
+    
     
     plotElementsDictionary = [NSDictionary dictionaryWithObjects:plotElementValues forKeys:plotElementKeys];
-    NSLog(@"HIVE in viewLoad: %@", hive.hiveID);
-
+    selectedElementsDictionary = [[NSMutableDictionary alloc] init];
+    
 }
 
 
@@ -232,19 +236,13 @@ float maxYValue;
     titleStyle.fontSize = 16.0f;
     graph.titleTextStyle = titleStyle;
     graph.titlePlotAreaFrameAnchor = CPTRectAnchorTop;
-    graph.titleDisplacement = CGPointMake(0.0f, -16.0f);
+    graph.titleDisplacement = CGPointMake(0.0f, -5.0f);
     
     //Manipulate padding for desired effect....
     graph.paddingBottom = 5.0f;
-    graph.paddingLeft = 30.0f;
+    graph.paddingLeft = 10.0f;
     graph.paddingTop = 5.0f;
-    graph.paddingRight = 30.0;
-   
-    //Setup Plotting Space - Might Not Be needed, used in BarPlot example but not scatter
-        //CGFloat xMin = 0.0f;
-        //CGFloat xMax = [[plotData.dateDictionary valueForKey:@"range"] floatValue]; // number of days of observations
-        //CGFloat yMin = 0.0f;
-        //CGFloat yMax = maxYValue;
+    graph.paddingRight = 10.0;
 
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     plotSpace.allowsUserInteraction = YES;
@@ -254,20 +252,17 @@ float maxYValue;
     //Get Graph and PlotSpace
     graph = self.hostView.hostedGraph;
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
-    
-    //array for color
-    //array for symbol
-    // merge weather and varaible arrays
-    
+    NSDictionary *tempDict = [[NSDictionary alloc] init];
     //Generate Plots
-    int i = 0;
-    for (id element in variablesSelectedArray) {
+    for (id element in selectedElementsDictionary) {
+        tempDict = [selectedElementsDictionary valueForKey:element];
+        
         CPTScatterPlot *xyPlot = [[CPTScatterPlot alloc] init];
         xyPlot.dataSource = self;
-        xyPlot.identifier = variablesSelectedArray[i];
+        xyPlot.identifier = [tempDict valueForKey:@"identifier"];
         [graph addPlot:xyPlot toPlotSpace:plotSpace];
         
-        CPTColor *xyColor = plotData.colorArray[i];
+        CPTColor *xyColor = [tempDict valueForKey:@"color"];
         
         CPTMutableLineStyle *xyPlotLineStyle = [xyPlot.dataLineStyle mutableCopy];
         xyPlotLineStyle.lineWidth = 2.5;
@@ -276,14 +271,14 @@ float maxYValue;
         
         CPTMutableLineStyle *xyPlotSymbolLineStyle = [CPTMutableLineStyle lineStyle];
         xyPlotSymbolLineStyle.lineColor = xyColor;
-        CPTPlotSymbol *xyPlotSymbol = (CPTPlotSymbol *) plotData.plotSymbolArray[i];
+        CPTPlotSymbol *xyPlotSymbol = [tempDict valueForKey:@"symbol"];
         xyPlotSymbol.fill = [CPTFill fillWithColor:xyColor];
         xyPlotSymbol.lineStyle = xyPlotSymbolLineStyle;
         xyPlotSymbol.size = CGSizeMake(6.0f, 6.0f);
         xyPlot.plotSymbol = xyPlotSymbol;
         
         [plots addObject:xyPlot];
-        i++;
+        NSLog(@"DATA: %@", [tempDict valueForKey:@"data"]);
     }
     // 3 - Set up plot space
     [plotSpace scaleToFitPlots:plots];
@@ -485,11 +480,13 @@ float maxYValue;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if([self isRowSelectedOnTableView:tableView atIndexPath:indexPath]){
             [variablesSelectedCellsArray removeObject:indexPath];
-            [variablesSelectedArray removeObject:plotElement];
+            [selectedElementsDictionary removeObjectForKey:plotElement];
+            //[variablesSelectedArray removeObject:plotElement];
             cell.accessoryType = UITableViewCellAccessoryNone;
         } else {
             [variablesSelectedCellsArray addObject:indexPath];
-            [variablesSelectedArray addObject:plotElement];
+            [selectedElementsDictionary setObject:[plotElementsDictionary valueForKey:plotElement] forKey:plotElement];
+            //[variablesSelectedArray addObject:plotElement];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             [plotElementsTableView reloadData];
         }
@@ -499,11 +496,13 @@ float maxYValue;
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if([self isRowSelectedOnTableView:tableView atIndexPath:indexPath]){
             [weatherSelectedCellsArray removeObject:indexPath];
-            [weatherSelectedArray removeObject:plotElement];
+            [selectedElementsDictionary removeObjectForKey:plotElement];
+            //[weatherSelectedArray removeObject:plotElement];
             cell.accessoryType = UITableViewCellAccessoryNone;
         } else {
             [weatherSelectedCellsArray addObject:indexPath];
-            [weatherSelectedArray addObject:plotElement];
+            [selectedElementsDictionary setObject:[plotElementsDictionary valueForKey:plotElement] forKey:plotElement];
+            //[weatherSelectedArray addObject:plotElement];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
         
@@ -520,6 +519,7 @@ float maxYValue;
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
+    
 }
 
 -(BOOL)isRowSelectedOnTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath

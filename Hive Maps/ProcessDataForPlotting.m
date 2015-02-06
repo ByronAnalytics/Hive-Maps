@@ -70,20 +70,19 @@ Data arrays for each variable are created and stored in instance for this class 
             framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
             framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
             framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
-            NSLog(@"Frames Honey: %f", framesHoney);
-            NSLog(@"Frames Workers: %f", framesWorkers);
             
         }
         
         [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
         [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
         [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
-        [queenPerformance addObject:[sortedObservations valueForKey:@"queenPerformance"]];
-        //WeatherObservation *weather = [sortedObservations valueForKey:@"weatherObservation"];
-        //[temperature addObject:weather.temperature];
-        //[humidity addObject:weather.humidity];
-        //[pressure addObject:weather.pressure];
-        //[windSpeed addObject:weather.windSpeed];
+        [queenPerformance addObject:[obs valueForKey:@"queenPerformance"]];
+        
+        
+        [temperature addObject:[obs valueForKeyPath:@"weatherObservation.temperature"]];
+        [humidity addObject:[obs valueForKeyPath:@"weatherObservation.humidity"]];
+        [pressure addObject:[obs valueForKeyPath:@"weatherObservation.pressure"]];
+        [windSpeed addObject:[obs valueForKeyPath:@"weatherObservation.windSpeed"]];
         
         //Discrete Events
         [didRequeen addObject:[obs valueForKey:@"requeened"]];
@@ -99,30 +98,30 @@ Data arrays for each variable are created and stored in instance for this class 
     }
     [self defineDictionaries:hive];
     [self definePlotSymbolArray];
-    [self defineColorArray];
+    [self defineColorArray];    
 }
 
 -(void)definePlotSymbolArray{
-    self.plotSymbolArray = [NSArray arrayWithObjects:[CPTPlotSymbol crossPlotSymbol], [CPTPlotSymbol ellipsePlotSymbol], [CPTPlotSymbol rectanglePlotSymbol], [CPTPlotSymbol plusPlotSymbol], [CPTPlotSymbol starPlotSymbol], [CPTPlotSymbol diamondPlotSymbol], [CPTPlotSymbol trianglePlotSymbol], [CPTPlotSymbol pentagonPlotSymbol], [CPTPlotSymbol hexagonPlotSymbol], [CPTPlotSymbol snowPlotSymbol], [CPTPlotSymbol dashPlotSymbol], nil];
+    self.plotSymbolArray = [NSArray arrayWithObjects: [CPTPlotSymbol rectanglePlotSymbol],  [CPTPlotSymbol pentagonPlotSymbol], [CPTPlotSymbol dashPlotSymbol], nil];
 }
 
 -(void)defineColorArray{
-    self.colorArray = [NSArray arrayWithObjects:[CPTColor blackColor], [CPTColor redColor], [CPTColor greenColor], [CPTColor orangeColor], [CPTColor blueColor], [CPTColor purpleColor], [CPTColor cyanColor], [CPTColor brownColor], [CPTColor magentaColor], [CPTColor grayColor], [CPTColor yellowColor], nil];
+    self.colorArray = [NSArray arrayWithObjects: [CPTColor greenColor], [CPTColor orangeColor],   [CPTColor grayColor], nil];
     
 }
 
 //3-number distribution for each plot element, @[min, range, max]
 -(void)defineDictionaries:(HiveDetails *)hive{
     
-    //setup y-value dictionaries
-    broodDictionary = [self calcRange:broodTotals];
-    honeyDictionary = [self calcRange:honeyTotals];
-    workerDictionary = [self calcRange:workerTotals];
-    //queenPerformanceDictionary = [self calcRange:queenPerformance];
-   // temperatureDictionary = [self calcRange:temperature];
-    //humidityDictionary = [self calcRange:humidity];
-   // pressureDictionary = [self calcRange:pressure];
-   // windSpeedDictionary = [self calcRange:windSpeed];
+    //setup y-value dictionaries //data name symbol color
+    broodDictionary = [self calcRange:broodTotals:@"Brood Frames":[CPTPlotSymbol plusPlotSymbol]:[CPTColor brownColor]];
+    honeyDictionary = [self calcRange:honeyTotals:@"Honey Frames":[CPTPlotSymbol hexagonPlotSymbol]:[CPTColor yellowColor]];
+    workerDictionary = [self calcRange:workerTotals:@"Worker Frames":[CPTPlotSymbol trianglePlotSymbol]:[CPTColor redColor]];
+    queenPerformanceDictionary = [self calcRange:queenPerformance:@"Queen Performance":[CPTPlotSymbol starPlotSymbol]:[CPTColor magentaColor]];
+    temperatureDictionary = [self calcRange:temperature:@"Temperature":[CPTPlotSymbol snowPlotSymbol]:[CPTColor cyanColor]];
+    humidityDictionary = [self calcRange:humidity:@"Humidity":[CPTPlotSymbol crossPlotSymbol]:[CPTColor blueColor]];
+    pressureDictionary = [self calcRange:pressure:@"Pressure":[CPTPlotSymbol ellipsePlotSymbol]:[CPTColor purpleColor]];
+    windSpeedDictionary = [self calcRange:windSpeed:@"Wind Speed":[CPTPlotSymbol diamondPlotSymbol]:[CPTColor blackColor]];
     
     //Setup Date Dictionary
     NSDate *firstDate = dateArray[0];
@@ -138,7 +137,7 @@ Data arrays for each variable are created and stored in instance for this class 
     
 }
     
--(NSDictionary *)calcRange:(NSArray*)plotElement{
+-(NSDictionary *)calcRange:(NSArray*)plotElement :(NSString*)identifier :(CPTPlotSymbol*)symbol :(CPTColor*)color{
     NSNumber *minValue, *rangeValue, *maxValue;
     
     float xmax = -MAXFLOAT; //system max value for datatype float
@@ -154,8 +153,8 @@ Data arrays for each variable are created and stored in instance for this class 
     rangeValue = [NSNumber numberWithFloat:range];
     maxValue = [NSNumber numberWithFloat:xmax];
     
-    NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[plotElement, minValue, rangeValue, maxValue]
-                                forKeys:@[@"data", @"minValue", @"range", @"maxValue"]];
+    NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[plotElement, minValue, rangeValue, maxValue, identifier, symbol, color]
+                                forKeys:@[@"data", @"minValue", @"range", @"maxValue", @"identifier", @"symbol", @"color"]];
     return dataDictionary;
 }
 
