@@ -78,11 +78,17 @@ Data arrays for each variable are created and stored in instance for this class 
         [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
         [queenPerformance addObject:[obs valueForKey:@"queenPerformance"]];
         
-        
-        [temperature addObject:[obs valueForKeyPath:@"weatherObservation.temperature"]];
-        [humidity addObject:[obs valueForKeyPath:@"weatherObservation.humidity"]];
-        [pressure addObject:[obs valueForKeyPath:@"weatherObservation.pressure"]];
-        [windSpeed addObject:[obs valueForKeyPath:@"weatherObservation.windSpeed"]];
+        if ([obs valueForKey:@"weatherObservation"]) {
+            [temperature addObject:[obs valueForKeyPath:@"weatherObservation.temperature"]];
+            [humidity addObject:[obs valueForKeyPath:@"weatherObservation.humidity"]];
+            [pressure addObject:[obs valueForKeyPath:@"weatherObservation.pressure"]];
+            [windSpeed addObject:[obs valueForKeyPath:@"weatherObservation.windSpeed"]];
+        } else {
+            [temperature addObject:[NSNull null]];
+            [humidity addObject:[NSNull null]];
+            [pressure addObject:[NSNull null]];
+            [windSpeed addObject:[NSNull null]];
+        }
         
         //Discrete Events
         [didRequeen addObject:[obs valueForKey:@"requeened"]];
@@ -143,20 +149,36 @@ Data arrays for each variable are created and stored in instance for this class 
     float xmax = -MAXFLOAT; //system max value for datatype float
     float xmin = MAXFLOAT;
     for (NSNumber *num in plotElement) {
-        float x = num.floatValue;
-        if (x < xmin) xmin = x;
-        if (x > xmax) xmax = x;
+        if(num == (id)[NSNull null] || num == nil){
+            NSLog(@"NULL VALUE");
+        } else {
+            float x = num.floatValue;
+            if (x < xmin) xmin = x;
+            if (x > xmax) xmax = x;
+        }
     }
     
-    float range = xmax - xmin;
-    minValue = [NSNumber numberWithFloat:xmin];
-    rangeValue = [NSNumber numberWithFloat:range];
-    maxValue = [NSNumber numberWithFloat:xmax];
+    if (xmax == MAXFLOAT) {
+       
+        NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[[NSNull null], [NSNull null], [NSNull null],[NSNull null], identifier, symbol, color]
+                                                                   forKeys:@[@"data", @"minValue", @"range", @"maxValue", @"identifier", @"symbol", @"color"]];
+        return dataDictionary;
+        
+    } else {
     
-    NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[plotElement, minValue, rangeValue, maxValue, identifier, symbol, color]
-                                forKeys:@[@"data", @"minValue", @"range", @"maxValue", @"identifier", @"symbol", @"color"]];
-    return dataDictionary;
+        float range = xmax - xmin;
+        minValue = [NSNumber numberWithFloat:xmin];
+        rangeValue = [NSNumber numberWithFloat:range];
+        maxValue = [NSNumber numberWithFloat:xmax];
+    
+        NSDictionary *dataDictionary = [NSDictionary dictionaryWithObjects:@[plotElement, minValue, rangeValue, maxValue, identifier, symbol, color]
+                                                                   forKeys:@[@"data", @"minValue", @"range", @"maxValue", @"identifier", @"symbol", @"color"]];
+        return dataDictionary;
+    }
+      
+    
 }
+
 
 
 @end

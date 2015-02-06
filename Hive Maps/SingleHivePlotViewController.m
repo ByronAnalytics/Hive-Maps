@@ -66,10 +66,8 @@
 
 @synthesize tableArray;
 @synthesize variablesArray;
-//@synthesize variablesSelectedArray;
 @synthesize variablesSelectedCellsArray;
 @synthesize weatherArray;
-//@synthesize weatherSelectedArray;
 @synthesize weatherSelectedCellsArray;
 @synthesize eventsArray;
 @synthesize eventsSelectedArray;
@@ -108,11 +106,6 @@ float maxYValue;
     
     plots = [[NSMutableArray alloc] init];
     
-    //Setup Dictionary to communicate between selected Elements and Data
-   // NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
-  //  NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.queenPerformanceDictionary,  plotData.workerDictionary];
-    
-    // FULL DATA SET TO BE LATER IMPLIMENTED AFTER WEATHER/QUEEN PERFORMANCE DEBUG
     NSArray *plotElementKeys = @[@"Brood Frames", @"Honey Frames", @"Worker Frames", @"Queen Performance", @"Temperature", @"Humidity", @"Pressure", @"Wind Speed"];
     NSArray *plotElementValues = @[plotData.broodDictionary, plotData.honeyDictionary, plotData.workerDictionary, plotData.queenPerformanceDictionary, plotData.temperatureDictionary, plotData.humidityDictionary, plotData.pressureDictionary, plotData.windSpeedDictionary];
     
@@ -193,6 +186,7 @@ float maxYValue;
         [self updatePlotElementsTableView];
     }
 }
+
 
 #pragma mark ------------ Chart behavior -----------
 -(void)initPlot {
@@ -278,8 +272,8 @@ float maxYValue;
         xyPlot.plotSymbol = xyPlotSymbol;
         
         [plots addObject:xyPlot];
-        NSLog(@"DATA: %@", [tempDict valueForKey:@"data"]);
     }
+    
     // 3 - Set up plot space
     [plotSpace scaleToFitPlots:plots];
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
@@ -385,6 +379,23 @@ float maxYValue;
     y.majorTickLocations = yMajorLocations;
     y.minorTickLocations = yMinorLocations;
 }
+-(void) configureLegend{
+    
+    CPTLegend *theLegend = [CPTLegend legendWithGraph:graph];
+    // 3 - Configure legend
+    theLegend.numberOfColumns = 1;
+    theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
+    theLegend.borderLineStyle = [CPTLineStyle lineStyle];
+    theLegend.cornerRadius = 5.0;
+    // 4 - Add legend to graph
+    graph.legend = theLegend;
+    graph.legendAnchor = CPTRectAnchorTopLeft;
+    //CGFloat legendPadding = (self.view.bounds.size.width / 8);
+    graph.legendDisplacement = CGPointMake(11, -30);
+
+}
+
+
 
 #pragma mark ----------- CPTPlotDataSource methods -----------
 -(void)updatePlotData{
@@ -394,6 +405,7 @@ float maxYValue;
     [self configureGraph];
     [self configurePlots];
     [self configureAxes];
+    [self configureLegend];
 }
 
 
