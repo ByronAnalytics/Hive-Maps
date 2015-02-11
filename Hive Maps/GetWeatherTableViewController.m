@@ -54,6 +54,25 @@ NSString *APPID = @"aced8d32f3a99cbe735019eb4f8e5bf0";
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.tableView addGestureRecognizer:gestureRecognizer];
     
+    if (hiveObs.weatherObservation) {
+        WeatherObservation *weather = hiveObs.weatherObservation;
+        
+        stationTextField.text = weather.stationID;
+        
+        //Set Text Field Values
+        distanceTextField.text = [NSString stringWithFormat:@"%@", weather.stationDistance];
+        stationCodeTextField.text = weather.stationType;
+        tempTextField.text = [NSString stringWithFormat:@"%@", weather.temperature];
+        humidityTextField.text = [NSString stringWithFormat:@"%@", weather.humidity];
+        precip1HrTextField.text = [NSString stringWithFormat:@"%@", weather.precip1hr];
+        precip24HrTextField.text = [NSString stringWithFormat:@"%@", weather.precip24hr];
+        pressureTextField.text = [NSString stringWithFormat:@"%@", weather.pressure];
+        windSpeedTextField.text = [NSString stringWithFormat:@"%@", weather.windSpeed];
+        windDirectionTextField.text = [NSString stringWithFormat:@"%@", weather.windDir];
+    }
+    
+    
+    
     //email Bug Report
     UISwipeGestureRecognizer *swipeRightForEmail = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeToEmail:)];
     swipeRightForEmail.direction = UISwipeGestureRecognizerDirectionRight;
