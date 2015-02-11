@@ -37,26 +37,15 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _managedObjectContext = [appDelegate managedObjectContext];
     
-    NSString *messageText = @"Standard Comercial and common DIY hive boxes are built in for your use. Add a custom box only if your size isn't represented. \n If you need a custom box, include accurate dimensions for your box so that comparisons between your setup and the bee keeping community are as accurate as possible.\n ALL VALUES ARE CRITICAL\n For more info see:\n hivemapers.com/BoxSetup";
+    NSString *messageText = @"For a custom box, measure inside the frame\n For more info see:\n hivemaps.com/BoxSetup";
     
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ATTENTION!!!"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"All Values Are Required"
                                                     message:messageText
-                                                   delegate:nil
+                                                   delegate:self
                                           cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];  //add link-out button for website
-   /*
-    NSArray *subviewArray = alert.subviews;
-    for(int x = 0; x < [subviewArray count]; x++){
-        
-        if([[[subviewArray objectAtIndex:x] class] isSubclassOfClass:[UILabel class]]) {
-            UILabel *label = [subviewArray objectAtIndex:x];
-            label.textAlignment = NSTextAlignmentLeft;
-        }
-    }
-    */
-    
-    [alert show];
+                                          otherButtonTitles:@"More Info",nil];  //add link-out button for website
+   [alert show];
     
     //email Bug Report
     UISwipeGestureRecognizer *swipeRightForEmail = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeToEmail:)];
@@ -77,7 +66,10 @@
 // link out function for warning
 - (void)alertView: (UIAlertView *)alertView clickedButtonAtIndex: (NSInteger)buttonIndex
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.ByronAnalytics.com"]];
+    if (buttonIndex == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.HiveMaps.com/support"]];
+    }
+    
 }
 
 

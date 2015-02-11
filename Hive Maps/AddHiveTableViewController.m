@@ -446,21 +446,24 @@ int numberBoxes;
 #pragma mark ---------------- Navigation Button Controls ----------------
 // SAVE BUTTON
 - (IBAction)saveButtonPressed:(id)sender {
-    if ([sourceVC isEqualToString:@"editBoxSegue"]){
-        [self editBox];
-        [self performSegueWithIdentifier:@"unwindToBoxDetails" sender:self];
+   BOOL areFieldsComplete = [self locateEmptyTextField];
+    if (areFieldsComplete) {
+     
+        if ([sourceVC isEqualToString:@"editBoxSegue"]){
+            [self editBox];
+            [self performSegueWithIdentifier:@"unwindToBoxDetails" sender:self];
 
-    } else if ([sourceVC isEqualToString:@"addBoxSegue"]){
-        //NO ACTION - BUTTON DISABLED
+        } else if ([sourceVC isEqualToString:@"addBoxSegue"]){
+            //NO ACTION - BUTTON DISABLED
     
-    } else if ([sourceVC isEqualToString:@"editHiveSegue"]){
-        [self editHive];
-        [self performSegueWithIdentifier:@"unwindToHiveDetails" sender:self];
+        } else if ([sourceVC isEqualToString:@"editHiveSegue"]){
+            [self editHive];
+            [self performSegueWithIdentifier:@"unwindToHiveDetails" sender:self];
         
-    } else if ([sourceVC isEqualToString:@"showAddHive"]){
-        [self saveNewHive];
-        [self performSegueWithIdentifier:@"unwindToHome" sender:self];
+        } else if ([sourceVC isEqualToString:@"showAddHive"]){
+            [self saveNewHive];
         
+        }
     }
 
 }
@@ -488,13 +491,16 @@ int numberBoxes;
 }
 // RIGHT-BAR BUTTON
 - (IBAction)toolBarRightButtonPressed:(id)sender {
-    if ([sourceVC isEqualToString:@"addBoxSegue"]){
-        [self addNewBox];
+    BOOL areFieldsComplete = [self locateEmptyTextField];
+    if (areFieldsComplete) {
+
+        if ([sourceVC isEqualToString:@"addBoxSegue"]){
+            [self addNewBox];
         
-    } else if ([sourceVC isEqualToString:@"showAddHive"]){
-        NSLog(@"Adding New Hive - Add Box Pressed");
-        [self addNewBox];
-        
+        } else if ([sourceVC isEqualToString:@"showAddHive"]){
+            NSLog(@"Adding New Hive - Add Box Pressed");
+            [self addNewBox];
+        }
     }
 
 }
@@ -506,12 +512,7 @@ int numberBoxes;
 #pragma mark ---------- Commit Changes to Store ----------
 
 -(void) addNewBox{
-    if ([boxTextField.text isEqualToString:@""]){
-        
-        [self missingBoxTypeAlert];
-        
-    } else {
-        
+    
         HiveBox *newBox = (HiveBox *)[NSEntityDescription insertNewObjectForEntityForName:@"HiveBox" inManagedObjectContext:_managedObjectContext];
         newBox.boxID = boxIDTextfield.text;
         newBox.boxType = boxTextField.text;
@@ -558,7 +559,7 @@ int numberBoxes;
         if (![_managedObjectContext save:&error]) {
             //Handle the error.
         }
-    }
+    
 }
 
 -(void) editBox{
@@ -595,9 +596,6 @@ int numberBoxes;
 }
 
 -(void) saveNewHive{
-    if ([boxTextField.text isEqualToString:@""] && ((hive.hiveBoxes.count == 0) || (boxSet.count == 0))){
-        [self missingBoxTypeAlert];
-      } else {
         //Instantiate hive managed object
         hive = (HiveDetails *)[NSEntityDescription insertNewObjectForEntityForName:@"HiveDetails" inManagedObjectContext:_managedObjectContext];
         
@@ -653,53 +651,67 @@ int numberBoxes;
             }
     
         hiveIDTextField.text = nil;
-      }
+        [self performSegueWithIdentifier:@"unwindToHome" sender:self];
+          
+    
 }
+
+-(BOOL)locateEmptyTextField{
+    NSLog(@"Locate Empty Called");
+    bool formComplete = NO;
+    NSArray *textFieldArray = @[siteTextField, hiveIDTextField, queenTextField, boxTextField, boxIDTextfield];
+    
+    for(UITextField *field in textFieldArray){
+        if (![field hasText] && field.enabled == YES) {
+            [self missingBoxTypeAlert];
+            formComplete = NO;
+            [field becomeFirstResponder];
+            return formComplete;
+        } else {
+            formComplete = YES;
+        }
+    }
+    
+    return formComplete;
+}
+
 
 #pragma mark --------------- Alerts ----------------
 -(void)missingBoxTypeAlert{
-    //Support depreciation of UIAlertVIew, use UIAlertViewController if possible
-    if (NSClassFromString(@"UIAlertController")) {
-        UIAlertController *boxAlert = [UIAlertController alertControllerWithTitle:@"Woops!!"
-                                                                          message:@"Box type has not been selected."
-                                                                   preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Edit Values"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction *action){
-                                                         [boxAlert dismissViewControllerAnimated:YES completion:nil];
-                                                     }];
-        [boxAlert addAction:dismiss];
-        [self presentViewController:boxAlert animated:YES completion:nil];
-        
-    } else {
-      //iOS < 8.0
-        UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"Woops!!"
-                                                             message:@"Box type has not been selected."
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"A Field Has Been Left Blank"
+                                                             message:@"The Empty field has been selected."
                                                             delegate:self
                                                    cancelButtonTitle:@"OK"
                                                    otherButtonTitles:nil];
-        alertView1.tag = kAlertViewCheckBoxPicker;
-        [alertView1 show];
-    }
+        alertView.tag = kAlertViewCheckBoxPicker;
+        [alertView show];
+    
     
 }
 -(void) hiveNotSavedAlert{
-    UIAlertView *alertView2 = [[UIAlertView alloc] initWithTitle:@"Latest Hive not Saved"
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Latest Hive not Saved"
                                                          message:@"Would you like to discard the Hive?"
                                                         delegate:self
                                                cancelButtonTitle:@"Discard"
                                                otherButtonTitles:@"Save Hive", nil];
-    alertView2.tag = kAlertViewSaveData;
-    [alertView2 show];
-    
-    
-    
-    
+    alertView.tag = kAlertViewSaveData;
+    [alertView show];
     
 }
 
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == kAlertViewSaveData) {
+        if (buttonIndex == 0){
+         //Discard Data, unwind to hive
+           [self performSegueWithIdentifier:@"unwindToHome" sender:self];
+            
+        } else {
+            [self locateEmptyTextField];
 
+        }
+    }
+    
+}
 
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation

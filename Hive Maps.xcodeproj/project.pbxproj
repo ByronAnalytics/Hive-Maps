@@ -234,8 +234,9 @@
 				5245A56A1A5A67A0002DBA4B /* Observe Data View Controllers */,
 				528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */,
 				5234F03A1A79BDC60038E298 /* Worker Classes */,
-				52508F941A7455B5007EF20D /* Star Images */,
 				5270C6991A59FBA000F0C1B0 /* Supporting Files */,
+				52508F941A7455B5007EF20D /* Star Images */,
+				528C344F1A5A142400DB9539 /* CoreData */,
 			);
 			path = "Hive Maps";
 			sourceTree = "<group>";
@@ -294,7 +295,6 @@
 		528C34531A5A1A4F00DB9539 /* Collect Data View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				528C344F1A5A142400DB9539 /* CoreData */,
 				525BE5EE1A5A244D000324CA /* MakeHiveObsTableViewController.h */,
 				525BE5EF1A5A244D000324CA /* MakeHiveObsTableViewController.m */,
 				529C68A51A69901D0047C680 /* MakeBoxObservationTableViewController.h */,

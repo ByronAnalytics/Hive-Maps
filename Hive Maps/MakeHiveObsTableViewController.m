@@ -427,12 +427,17 @@
         
     } else if ([[segue identifier] isEqualToString:@"makeBoxObs"]) {
         [self.locationManager stopUpdatingLocation];
-
         //Pass selected Hive to new view controller
         UINavigationController *navController = (UINavigationController *) [segue destinationViewController];
         MakeBoxObservationTableViewController *makeBoxObservationTableViewController = (MakeBoxObservationTableViewController *)[navController topViewController];
         makeBoxObservationTableViewController.hive = hive;
-
+        if (![hiveObservation.boxObservations count]) {
+            makeBoxObservationTableViewController.sampled = NO;
+        } else {
+            makeBoxObservationTableViewController.sampled = YES;
+            makeBoxObservationTableViewController.hiveObservation = hiveObservation;
+        }
+        
     } else {
         
         [self.locationManager stopUpdatingLocation];
