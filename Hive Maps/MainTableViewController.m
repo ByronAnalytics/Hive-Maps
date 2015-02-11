@@ -242,7 +242,6 @@
 
 -(IBAction)unWindToHome:(UIStoryboardSegue *)segue{
     // need to record observation data into db
-    
 }
 
 

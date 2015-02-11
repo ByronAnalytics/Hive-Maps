@@ -180,6 +180,7 @@ BOOL useOldObs;
 }
 
 -(void) dataInitialization{
+    NSLog(@"Data Initialization - useOldObs:%@", useOldObs ? @"Yes" : @"No");
     
     if (useOldObs) {
         
@@ -483,7 +484,7 @@ BOOL useOldObs;
     [alertView3 show];
 }
 
-//Alert view delegate
+// ----- Alert view delegate ------
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     //Done button pressed - save Data?
     if(alertView.tag == kAlertViewSaveData){
@@ -537,6 +538,7 @@ BOOL useOldObs;
     } else if(alertView.tag == kAlertViewOldObs){
         if (buttonIndex == 0) {
             useOldObs = NO;
+            [self dataInitialization];
         } else {
             useOldObs = YES;
             [self dataInitialization];
