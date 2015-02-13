@@ -428,14 +428,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QYD-Bc-T7w">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="ZLh-FG-2PN">
-                            <connections>
-                                <action selector="saveWeatherData:" destination="s09-HD-wab" id="rxh-fY-veZ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Y1u-WG-Kme">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y1u-WG-Kme">
                             <connections>
                                 <segue destination="rG8-pK-6if" kind="unwind" unwindAction="cancelToObsrvHive:" id="3Bu-Vi-GOg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ZLh-FG-2PN">
+                            <connections>
+                                <action selector="saveWeatherData:" destination="s09-HD-wab" id="rxh-fY-veZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -869,7 +869,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="HCD-Wd-6fv">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="q4b-Ld-NGs">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="q4b-Ld-NGs">
                             <connections>
                                 <segue destination="k16-rw-H8H" kind="unwind" unwindAction="unWindToHome:" id="meV-LY-6Ig"/>
                             </connections>
@@ -1288,7 +1288,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="xUX-hT-05B">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="i2u-Ue-FXQ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="i2u-Ue-FXQ">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="GLn-50-idg" id="0fX-BD-rjH"/>
                             </connections>
@@ -1925,14 +1925,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3IE-7M-kvq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="j2z-VY-uE1">
-                            <connections>
-                                <action selector="saveObsEvent:" destination="Py7-xG-8aU" id="Wpg-Tf-xYF"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="ZOm-Hb-8V6">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ZOm-Hb-8V6">
                             <connections>
                                 <action selector="cancelHiveObs:" destination="Py7-xG-8aU" id="fDV-Ht-Vva"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="j2z-VY-uE1">
+                            <connections>
+                                <action selector="saveObsEvent:" destination="Py7-xG-8aU" id="Wpg-Tf-xYF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2256,12 +2256,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="oLh-QV-YzH">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="hfj-QJ-Zwu">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hfj-QJ-Zwu">
                             <connections>
                                 <segue destination="zKa-fc-4Wk" kind="unwind" unwindAction="unwindToObsrvHive:" id="sgk-Sp-AP5"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Commit Data" id="a6k-EW-r9i">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="a6k-EW-r9i">
                             <connections>
                                 <action selector="commitData:" destination="92p-rQ-90l" id="Lme-Cf-5gb"/>
                             </connections>
@@ -2310,7 +2310,7 @@
                                     <constraint firstAttribute="height" constant="44" id="PQt-W1-UbY"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem style="done" systemItem="done" id="ws7-Dp-Gq2">
+                                    <barButtonItem title="Back" id="ws7-Dp-Gq2">
                                         <connections>
                                             <segue destination="YKW-X7-Miu" kind="unwind" unwindAction="unwindToHiveDetails:" id="iWo-Ag-89s"/>
                                         </connections>
@@ -2932,14 +2932,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="nC6-e9-e4o">
-                        <barButtonItem key="leftBarButtonItem" title="Add Box" id="EvP-KU-iaj">
-                            <connections>
-                                <segue destination="qEK-5s-toL" kind="presentation" identifier="addBoxSegue" id="tEL-kP-PGj"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Chj-Xx-3Mv">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Chj-Xx-3Mv">
                             <connections>
                                 <segue destination="gTa-n0-mJM" kind="unwind" unwindAction="unwindToHiveDetails:" id="hFn-Fu-nRj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add Box" id="EvP-KU-iaj">
+                            <connections>
+                                <segue destination="qEK-5s-toL" kind="presentation" identifier="addBoxSegue" id="tEL-kP-PGj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -3205,6 +3205,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XfV-hP-5c5"/>
+        <segue reference="jkB-G8-aFQ"/>
     </inferredMetricsTieBreakers>
 </document>

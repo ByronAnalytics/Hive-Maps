@@ -206,9 +206,10 @@ int numberBoxes;
 -(void) viewForAddBox{
     //ADD BOX
     // Setup Navigation buttons.
-    [saveButton setTitle:@""];
-    saveButton.enabled = NO;
-    [toolBarRightButton setTitle:@"Add Box"];
+    [saveButton setTitle:@"Add Box"];
+    saveButton.enabled = YES;
+    [toolBarRightButton setTitle:@""];
+    toolBarRightButton.enabled = NO;
     [toolBarLeftButton setTitle:@"Add Custom Box"];
     
     //Set Box Add Date to current Date
@@ -454,7 +455,8 @@ int numberBoxes;
             [self performSegueWithIdentifier:@"unwindToBoxDetails" sender:self];
 
         } else if ([sourceVC isEqualToString:@"addBoxSegue"]){
-            //NO ACTION - BUTTON DISABLED
+            BOOL areFieldsComplete = [self locateEmptyTextField];
+            if(areFieldsComplete) [self addNewBox];
     
         } else if ([sourceVC isEqualToString:@"editHiveSegue"]){
             [self editHive];
@@ -495,7 +497,7 @@ int numberBoxes;
     if (areFieldsComplete) {
 
         if ([sourceVC isEqualToString:@"addBoxSegue"]){
-            [self addNewBox];
+            //moved to Save Button
         
         } else if ([sourceVC isEqualToString:@"showAddHive"]){
             NSLog(@"Adding New Hive - Add Box Pressed");
