@@ -10,4 +10,5 @@
 
 @interface MultiHivePlotViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *plotElementsTV;
 @end

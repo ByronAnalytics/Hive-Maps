@@ -61,23 +61,38 @@ Data arrays for each variable are created and stored in instance for this class 
         [dateArray addObject:[obs valueForKey:@"observationDate"]];
         
         //Independent Variables
-        NSSet *boxes = [obs valueForKey:@"boxObservations"];
-        float framesBrood = 0;
-        float framesWorkers = 0;
-        float framesHoney = 0;
         
-        for (id box in boxes) {
-            framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
-            framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
-            framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
-            
+        //verify existing box-level observations
+        if([obs valueForKey:@"boxObservations"]){
+            NSSet *boxes = [obs valueForKey:@"boxObservations"];
+            float framesBrood = 0;
+            float framesWorkers = 0;
+            float framesHoney = 0;
+        
+            for (id box in boxes) {
+                framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
+                framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
+                framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
+            }
+        
+            [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
+            [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
+            [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
+        } else {
+            //If observations weren't made, pass null for plotting
+            [broodTotals addObject:[NSNull null]];
+            [honeyTotals addObject:[NSNull null]];
+            [workerTotals addObject:[NSNull null]];
         }
         
-        [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
-        [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
-        [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
-        [queenPerformance addObject:[obs valueForKey:@"queenPerformance"]];
+        //verify Queen Performance Recorded
+        if([obs valueForKey:@"queenPerformance"]){
+            [queenPerformance addObject:[obs valueForKey:@"queenPerformance"]];
+        } else {
+            [queenPerformance addObject:[NSNull null]];
+        }
         
+        //verify weather data collected
         if ([obs valueForKey:@"weatherObservation"]) {
             [temperature addObject:[obs valueForKeyPath:@"weatherObservation.temperature"]];
             [humidity addObject:[obs valueForKeyPath:@"weatherObservation.humidity"]];
@@ -130,16 +145,21 @@ Data arrays for each variable are created and stored in instance for this class 
     windSpeedDictionary = [self calcRange:windSpeed:@"Wind Speed":[CPTPlotSymbol diamondPlotSymbol]:[CPTColor blackColor]];
     
     //Setup Date Dictionary
-    NSDate *firstDate = dateArray[0];
-    NSDate *lastDate = dateArray[dateArray.count-1];
+    if(dateArray.count > 0){
+        NSDate *firstDate = dateArray[0];
+        NSDate *lastDate = dateArray[dateArray.count-1];
     
-    NSTimeInterval dateIntervalinSec = [lastDate timeIntervalSinceDate:firstDate];
-    int secInDay = 86400;
-    NSNumber *rangeX = [NSNumber numberWithInteger:dateIntervalinSec / secInDay];
-    NSDate *minX = dateArray[0];
-    NSDate *maxX = dateArray[dateArray.count-1];
-    dateDictionary = [NSDictionary dictionaryWithObjects:@[dateArray, minX, rangeX, maxX]
+        NSTimeInterval dateIntervalinSec = [lastDate timeIntervalSinceDate:firstDate];
+        int secInDay = 86400;
+        NSNumber *rangeX = [NSNumber numberWithInteger:dateIntervalinSec / secInDay];
+        NSDate *minX = dateArray[0];
+        NSDate *maxX = dateArray[dateArray.count-1];
+        dateDictionary = [NSDictionary dictionaryWithObjects:@[dateArray, minX, rangeX, maxX]
                                                  forKeys:@[@"data", @"minValue", @"range", @"maxValue"]];
+    } else {
+        dateDictionary = [NSDictionary dictionaryWithObjects:@[[NSNull null], [NSNull null], [NSNull null], [NSNull null]]
+                                                     forKeys:@[@"data", @"minValue", @"range", @"maxValue"]];
+    }
     
 }
     

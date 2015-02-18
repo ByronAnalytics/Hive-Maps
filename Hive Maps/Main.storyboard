@@ -428,14 +428,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QYD-Bc-T7w">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="ZLh-FG-2PN">
-                            <connections>
-                                <action selector="saveWeatherData:" destination="s09-HD-wab" id="rxh-fY-veZ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Y1u-WG-Kme">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Y1u-WG-Kme">
                             <connections>
                                 <segue destination="rG8-pK-6if" kind="unwind" unwindAction="cancelToObsrvHive:" id="3Bu-Vi-GOg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ZLh-FG-2PN">
+                            <connections>
+                                <action selector="saveWeatherData:" destination="s09-HD-wab" id="rxh-fY-veZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -869,7 +869,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="HCD-Wd-6fv">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="q4b-Ld-NGs">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="q4b-Ld-NGs">
                             <connections>
                                 <segue destination="k16-rw-H8H" kind="unwind" unwindAction="unWindToHome:" id="meV-LY-6Ig"/>
                             </connections>
@@ -954,11 +954,11 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4aF-L2-gZw" id="5xI-lH-X6V">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hive ID: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTe-0a-SXm">
-                                                    <rect key="frame" x="30" y="11" width="65" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hive Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTe-0a-SXm">
+                                                    <rect key="frame" x="30" y="11" width="89" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="e07-do-0wp"/>
-                                                        <constraint firstAttribute="width" constant="65" id="ucU-AQ-o8F"/>
+                                                        <constraint firstAttribute="width" constant="89" id="ucU-AQ-o8F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -1288,7 +1288,7 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="xUX-hT-05B">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="i2u-Ue-FXQ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="i2u-Ue-FXQ">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="GLn-50-idg" id="0fX-BD-rjH"/>
                             </connections>
@@ -1925,14 +1925,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3IE-7M-kvq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="j2z-VY-uE1">
-                            <connections>
-                                <action selector="saveObsEvent:" destination="Py7-xG-8aU" id="Wpg-Tf-xYF"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="ZOm-Hb-8V6">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ZOm-Hb-8V6">
                             <connections>
                                 <action selector="cancelHiveObs:" destination="Py7-xG-8aU" id="fDV-Ht-Vva"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="j2z-VY-uE1">
+                            <connections>
+                                <action selector="saveObsEvent:" destination="Py7-xG-8aU" id="Wpg-Tf-xYF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2066,9 +2066,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tst-YB-kBx">
-                                                    <rect key="frame" x="529" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="520" y="11" width="50" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="41" id="buk-UG-8Hy"/>
+                                                        <constraint firstAttribute="width" constant="50" id="buk-UG-8Hy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -2106,9 +2106,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qio-M6-zMq">
-                                                    <rect key="frame" x="529" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="520" y="11" width="50" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="41" id="a8D-3k-Ru9"/>
+                                                        <constraint firstAttribute="width" constant="50" id="a8D-3k-Ru9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -2143,9 +2143,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEp-w2-GnO">
-                                                    <rect key="frame" x="529" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="520" y="11" width="50" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="41" id="C3b-60-YUJ"/>
+                                                        <constraint firstAttribute="width" constant="50" id="C3b-60-YUJ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -2228,9 +2228,9 @@
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KED-eC-rir">
-                                                    <rect key="frame" x="533" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="524" y="11" width="50" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="41" id="Jg8-fL-izB"/>
+                                                        <constraint firstAttribute="width" constant="50" id="Jg8-fL-izB"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -2256,12 +2256,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="oLh-QV-YzH">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="hfj-QJ-Zwu">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="hfj-QJ-Zwu">
                             <connections>
                                 <segue destination="zKa-fc-4Wk" kind="unwind" unwindAction="unwindToObsrvHive:" id="sgk-Sp-AP5"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Commit Data" id="a6k-EW-r9i">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="a6k-EW-r9i">
                             <connections>
                                 <action selector="commitData:" destination="92p-rQ-90l" id="Lme-Cf-5gb"/>
                             </connections>
@@ -2310,7 +2310,7 @@
                                     <constraint firstAttribute="height" constant="44" id="PQt-W1-UbY"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem style="done" systemItem="done" id="ws7-Dp-Gq2">
+                                    <barButtonItem title="Back" id="ws7-Dp-Gq2">
                                         <connections>
                                             <segue destination="YKW-X7-Miu" kind="unwind" unwindAction="unwindToHiveDetails:" id="iWo-Ag-89s"/>
                                         </connections>
@@ -2660,9 +2660,7 @@
                             <outlet property="delegate" destination="Sut-L2-MSr" id="xG8-dj-Nsu"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="MOy-5G-ZWP"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="boxName" destination="dYa-j1-hoL" id="o9J-aM-Vpa"/>
@@ -2934,14 +2932,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="nC6-e9-e4o">
-                        <barButtonItem key="leftBarButtonItem" title="Add Box" id="EvP-KU-iaj">
-                            <connections>
-                                <segue destination="qEK-5s-toL" kind="presentation" identifier="addBoxSegue" id="tEL-kP-PGj"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Chj-Xx-3Mv">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Chj-Xx-3Mv">
                             <connections>
                                 <segue destination="gTa-n0-mJM" kind="unwind" unwindAction="unwindToHiveDetails:" id="hFn-Fu-nRj"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add Box" id="EvP-KU-iaj">
+                            <connections>
+                                <segue destination="qEK-5s-toL" kind="presentation" identifier="addBoxSegue" id="tEL-kP-PGj"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2972,7 +2970,7 @@
         <!--Compare Hives Scene-->
         <scene sceneID="Czy-wp-80t">
             <objects>
-                <viewController id="c9B-FE-YmO" userLabel="Compare Hives Scene" sceneMemberID="viewController">
+                <viewController id="c9B-FE-YmO" userLabel="Compare Hives Scene" customClass="MultiHivePlotViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mgc-yO-mTA"/>
                         <viewControllerLayoutGuide type="bottom" id="jpv-Bd-L7u"/>
@@ -2990,22 +2988,31 @@
                                 <items>
                                     <barButtonItem style="done" systemItem="done" id="EOB-fF-sAp">
                                         <connections>
-                                            <segue destination="gEl-f9-CAq" kind="unwind" unwindAction="unwindToHiveDetails:" id="2Zk-W6-XFO"/>
+                                            <segue destination="gEl-f9-CAq" kind="unwind" unwindAction="unwindToHiveDetails:" id="TaG-i2-lrU"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="40" style="plain" systemItem="flexibleSpace" id="dPr-hh-lkR"/>
-                                    <barButtonItem title="Variables" id="gwe-ar-iTq"/>
-                                    <barButtonItem title="Weather" id="I9q-gN-1g8"/>
-                                    <barButtonItem title="Events" id="OLP-xO-VQY"/>
+                                    <barButtonItem title="Hives" id="gwe-ar-iTq"/>
+                                    <barButtonItem title="Value" id="I9q-gN-1g8"/>
+                                    <barButtonItem title="TBD" id="OLP-xO-VQY"/>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaI-NF-6Mh">
+                                <rect key="frame" x="129" y="238" width="342" height="124"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="342" id="kxZ-b1-HjI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-0L-Y3U">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="8YM-Rf-Dpg"/>
                                     <constraint firstAttribute="width" constant="150" id="nVv-Gd-ghV"/>
                                     <constraint firstAttribute="width" constant="199" id="obm-1a-4XP"/>
-                                    <constraint firstAttribute="width" constant="320" id="pQW-Ps-zGu"/>
                                     <constraint firstAttribute="width" constant="199" id="xQZ-Gu-91S"/>
                                 </constraints>
                                 <prototypes>
@@ -3061,31 +3068,34 @@
                             <constraint firstItem="d25-ae-MxT" firstAttribute="leading" secondItem="rZs-0L-Y3U" secondAttribute="trailing" constant="8" symbolic="YES" id="5al-NY-S4b"/>
                             <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="d25-ae-MxT" secondAttribute="top" id="6bn-Cc-Xgq"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="8bg-1P-aXe"/>
+                            <constraint firstItem="jpv-Bd-L7u" firstAttribute="top" secondItem="DaI-NF-6Mh" secondAttribute="bottom" constant="189" id="8cK-SJ-uIW"/>
+                            <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="ARL-PJ-6FI"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="rZs-0L-Y3U" secondAttribute="leading" id="BWK-6b-gMp"/>
                             <constraint firstItem="rZs-0L-Y3U" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leadingMargin" constant="-11" id="DR1-ya-E8x"/>
+                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="Did-hy-snG"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="top" secondItem="9nK-00-ywB" secondAttribute="top" id="ESn-Xa-qTS"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="trailing" secondItem="d25-ae-MxT" secondAttribute="trailing" id="FF4-ht-hUP"/>
+                            <constraint firstItem="DaI-NF-6Mh" firstAttribute="centerX" secondItem="Ncs-O3-jKI" secondAttribute="centerX" id="HUw-ji-0tS"/>
                             <constraint firstItem="d25-ae-MxT" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="HY3-Dr-2hE"/>
                             <constraint firstItem="d25-ae-MxT" firstAttribute="bottom" secondItem="jpv-Bd-L7u" secondAttribute="top" id="HtT-Kt-xXk"/>
+                            <constraint firstItem="Ncs-O3-jKI" firstAttribute="top" secondItem="9nK-00-ywB" secondAttribute="top" id="NED-yx-1uO"/>
+                            <constraint firstAttribute="trailing" secondItem="Ncs-O3-jKI" secondAttribute="trailing" id="PIv-2r-AHk"/>
                             <constraint firstItem="jpv-Bd-L7u" firstAttribute="top" secondItem="rZs-0L-Y3U" secondAttribute="bottom" constant="8" symbolic="YES" id="Tdw-JJ-AJZ"/>
+                            <constraint firstItem="DaI-NF-6Mh" firstAttribute="centerY" secondItem="9nK-00-ywB" secondAttribute="centerY" id="VCc-lm-ksU"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="top" secondItem="9nK-00-ywB" secondAttribute="top" id="Y8N-9a-D1b"/>
+                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="bottom" secondItem="jpv-Bd-L7u" secondAttribute="top" id="ZMa-Ik-Ahx"/>
                             <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="b8Q-Ch-PD0"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="bgm-Hc-P19"/>
                             <constraint firstAttribute="trailing" secondItem="d25-ae-MxT" secondAttribute="trailing" id="cFj-w7-2S8"/>
-                            <constraint firstItem="Ncs-O3-jKI" firstAttribute="top" secondItem="9nK-00-ywB" secondAttribute="topMargin" id="gZM-a6-Dy2"/>
                             <constraint firstItem="d25-ae-MxT" firstAttribute="bottom" secondItem="jpv-Bd-L7u" secondAttribute="top" id="iJn-cz-Sew"/>
                             <constraint firstItem="rZs-0L-Y3U" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="kYk-vq-jEP"/>
                             <constraint firstItem="d25-ae-MxT" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="nTo-g2-ltD"/>
                             <constraint firstItem="d25-ae-MxT" firstAttribute="leading" secondItem="rZs-0L-Y3U" secondAttribute="trailing" constant="8" symbolic="YES" id="oFC-oc-AtY"/>
-                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="leading" secondItem="Ncs-O3-jKI" secondAttribute="leading" id="qEG-Wd-trS"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="rZs-0L-Y3U" secondAttribute="bottom" constant="32" id="r34-TF-Scv"/>
+                            <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="rZs-0L-Y3U" secondAttribute="leading" id="oRe-WL-bKq"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="top" secondItem="9nK-00-ywB" secondAttribute="top" id="tk6-Qy-yDo"/>
-                            <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leadingMargin" constant="-16" id="u3O-8j-UhC"/>
                             <constraint firstItem="rZs-0L-Y3U" firstAttribute="bottom" secondItem="jpv-Bd-L7u" secondAttribute="top" id="vWx-UY-9gr"/>
-                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="top" id="vnq-LC-amG"/>
                             <constraint firstItem="jpv-Bd-L7u" firstAttribute="top" secondItem="rZs-0L-Y3U" secondAttribute="bottom" constant="8" symbolic="YES" id="vsb-Sh-qCm"/>
                             <constraint firstAttribute="trailing" secondItem="Ncs-O3-jKI" secondAttribute="trailing" id="xEE-ZA-BL7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ncs-O3-jKI" secondAttribute="trailing" constant="-16" id="zIg-l0-gWl"/>
                             <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="d25-ae-MxT" secondAttribute="top" id="zu0-PL-LdR"/>
                         </constraints>
                         <variation key="default">
@@ -3096,10 +3106,6 @@
                                 <exclude reference="5al-NY-S4b"/>
                                 <exclude reference="HY3-Dr-2hE"/>
                                 <exclude reference="HtT-Kt-xXk"/>
-                                <exclude reference="cFj-w7-2S8"/>
-                                <exclude reference="iJn-cz-Sew"/>
-                                <exclude reference="nTo-g2-ltD"/>
-                                <exclude reference="oFC-oc-AtY"/>
                                 <exclude reference="0Cv-6Z-LuY"/>
                                 <exclude reference="2Q3-eE-XFS"/>
                                 <exclude reference="8bg-1P-aXe"/>
@@ -3119,6 +3125,10 @@
                                 <exclude reference="zu0-PL-LdR"/>
                                 <exclude reference="Tdw-JJ-AJZ"/>
                                 <exclude reference="vsb-Sh-qCm"/>
+                                <exclude reference="cFj-w7-2S8"/>
+                                <exclude reference="iJn-cz-Sew"/>
+                                <exclude reference="nTo-g2-ltD"/>
+                                <exclude reference="oFC-oc-AtY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -3129,9 +3139,6 @@
                                 <include reference="0Cv-6Z-LuY"/>
                                 <include reference="ESn-Xa-qTS"/>
                                 <include reference="bgm-Hc-P19"/>
-                                <exclude reference="gZM-a6-Dy2"/>
-                                <exclude reference="u3O-8j-UhC"/>
-                                <exclude reference="zIg-l0-gWl"/>
                                 <include reference="DR1-ya-E8x"/>
                                 <include reference="b8Q-Ch-PD0"/>
                                 <include reference="Tdw-JJ-AJZ"/>
@@ -3144,17 +3151,14 @@
                             <mask key="constraints">
                                 <include reference="HY3-Dr-2hE"/>
                                 <include reference="HtT-Kt-xXk"/>
-                                <include reference="oFC-oc-AtY"/>
                                 <include reference="2Q3-eE-XFS"/>
                                 <include reference="8bg-1P-aXe"/>
                                 <include reference="BWK-6b-gMp"/>
                                 <include reference="Y8N-9a-D1b"/>
-                                <exclude reference="gZM-a6-Dy2"/>
-                                <exclude reference="u3O-8j-UhC"/>
                                 <include reference="xEE-ZA-BL7"/>
-                                <exclude reference="zIg-l0-gWl"/>
                                 <include reference="6bn-Cc-Xgq"/>
                                 <include reference="vWx-UY-9gr"/>
+                                <include reference="oFC-oc-AtY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
@@ -3162,10 +3166,6 @@
                                 <include reference="5al-NY-S4b"/>
                                 <exclude reference="HY3-Dr-2hE"/>
                                 <exclude reference="HtT-Kt-xXk"/>
-                                <include reference="cFj-w7-2S8"/>
-                                <include reference="iJn-cz-Sew"/>
-                                <include reference="nTo-g2-ltD"/>
-                                <exclude reference="oFC-oc-AtY"/>
                                 <exclude reference="0Cv-6Z-LuY"/>
                                 <exclude reference="2Q3-eE-XFS"/>
                                 <exclude reference="8bg-1P-aXe"/>
@@ -3185,10 +3185,18 @@
                                 <include reference="zu0-PL-LdR"/>
                                 <exclude reference="Tdw-JJ-AJZ"/>
                                 <include reference="vsb-Sh-qCm"/>
+                                <include reference="cFj-w7-2S8"/>
+                                <include reference="iJn-cz-Sew"/>
+                                <include reference="nTo-g2-ltD"/>
+                                <exclude reference="oFC-oc-AtY"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Compare Hives" id="a1Q-MN-KPI"/>
+                    <connections>
+                        <outlet property="label" destination="DaI-NF-6Mh" id="ajS-CK-2xi"/>
+                        <outlet property="plotElementsTV" destination="rZs-0L-Y3U" id="oIQ-Gp-kxM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inv-9S-UnH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="gEl-f9-CAq" userLabel="Exit" sceneMemberID="exit"/>
@@ -3197,6 +3205,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VIN-Ku-dJP"/>
+        <segue reference="jkB-G8-aFQ"/>
     </inferredMetricsTieBreakers>
 </document>

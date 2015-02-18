@@ -114,65 +114,29 @@
     NSDate *date2 = [[NSDate alloc] initWithTimeInterval:theTimeInterval sinceDate:date1];
     
     // Get conversion to months, days, hours, minutes
-    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear;
+    unsigned int unitFlags = NSCalendarUnitDay | NSCalendarUnitMonth;
     
     NSDateComponents *breakdownInfo = [sysCalendar components:unitFlags fromDate:date1  toDate:date2  options:0];
     NSString *age = nil;
     
-    if([breakdownInfo year] > 0 ){  // If hive is more then a year old, display age as YY:MM
-        if ([breakdownInfo month] > 0) {
-            if([breakdownInfo year] >= 2){ //pluralize years
-                if([breakdownInfo month] >= 2){ //pluralize months
-                    age = [NSString stringWithFormat:@"%ld years, %ld months", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld years, %ld month", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                }
-            } else {
-                if([breakdownInfo month] >= 2){
-                    age = [NSString stringWithFormat:@"%ld year, %ld months", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld year, %ld month", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-                }
-            }
-            
-        } else { // hive is between 12 and 13 months old
-            if([breakdownInfo year] >= 2){ //pluralize years
-                if([breakdownInfo day] >= 2){ //pluralize months
-                    age = [NSString stringWithFormat:@"%ld years, %ld days", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld years, %ld day", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                }
-            } else {
-                if([breakdownInfo month] >= 2){
-                    age = [NSString stringWithFormat:@"%ld year, %ld days", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                } else {
-                    age = [NSString stringWithFormat:@"%ld year, %ld day", (long)[breakdownInfo year], (long)[breakdownInfo day]];
-                }
-            }
-            
-        }
-    } else if ([breakdownInfo month] > 0) {
-        if([breakdownInfo month] >= 2){
-            if ([breakdownInfo day] >=2){
-                age = [NSString stringWithFormat:@"%ld months, %ld days", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-            } else {
-                age = [NSString stringWithFormat:@"%ld months, %ld day", (long)[breakdownInfo year], (long)[breakdownInfo month]];
-            }
+       if ([breakdownInfo month] > 0) {
+           //Report age in months
+           if([breakdownInfo month] > 1){
+               age = [NSString stringWithFormat:@"%ld months", (long)[breakdownInfo month]];
+           } else {
+               age = [NSString stringWithFormat:@"%ld month", (long)[breakdownInfo month]];
+           }
         } else {
-            if ([breakdownInfo day] >=2){
-                age = [NSString stringWithFormat:@"%ld month, %ld days", (long)[breakdownInfo month], (long)[breakdownInfo day]];
+            //Report age in days
+            if ([breakdownInfo day] > 1) {
+                age = [NSString stringWithFormat:@"%ld days", (long)[breakdownInfo day]];
             } else {
-                age = [NSString stringWithFormat:@"%ld month, %ld day", (long)[breakdownInfo month], (long)[breakdownInfo day]];
-            }
-        }
-    } else {
-        if ([breakdownInfo day] >=2){
-            age = [NSString stringWithFormat:@"%ld days", (long)[breakdownInfo day]];
-        } else {
             age = [NSString stringWithFormat:@"%ld day", (long)[breakdownInfo day]];
+            }
         }
-    }
-    
+            
+
+
     return age;
 }
 
@@ -243,7 +207,11 @@
     // Email Content
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     NSString *deviceType = [UIDevice currentDevice].model;
-    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\niOS: %@, Device: %@\nCurrent View:%@",currSysVer, deviceType, viewString];
+    NSString *appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *versionBuildString = [NSString stringWithFormat:@"Version: %@ (%@)", appVersionString, appBuildString];
+    
+    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\nApp %@\niOS: %@, Device: %@\nCurrent View: %@",versionBuildString, currSysVer, deviceType, viewString];
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@"kwbyron@byronanalytics.com"];
     NSArray *ccRecipents = [NSArray arrayWithObject:@"quentinalexander2000@gmail.com"];

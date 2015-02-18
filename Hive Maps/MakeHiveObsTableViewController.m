@@ -24,6 +24,7 @@
 //Alert View Tag Macros
 #define kAlertViewInfo 1
 #define kAlertViewSaveData 2
+#define kAlertViewOldObs 3
 
 //Constants
 #define kFrameWeight 2.5
@@ -47,7 +48,8 @@
 @synthesize aggressionLevel;
 @synthesize treatmentMethod;
 @synthesize treatmentStatus;
- 
+BOOL useOldObs;
+
 //Inputs and Outlets
   @synthesize temperatureValue;
   //Behavior
@@ -88,8 +90,7 @@
         _location = appDelegate.locationManager.location;
         [_locationManager startUpdatingLocation];
     }
-   hiveObservation = (HiveObservation * )[NSEntityDescription insertNewObjectForEntityForName:@"HiveObservation" inManagedObjectContext:_managedObjectContext];
-   
+    
     //Dismiss Keyboard
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.tableView addGestureRecognizer:gestureRecognizer];
@@ -110,6 +111,18 @@
     commentTextField.textColor = [UIColor blueColor];
     commentTextField.delegate = self;
     
+    //Check for observation within 12hours, if so prompt to use existing values
+    NSDate *lastObs = hive.lastObservation.observationDate;
+    NSTimeInterval obsAge = -[lastObs timeIntervalSinceNow];
+    int secIn12Hours = 43200;
+    
+    if (obsAge < secIn12Hours) {
+        [self newObsAlert];
+    } else {
+        useOldObs = NO;
+        [self dataInitialization];
+    }
+
     //email Bug Report
     UISwipeGestureRecognizer *swipeRightForEmail = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeToEmail:)];
     swipeRightForEmail.direction = UISwipeGestureRecognizerDirectionRight;
@@ -118,26 +131,7 @@
 
 }
 
-- (BOOL) textViewShouldBeginEditing:(UITextField *)textField{
-    
-    if ([commentTextField.text isEqualToString:@"Add Notes"]) {
-        commentTextField.text = @"";
-        commentTextField.textColor = [UIColor blackColor];
-    }
-    
-    return YES;
-}
--(void)textFieldDidChange:(UITextField *)textField{
-    if (commentTextField.text.length == 0) {
-        commentTextField.text = @"Add Notes";
-        commentTextField.textColor = [UIColor blueColor];
-        [commentTextField resignFirstResponder];
-    }
-
-    
-}
-
--(void) viewDidAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated{
     //code run each time view appears
     
     //Change temperature field to show the temp if collected
@@ -150,6 +144,27 @@
     
     [self requeenSwitchChanged:nil];
     [self healthSwitch:nil];
+
+}
+
+- (BOOL) textViewShouldBeginEditing:(UITextField *)textField{
+    
+    if ([commentTextField.text isEqualToString:@"Add Notes"]) {
+        commentTextField.text = @"";
+        commentTextField.textColor = [UIColor blackColor];
+    }
+    
+    return YES;
+}
+
+-(void)textFieldDidChange:(UITextField *)textField{
+    if (commentTextField.text.length == 0) {
+        commentTextField.text = @"Add Notes";
+        commentTextField.textColor = [UIColor blueColor];
+        [commentTextField resignFirstResponder];
+    }
+
+    
 }
 
 - (void) hideKeyboard {
@@ -164,6 +179,61 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) dataInitialization{
+    NSLog(@"Data Initialization - useOldObs:%@", useOldObs ? @"Yes" : @"No");
+    
+    if (useOldObs) {
+        
+        hiveObservation = hive.lastObservation;
+        swarmSwitch.on = [hiveObservation.swarm boolValue];
+        insurSwitch.on = [hiveObservation.cupsInsur boolValue];
+        droneSwitch.on = [hiveObservation.drone boolValue];
+        self.aggressionSegControl.selectedSegmentIndex = [hiveObservation.aggressionLevel integerValue] - 1;
+        [self segIndexChanged:nil];
+        
+        obsQueenSwitch.on = [hiveObservation.observedQueen boolValue];
+        self.queenRateView.rating = [hiveObservation.queenPerformance floatValue];
+        [self rateView:queenRateView ratingDidChange:self.queenRateView.rating];
+        
+        requeenSwitch.on = [hiveObservation.requeened boolValue];
+        if (requeenSwitch.on) {
+            queenSourceTF.text = hiveObservation.queenSource;
+        }
+        propolisSwitch.on = [hiveObservation.propolisObserved boolValue];
+        statusSwitch.on = [hiveObservation.healthStatus boolValue];
+        if (statusSwitch.on) {
+            treatmentTextField.text = hiveObservation.treatment;
+            if ([hiveObservation.treatmentStage isEqualToString:@"none"]) {
+                self.treatmentPhaseSegmentControl.selectedSegmentIndex = 0;
+            } else if([hiveObservation.treatmentStage isEqualToString:@"started"]){
+                self.treatmentPhaseSegmentControl.selectedSegmentIndex = 1;
+            } else if([hiveObservation.treatmentStage isEqualToString:@"on going"]){
+                self.treatmentPhaseSegmentControl.selectedSegmentIndex = 2;
+            } else {
+                self.treatmentPhaseSegmentControl.selectedSegmentIndex = 3;
+            }
+        }
+        commentTextField.text = hiveObservation.commentBox;
+        
+        NSString *temperature = [hiveObservation valueForKeyPath:@"weatherObservation.temperature"];
+        if(temperature == nil){
+            temperatureValue.text = @"--.-";
+        }else {
+            temperatureValue.text = [NSString stringWithFormat:@"%@", temperature];
+        }
+        
+        NSLog(@"Old Data: %@", hiveObservation);
+        
+    } else {
+        
+        hiveObservation = (HiveObservation * )[NSEntityDescription insertNewObjectForEntityForName:@"HiveObservation" inManagedObjectContext:_managedObjectContext];
+        NSLog(@"New Hive Observation Created");
+    }
+    
+}
+
+    
+    
 #pragma mark --------------- User Input Controls ---------------
 //Aggression Input
 -(IBAction)segIndexChanged:(UISegmentedControl *)sender
@@ -274,66 +344,6 @@
     }
 }
 
-#pragma mark --------------- Alert Views ---------------
-
-- (IBAction)treatmentAlert:(id)sender {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Describe Illness and Treatment"
-                                                    message:@"i.e. Varroa Mites, hung 2 Aspistan strips."
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles: nil];
-    
-    alert.tag = kAlertViewInfo;
-    [alert show];
-}
-
-- (IBAction)queenPerfPopup:(id)sender {
-    NSString *messageText = @"Rate the queen's performance on a scale of 1-10";
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Defining Queen Performance"
-                                                    message:messageText
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles: nil];
-    
-    NSArray *subviewArray = alert.subviews;
-    for(int x = 0; x < [subviewArray count]; x++){
-        
-        if([[[subviewArray objectAtIndex:x] class] isSubclassOfClass:[UILabel class]]) {
-            UILabel *label = [subviewArray objectAtIndex:x];
-            label.textAlignment = NSTextAlignmentLeft;
-        }
-    }
-    
-    alert.tag = kAlertViewInfo;
-    [alert show];
-}
-
-- (IBAction)aggInfoPopup:(id)sender {
-    
-    NSString *messageText = @"1 - Bees are docile \n3 - Bees are defensive\n5 - Bees are highly aggressive ";
-    
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Defining Aggression Level"
-                                                    message:messageText
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    
-    NSArray *subviewArray = alert.subviews;
-    for(int x = 0; x < [subviewArray count]; x++){
-        
-        if([[[subviewArray objectAtIndex:x] class] isSubclassOfClass:[UILabel class]]) {
-            UILabel *label = [subviewArray objectAtIndex:x];
-            label.textAlignment = NSTextAlignmentLeft;
-        }
-    }
-    alert.tag = kAlertViewInfo;
-    [alert show];
-}
-
-
 #pragma mark --------------- SAVE DATA TO CORE DATA ---------------
 - (IBAction)saveObsEvent:(id)sender {
     
@@ -377,6 +387,91 @@
     [self performSegueWithIdentifier:@"unwindToHome" sender:self];
 }
 
+#pragma mark --------------- Alert Views ---------------
+// Instructions
+- (IBAction)aggInfoPopup:(id)sender {
+    
+    NSString *messageText = @"1 - Bees are docile \n3 - Bees are defensive\n5 - Bees are highly aggressive ";
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Defining Aggression Level"
+                                                    message:messageText
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    
+    NSArray *subviewArray = alert.subviews;
+    for(int x = 0; x < [subviewArray count]; x++){
+        
+        if([[[subviewArray objectAtIndex:x] class] isSubclassOfClass:[UILabel class]]) {
+            UILabel *label = [subviewArray objectAtIndex:x];
+            label.textAlignment = NSTextAlignmentLeft;
+        }
+    }
+    alert.tag = kAlertViewInfo;
+    [alert show];
+}
+
+- (IBAction)queenPerfPopup:(id)sender {
+    NSString *messageText = @"Rate the queen's performance on a scale of 1-10";
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Defining Queen Performance"
+                                                    message:messageText
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles: nil];
+    
+    NSArray *subviewArray = alert.subviews;
+    for(int x = 0; x < [subviewArray count]; x++){
+        
+        if([[[subviewArray objectAtIndex:x] class] isSubclassOfClass:[UILabel class]]) {
+            UILabel *label = [subviewArray objectAtIndex:x];
+            label.textAlignment = NSTextAlignmentLeft;
+        }
+    }
+    
+    alert.tag = kAlertViewInfo;
+    [alert show];
+}
+
+- (IBAction)treatmentAlert:(id)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Describe Illness and Treatment"
+                                                    message:@"i.e. Varroa Mites, hung 2 Aspistan strips."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles: nil];
+    
+    alert.tag = kAlertViewInfo;
+    [alert show];
+}
+
+// Alerts Requiring User Decisions
+-(void)newObsAlert{
+    NSString *messageText = @"Last observation was less then 12 hours ago\n Would you like to edit the values?";
+    
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Recent Hive Check Made"
+                                                    message:messageText
+                                                   delegate:self
+                                          cancelButtonTitle:@"Create New"
+                                          otherButtonTitles:@"Edit Old", nil];
+    
+    NSArray *subviewArray = alert.subviews;
+    for(int x = 0; x < [subviewArray count]; x++){
+        
+        if([[[subviewArray objectAtIndex:x] class] isSubclassOfClass:[UILabel class]]) {
+            UILabel *label = [subviewArray objectAtIndex:x];
+            label.textAlignment = NSTextAlignmentLeft;
+        }
+    }
+    
+    alert.tag = kAlertViewOldObs;
+    [alert show];
+    
+    
+}
+
 - (IBAction)cancelHiveObs:(id)sender {
     //add popup to notify cancel = lost data
     
@@ -389,23 +484,66 @@
     [alertView3 show];
 }
 
-//Alert view delegate
+// ----- Alert view delegate ------
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(alertView.tag == kAlertViewInfo){
-        //Dialog boxes, no action needed
-        NSLog(@"No Action");
+    //Done button pressed - save Data?
+    if(alertView.tag == kAlertViewSaveData){
+        // If User is editing Data
+        if (useOldObs) {
+            if (buttonIndex == 1){
+                //message dismissed, no action
+                NSLog(@"Cancel");
+                
+            } else if(buttonIndex == 0){
+                NSLog(@"Data discarded");
+                //unwinding will discard changes without saving
+                [self performSegueWithIdentifier:@"unwindToHome" sender:self];
+            }
+        //User is Creating a New Observation
+        } else {
         
-    } else if(alertView.tag == kAlertViewSaveData){
-        if (buttonIndex == 1){
-            //message dismissed, no action
-            NSLog(@"Cancel");
+            if (buttonIndex == 1){
+                //message dismissed, no action
+                NSLog(@"Cancel");
             
-        }else if(buttonIndex == 0){
-            NSLog(@"Data discarded");
-            //code for discarding new managed object and recent weather observations
-            //[self.managedObjectContext rollback];
-            [self performSegueWithIdentifier:@"unwindToHome" sender:self];
+            }else if(buttonIndex == 0){
+                NSLog(@"Data discarded");
+                //code for discarding new managed object and recent weather observations
+                if (hiveObservation.weatherObservation) {  //Has a weather Obs been made?
+                    [self.managedObjectContext deleteObject:hiveObservation.weatherObservation];
+                }
+                
+                if (hiveObservation.boxObservations.count > 0) { //Have box observations been made?
+                    for(id boxObs in hiveObservation.boxObservations){
+                        [self.managedObjectContext deleteObject:boxObs];
+                    }
+                }
+                
+                if(hiveObservation){ // Does hiveObservation exist?
+                    [self.managedObjectContext deleteObject:hiveObservation];
+                }
+                
+                NSError *error = nil;
+                if (![self.managedObjectContext save:&error]){
+                    NSLog(@"Error deleting observation, %@", [error userInfo]);
+                }
+                
+                [self performSegueWithIdentifier:@"unwindToHome" sender:self];
+                
+                NSLog(@"Deleted Observations: %@", hiveObservation);
+            }
         }
+            
+    //Use Old Data Alart
+    } else if(alertView.tag == kAlertViewOldObs){
+        if (buttonIndex == 0) {
+            useOldObs = NO;
+            [self dataInitialization];
+        } else {
+            useOldObs = YES;
+            [self dataInitialization];
+        }
+        
     }
     
 }
@@ -427,12 +565,17 @@
         
     } else if ([[segue identifier] isEqualToString:@"makeBoxObs"]) {
         [self.locationManager stopUpdatingLocation];
-
         //Pass selected Hive to new view controller
         UINavigationController *navController = (UINavigationController *) [segue destinationViewController];
         MakeBoxObservationTableViewController *makeBoxObservationTableViewController = (MakeBoxObservationTableViewController *)[navController topViewController];
         makeBoxObservationTableViewController.hive = hive;
-
+        if (![hiveObservation.boxObservations count]) {
+            makeBoxObservationTableViewController.sampled = NO;
+        } else {
+            makeBoxObservationTableViewController.sampled = YES;
+            makeBoxObservationTableViewController.hiveObservation = hiveObservation;
+        }
+        
     } else {
         
         [self.locationManager stopUpdatingLocation];
@@ -470,7 +613,11 @@
     // Email Content
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     NSString *deviceType = [UIDevice currentDevice].model;
-    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\niOS: %@, Device: %@\nCurrent View:%@",currSysVer, deviceType, viewString];
+    NSString *appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *versionBuildString = [NSString stringWithFormat:@"Version: %@ (%@)", appVersionString, appBuildString];
+    
+    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\nApp %@\niOS: %@, Device: %@\nCurrent View: %@",versionBuildString, currSysVer, deviceType, viewString];
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@"kwbyron@byronanalytics.com"];
     NSArray *ccRecipents = [NSArray arrayWithObject:@"quentinalexander2000@gmail.com"];

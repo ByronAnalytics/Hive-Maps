@@ -113,6 +113,7 @@ float maxYValue;
     plotElementsDictionary = [NSDictionary dictionaryWithObjects:plotElementValues forKeys:plotElementKeys];
     selectedElementsDictionary = [[NSMutableDictionary alloc] init];
     
+    NSLog(@"View Setup Complete");
 }
 
 
@@ -363,7 +364,7 @@ float maxYValue;
     for (NSInteger j = minorIncrement; j <= yMax; j += minorIncrement) {
         NSUInteger mod = j % majorIncrement;
         if (mod == 0) {
-            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%i", j] textStyle:y.labelTextStyle];
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%li", (long)j] textStyle:y.labelTextStyle];
             NSDecimal location = CPTDecimalFromInteger(j);
             label.tickLocation = location;
             label.offset = -y.majorTickLength - y.labelOffset;

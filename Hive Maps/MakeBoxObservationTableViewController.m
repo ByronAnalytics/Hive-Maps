@@ -12,6 +12,7 @@
 #import "MakeBoxObservationTableViewController.h"
 #import "AppDelegate.h"
 #import "MakeHiveObsTableViewController.h"
+#import <math.h>
 
 #import "HiveBox.h"
 #import "BoxObservation.h"
@@ -22,7 +23,6 @@
 @property (strong, nonatomic) NSMutableDictionary *boxStatus; //value: Status key:boxID
 @property (strong, nonatomic) NSArray *boxFrameArray;
 @property (strong, nonatomic) NSMutableDictionary *managedObjectIDs;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *commitDataButton;
 
 //Picker Elements
 @property (strong, nonatomic) UIPickerView *boxPicker;
@@ -30,54 +30,10 @@
 @property (strong, nonatomic) NSArray *boxIdArray;
 @property (strong, nonatomic) NSArray *boxDataArray;
 
-//Box Details User Elements
-@property (weak, nonatomic) IBOutlet UILabel *box1ofNLabel;
-@property (weak, nonatomic) IBOutlet UILabel *boxesObservedLabel;
-@property (weak, nonatomic) IBOutlet UITextField *boxIDTF;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-
-//Productivity Inputs
-@property (weak, nonatomic) IBOutlet UISlider *broodSlider;
-@property (weak, nonatomic) IBOutlet UILabel *broodLabel;
-@property (weak, nonatomic) IBOutlet UISlider *workerSlider;
-@property (weak, nonatomic) IBOutlet UILabel *workerLabel;
-@property (weak, nonatomic) IBOutlet UISlider *honeySlider;
-@property (weak, nonatomic) IBOutlet UILabel *honeyLabel;
-
-//Wax BuildOut
-@property (weak, nonatomic) IBOutlet UISwitch *waxSwitch;
-@property (weak, nonatomic) IBOutlet UILabel *waxSwitchLabel;
-@property (weak, nonatomic) IBOutlet UISlider *waxSlider;
-@property (weak, nonatomic) IBOutlet UILabel *waxSliderLabel;
-@property (weak, nonatomic) IBOutlet UILabel *waxBuildOutLabel;
-
 @end
 
 @implementation MakeBoxObservationTableViewController
-
-//Core Data Elements
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize hive;
-@synthesize hiveObservation;
-
-//InClass Variables
-@synthesize boxStatus;
-@synthesize boxFrameArray;
-@synthesize managedObjectIDs;
-@synthesize completedBoxes; // passed back to hiveObservation to set relationship
-@synthesize commitDataButton;
-
-int boxesSavedIndex = 0;
-int totalFrames;
-BOOL alertMade;
-
-
-//Picker Elements
-@synthesize boxPicker;
-@synthesize boxPickerData;
-@synthesize boxIdArray;
-@synthesize boxDataArray;
-
+// ----- User Interaction elements ------
 //Box Details User Elements
 @synthesize box1ofNLabel;
 @synthesize boxesObservedLabel;
@@ -98,20 +54,61 @@ BOOL alertMade;
 @synthesize waxSliderLabel;
 @synthesize waxBuildOutLabel;
 
+// ----- Data Variables -----
+//Core Data Elements
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize hive;
+@synthesize hiveObservation;
+//@synthesize sampled;
+
+//Picker Elements
+@synthesize boxPicker;
+@synthesize boxPickerData;
+@synthesize boxIdArray;
+@synthesize boxDataArray;
+
+//InClass Variables
+@synthesize boxStatus;
+@synthesize boxFrameArray;
+@synthesize managedObjectIDs;
+@synthesize completedBoxes; // passed back to hiveObservation to set relationship
+@synthesize commitDataButton;
+
+int boxesSavedIndex = 0;
+float totalFrames;
+float maxSliderValue;
+BOOL alertMade;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _managedObjectContext = [appDelegate managedObjectContext];
+   
+    managedObjectIDs = [[NSMutableDictionary alloc]init];
     
+    //If observations have previously been made - load data
+    if (self.isSampled) {
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"hiveBox.boxID" ascending:YES]];
+        NSArray *sortedBoxes = [[hiveObservation.boxObservations allObjects] sortedArrayUsingDescriptors:sortDescriptors];
+        
+        for(NSManagedObject *obj in sortedBoxes){
+            [managedObjectIDs setObject:obj forKey:[obj valueForKeyPath:@"hiveBox.boxID"]];
+        }
+    }
+    self.boxesObservedLabel.text = [NSString stringWithFormat:@"Boxes Observed: %lu", (unsigned long)managedObjectIDs.count];
     [self loadBoxes]; //setup arrays for picker, slider limits, and core data
     alertMade = NO;
     
     //Set initial Label Values
     box1ofNLabel.text = [NSString stringWithFormat:@"0 of %lu", (unsigned long)boxIdArray.count];
     statusLabel.text = @"Status:";
-
+    
+    //set initial state for wax buildout
+    waxBuildOutLabel.textColor = [UIColor grayColor];
+    waxSliderLabel.textColor = [UIColor grayColor];
+    
     //Setup Picker
     boxPicker = [[UIPickerView alloc] init];
     boxPicker.dataSource = self;
@@ -120,16 +117,14 @@ BOOL alertMade;
     boxIDTF.inputView = boxPicker;
     boxPickerData = boxIdArray;
     
-    //set initial state for wax buildout
-    waxBuildOutLabel.textColor = [UIColor grayColor];
-    waxSliderLabel.textColor = [UIColor grayColor];
-    
-    //email Bug Report
+    //setup email Bug Report
     UISwipeGestureRecognizer *swipeRightForEmail = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeToEmail:)];
     swipeRightForEmail.direction = UISwipeGestureRecognizerDirectionRight;
     swipeRightForEmail.numberOfTouchesRequired = 2;
     [self.tableView addGestureRecognizer:swipeRightForEmail];
-
+    
+    //direct User to select first box for sampling
+    [boxIDTF becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,13 +140,18 @@ BOOL alertMade;
     
     //populate array for setting slider max number of frames
     boxStatus = [[NSMutableDictionary alloc] init];
-    managedObjectIDs = [[NSMutableDictionary alloc] initWithCapacity:boxIdArray.count];
     
     boxFrameArray = [boxDataArray valueForKey:@"numFrames"];
-    for (int i = 0; i < boxIdArray.count; i++) {
-        [boxStatus setValue:@"No" forKey:boxIdArray[i]];
-        
-    }
+    
+        for (int i = 0; i < boxIdArray.count; i++) {
+            if([managedObjectIDs valueForKey:boxIdArray[i]]){
+                [boxStatus setValue:@"Yes" forKey:boxIdArray[i]];
+            } else {
+                [boxStatus setValue:@"No" forKey:boxIdArray[i]];
+            }
+        }
+    NSLog(@"Box Statu: %@", boxStatus);
+    
 }
 
 #pragma mark --------------- Box Picker Controls ---------------
@@ -163,9 +163,25 @@ BOOL alertMade;
     
     box1ofNLabel.text = [NSString stringWithFormat:@"%ld of %ld",(long)index, (long)numBoxes];
     statusLabel.text = [boxStatus valueForKey:currentBox];
-
-    NSString *rowBoxStatus = [boxStatus valueForKey:currentBox];
+    self.boxesObservedLabel.text = [NSString stringWithFormat:@"Boxes Observed: %lu", (unsigned long)managedObjectIDs.count];
     
+    //Enable Sliders
+    if (broodSlider.enabled == NO) {
+        commitDataButton.enabled = YES;
+        broodSlider.enabled = YES;
+        workerSlider.enabled = YES;
+        honeySlider.enabled = YES;
+    }
+    
+    // set slider maximum values from selected box values
+    totalFrames = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] floatValue];
+    broodSlider.maximumValue = totalFrames;
+    workerSlider.maximumValue = totalFrames;
+    honeySlider.maximumValue = totalFrames;
+    waxSlider.maximumValue = totalFrames;
+
+    //Setup Sliders and textfields
+    NSString *rowBoxStatus = [boxStatus valueForKey:currentBox];
     if ([rowBoxStatus  isEqual: @"No"] == TRUE) {
         
         statusLabel.text = @"Status: unsaved";
@@ -182,38 +198,31 @@ BOOL alertMade;
         
         
     } else {
-        
-            statusLabel.text = @"Status: saved";
+        //PreLoad Old Data
+        statusLabel.text = @"Status: saved";
         BoxObservation *box = [managedObjectIDs valueForKey:boxIDTF.text];
         
         // get current core data values for box
         broodSlider.value = [box.framesBrood floatValue];
+        broodLabel.text = [NSString stringWithFormat:@"%.2f", broodSlider.value];
+
         workerSlider.value = [box.framesWorkers floatValue];
+        workerLabel.text = [NSString stringWithFormat:@"%.2f", workerSlider.value];
+
         honeySlider.value = [box.framesHoney floatValue];
+        honeyLabel.text = [NSString stringWithFormat:@"%.2f", honeySlider.value];
+
         if ([box.buildOut integerValue] == 1) {
             waxSwitch.on =  YES;
             waxSlider.value = [box.framesBuildOut floatValue];
+            waxBuildOutLabel.text = [NSString stringWithFormat:@"%.2f", waxSlider.value];
+
         } else {
             waxSwitch.on = NO;
             waxSlider.value = 0;
         }
     }
     
-    //Enable Sliders
-    if (broodSlider.enabled == NO) {
-        commitDataButton.enabled = YES;
-        broodSlider.enabled = YES;
-        workerSlider.enabled = YES;
-        honeySlider.enabled = YES;
-    }
-    
-    // set slider maximum values from selected box values
-    totalFrames = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] intValue];
-    broodSlider.maximumValue = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] floatValue];
-    workerSlider.maximumValue = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] floatValue];
-    honeySlider.maximumValue = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] floatValue];
-    waxSlider.maximumValue = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] floatValue];
-  
 }
 
 //#Columns in Picker CURRENTLY SINGLE PICKER FOR BOX TYPE
@@ -238,34 +247,57 @@ BOOL alertMade;
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
 
     NSString *rowBoxID = boxPickerData[row];
-    NSString *rowBoxStatus = [boxStatus valueForKey:rowBoxID];
     
-    if ([rowBoxStatus  isEqual: @"Yes"] == TRUE) { //if box data hasn't been committed, text is Black
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:rowBoxID attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
-        return attString;
-    } else {                //if box has been saved, text is greyed out
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:rowBoxID attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        return attString;
-    }
+    //if box has been saved, text is greyed out
+    NSAttributedString *attString = [[NSAttributedString alloc] initWithString:rowBoxID attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    return attString;
+    
 }
 
 #pragma mark --------------- Data input Controls ---------------
 //Productivity inputs
 - (IBAction)broodSliderChanged:(id)sender {
-    int sliderValue = ceilf(broodSlider.value);
-    broodLabel.text = [NSString stringWithFormat:@"%d", sliderValue];
-}
-
-- (IBAction)workerSliderChanged:(id)sender {
-    int sliderValue = ceilf(workerSlider.value);
-    workerLabel.text = [NSString stringWithFormat:@"%d", sliderValue];
-    //Workers exist ontop of frame, not included in maximum possible values
+    float maxValue = totalFrames - (honeySlider.value + waxSlider.value);
+    float currentValue = broodSlider.value;
+    
+    float stepValue = 0.25f;
+    float nextStep = roundf(currentValue/stepValue);
+    float newValue = nextStep * stepValue;
+    
+    if (newValue <= maxValue){
+        broodSlider.value = newValue;
+    } else {
+        broodSlider.value = maxValue;
+    }
+    
+    broodLabel.text = [NSString stringWithFormat:@"%.2f", broodSlider.value];
 }
 
 - (IBAction)honeySliderChanged:(id)sender {
-    int sliderValue = ceilf(honeySlider.value);
-    honeyLabel.text = [NSString stringWithFormat:@"%d", sliderValue];
+    float maxValue = totalFrames - (broodSlider.value + waxSlider.value);
+    float stepValue = 0.25f;
+    float currentValue = honeySlider.value;
+    float nextStep = roundf(currentValue/stepValue);
+    float newValue = nextStep * stepValue;
+    
+    if (newValue <= maxValue) {
+        honeySlider.value = newValue;
+    } else {
+        honeySlider.value = maxValue;
+    }
+    
+    honeyLabel.text = [NSString stringWithFormat:@"%.2f", honeySlider.value];
 }
+
+- (IBAction)workerSliderChanged:(id)sender {
+    float stepValue = 0.25f;
+    float currentValue = workerSlider.value;
+    float nextStep = roundf(currentValue/stepValue);
+    workerSlider.value = nextStep * stepValue;
+    
+    workerLabel.text = [NSString stringWithFormat:@"%.2f", workerSlider.value];
+}
+
 
 // Wax Build out Data
 - (IBAction)waxSwtichChanged:(id)sender {
@@ -275,7 +307,7 @@ BOOL alertMade;
         waxBuildOutLabel.textColor = [UIColor blackColor];
         waxSliderLabel.textColor = [UIColor blackColor];
         waxSlider.enabled = YES;
-        waxSlider.maximumValue = [[boxFrameArray objectAtIndex:[boxPicker selectedRowInComponent:0]] floatValue];
+
     } else {
         waxSwitchLabel.text = @"No";
         waxSlider.value = 0;
@@ -289,8 +321,21 @@ BOOL alertMade;
 }
 
 - (IBAction)waxSliderValueChanged:(id)sender {
-    int sliderValue = ceilf(waxSlider.value);
-    waxSliderLabel.text = [NSString stringWithFormat:@"%d", sliderValue];
+    float maxValue = totalFrames - (broodSlider.value + honeySlider.value);
+    float stepValue = 0.25f;
+    float currentValue = waxSlider.value;
+    float nextStep = roundf(currentValue/stepValue);
+    float newValue = nextStep * stepValue;
+    
+    if (newValue <= maxValue){
+        waxSlider.value = newValue;
+    } else {
+        waxSlider.value = maxValue;
+    }
+    
+    waxSliderLabel.text = [NSString stringWithFormat:@"%.2f", waxSlider.value];
+    NSLog(@"Wax Slider Value: %f", waxSlider.value);
+    
 }
 
 #pragma mark --------------- Save Data ---------------
@@ -330,7 +375,7 @@ BOOL alertMade;
         box.framesWorkers = [NSNumber numberWithFloat:workerSlider.value];
         box.framesHoney = [NSNumber numberWithFloat:honeySlider.value];
         box.buildOut = [NSNumber numberWithBool:waxSwitch.on];
-        box.framesBuildOut = [NSNumber numberWithInt:waxSlider.value];
+        box.framesBuildOut = [NSNumber numberWithFloat:waxSlider.value];
         
         
         //Relationships
@@ -386,14 +431,7 @@ BOOL alertMade;
         
     }
     
-        
-        
     [boxDataArray objectAtIndex:[boxIdArray indexOfObject:boxIDTF.text]];
-    
-    
-    
-    
-    
 }
 - (void) boxesCompleteAlert{
     //alert notification
@@ -460,7 +498,11 @@ BOOL alertMade;
     // Email Content
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     NSString *deviceType = [UIDevice currentDevice].model;
-    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\niOS: %@, Device: %@\nCurrent View:%@",currSysVer, deviceType, viewString];
+    NSString *appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *versionBuildString = [NSString stringWithFormat:@"Version: %@ (%@)", appVersionString, appBuildString];
+    
+    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\nApp %@\niOS: %@, Device: %@\nCurrent View: %@",versionBuildString, currSysVer, deviceType, viewString];
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@"kwbyron@byronanalytics.com"];
     NSArray *ccRecipents = [NSArray arrayWithObject:@"quentinalexander2000@gmail.com"];

@@ -54,6 +54,25 @@ NSString *APPID = @"aced8d32f3a99cbe735019eb4f8e5bf0";
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.tableView addGestureRecognizer:gestureRecognizer];
     
+    if (hiveObs.weatherObservation) {
+        WeatherObservation *weather = hiveObs.weatherObservation;
+        
+        stationTextField.text = weather.stationID;
+        
+        //Set Text Field Values
+        distanceTextField.text = [NSString stringWithFormat:@"%@", weather.stationDistance];
+        stationCodeTextField.text = weather.stationType;
+        tempTextField.text = [NSString stringWithFormat:@"%@", weather.temperature];
+        humidityTextField.text = [NSString stringWithFormat:@"%@", weather.humidity];
+        precip1HrTextField.text = [NSString stringWithFormat:@"%@", weather.precip1hr];
+        precip24HrTextField.text = [NSString stringWithFormat:@"%@", weather.precip24hr];
+        pressureTextField.text = [NSString stringWithFormat:@"%@", weather.pressure];
+        windSpeedTextField.text = [NSString stringWithFormat:@"%@", weather.windSpeed];
+        windDirectionTextField.text = [NSString stringWithFormat:@"%@", weather.windDir];
+    }
+    
+    
+    
     //email Bug Report
     UISwipeGestureRecognizer *swipeRightForEmail = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeToEmail:)];
     swipeRightForEmail.direction = UISwipeGestureRecognizerDirectionRight;
@@ -259,7 +278,11 @@ NSString *APPID = @"aced8d32f3a99cbe735019eb4f8e5bf0";
     // Email Content
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     NSString *deviceType = [UIDevice currentDevice].model;
-    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\niOS: %@, Device: %@\nCurrent View:%@",currSysVer, deviceType, viewString];
+    NSString *appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *versionBuildString = [NSString stringWithFormat:@"Version: %@ (%@)", appVersionString, appBuildString];
+    
+    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\nApp %@\niOS: %@, Device: %@\nCurrent View: %@",versionBuildString, currSysVer, deviceType, viewString];
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@"kwbyron@byronanalytics.com"];
     NSArray *ccRecipents = [NSArray arrayWithObject:@"quentinalexander2000@gmail.com"];

@@ -242,7 +242,6 @@
 
 -(IBAction)unWindToHome:(UIStoryboardSegue *)segue{
     // need to record observation data into db
-    
 }
 
 
@@ -255,8 +254,12 @@
     // Email Content
     NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
     NSString *deviceType = [UIDevice currentDevice].model;
+    NSString *appBuildString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *versionBuildString = [NSString stringWithFormat:@"Version: %@ (%@)", appVersionString, appBuildString];
+
     NSString *viewString = @"Main View";
-    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\niOS: %@, Device: %@\nCurrent View:%@",currSysVer, deviceType, viewString];
+    NSString *messageBody = [NSString stringWithFormat:@"Describe the Bug:\n\nwhat were you doing:\n\nWhat happened?\n\nAny additional information\n\n\n\n---------system info------------\nApp %@\niOS: %@, Device: %@\nCurrent View: %@",versionBuildString, currSysVer, deviceType, viewString];
     // To address
     NSArray *toRecipents = [NSArray arrayWithObject:@"kwbyron@byronanalytics.com"];
     NSArray *ccRecipents = [NSArray arrayWithObject:@"quentinalexander2000@gmail.com"];
