@@ -196,6 +196,7 @@
 		52508F941A7455B5007EF20D /* Star Images */ = {
 			isa = PBXGroup;
 			children = (
+				52DE3EF81A95310E00859679 /* 180X180HiveMaps2015.png */,
 				52B9EA3B1A77FFFE004BAA89 /* TEXASEMPTY.png */,
 				528A3B431A7AB6C7007F2BFC /* TEXASHALF.png */,
 				52B9EA3C1A77FFFE004BAA89 /* TEXASFULL.png */,
@@ -228,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				528C34541A5A1DEE00DB9539 /* Main.storyboard */,
-				52DE3EF81A95310E00859679 /* 180X180HiveMaps2015.png */,
 				5270C69D1A59FBA000F0C1B0 /* AppDelegate.h */,
 				5270C69E1A59FBA000F0C1B0 /* AppDelegate.m */,
 				52593AB51A59FF3200EB5A1D /* MainTableViewController.h */,

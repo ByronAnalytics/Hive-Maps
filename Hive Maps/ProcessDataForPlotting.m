@@ -17,6 +17,18 @@ Data arrays for each variable are created and stored in instance for this class 
 #import "HiveBox.h"
 #import "WeatherObservation.h"
 
+//Private Variables
+@interface ProcessDataForPlotting ()
+
+@property (nonatomic, strong, readonly) NSMutableArray *broodTotals, *honeyTotals, *workerTotals, *queenPerformance, *temperature, *humidity, *pressure, *windSpeed; //hive parameters and covariates
+
+@property (nonatomic, strong, readonly) NSMutableArray  *didRequeen, *wasSick, *obsQueen, *obsInsuranceCups, *obsDrones, *obsSwarming; //boolean values
+@property (nonatomic, strong, readonly) NSMutableArray *siteHive, *queenSource, *diseaseTreatment; //descriptors for 'hover over' displays
+@property (nonatomic, strong) NSArray *plotSymbolArray, *colorArray;
+
+@end
+//******************************************************************
+
 @implementation ProcessDataForPlotting
 
 @synthesize dateArray;
@@ -69,7 +81,7 @@ Data arrays for each variable are created and stored in instance for this class 
             float framesWorkers = 0;
             float framesHoney = 0;
         
-            for (id box in boxes) {
+            for (id box in boxes) { //consolidate box observations
                 framesBrood = framesBrood + [[box valueForKey:@"framesBrood"] floatValue];
                 framesWorkers = framesWorkers + [[box valueForKey:@"framesWorkers"] floatValue];
                 framesHoney = framesHoney + [[box valueForKey:@"framesHoney"] floatValue];
@@ -78,6 +90,7 @@ Data arrays for each variable are created and stored in instance for this class 
             [broodTotals addObject:[NSNumber numberWithFloat:framesBrood]];
             [honeyTotals addObject:[NSString stringWithFormat:@"%f", framesHoney]];
             [workerTotals addObject:[NSNumber numberWithFloat:framesWorkers]];
+            
         } else {
             //If observations weren't made, pass null for plotting
             [broodTotals addObject:[NSNull null]];
@@ -117,6 +130,7 @@ Data arrays for each variable are created and stored in instance for this class 
         [diseaseTreatment addObject:[obs valueForKey:@"treatment"]];
      
     }
+    
     [self defineDictionaries:hive];
     [self definePlotSymbolArray];
     [self defineColorArray];    
