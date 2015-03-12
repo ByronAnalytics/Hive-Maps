@@ -14,13 +14,15 @@
 
 @interface MultiHivePlotViewController ()
 
+
+
 @end
 
 @implementation MultiHivePlotViewController
-
 //Variables for TableView
-@synthesize allHives;
-
+@synthesize variablesArray;
+@synthesize hivesArray;
+@synthesize hiveData;
 
 
 - (void)viewDidLoad {
@@ -29,6 +31,12 @@
     [self aggregateData];
     [self initPlot];
     
+    //Set plotting Elements:
+    variablesArray = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
+    hivesArray = [hiveData allKeys];
+    
+    self.plotElementsDisplayed = NO;
+    self.plotElementsTableView.hidden = YES;
     
 }
 
@@ -49,9 +57,7 @@
     [fetchAllHives setSortDescriptors:@[sortDescriptor]];
     
     NSError *fetchError = nil;
-    allHives = [self.managedObjectContext executeFetchRequest:fetchAllHives error:&fetchError];
-    
-    NSLog(@"Fetch Results: \n%@", allHives);
+    NSArray *allHives = [self.managedObjectContext executeFetchRequest:fetchAllHives error:&fetchError];
     
     NSMutableDictionary *hiveData = [[NSMutableDictionary alloc] init];
     
@@ -59,15 +65,66 @@
         ProcessDataForPlotting *data = [[ProcessDataForPlotting alloc] init];
         [data generateDataArrays:hive];
         [hiveData setObject:data forKey:hive.hiveID];
-        NSLog(@"Data for %@: %@", hive.hiveID, data);
-        
     }
-    //test to see if data is aggregating properly
-    
+    // Each ProcessData Object has: *dateDictionary, *broodDictionary, *honeyDictionary, *workerDictionary, *queenPerformanceDictionary, *temperatureDictionary, *humidityDictionary, *pressureDictionary, *windSpeedDictionary
+}
+
+# pragma mark ------- Table View Controls --------
+-(void)updatePlotElementsTableView{
+    if (!self.isPlotElementsDisplayed) {  // plotElements Displayed == NO (values selected, TV dismissed intended, graph updated)
+        self.plotElementsTableView.hidden = YES;        //hide TableView
+        [self.view bringSubviewToFront:self.hostView];  // Make Graph front view
+        [self updatePlotData];                          //update Graph
+        
+    } else {
+        self.plotElementsTableView.hidden = NO;
+        [self.view sendSubviewToBack:self.hostView]; // push plot to background
+        
+        if ([self.plotElementsGroup isEqualToString:@"Variables"]) {
+            self.tableArray = variablesArray;
+            NSLog(@"TableArray: %@", self.tableArray);
+        } else if ([self.plotElementsGroup isEqualToString:@"Hives"]) {
+            self.tableArray = hivesArray;
+            NSLog(@"TableArray: %@", self.tableArray);
+        }
+        
+        [self.plotElementsTableView reloadData];
+    }
     
 }
 
+- (IBAction)variablesButton:(id)sender {
+    if (self.isPlotElementsDisplayed) { //Table is already showing
+        if([self.plotElementsGroup isEqualToString:@"Variables"]){ //Button click to de-select
+            self.plotElementsDisplayed = !self.isPlotElementsDisplayed;
+            [self updatePlotElementsTableView];
+        } else { // Hives table is currently displayed, switch to Variables table
+            self.plotElementsGroup = @"Variables";
+            [self updatePlotElementsTableView];
+        }
+    } else { // Plot Elements TableView is hidden, show and set elemets
+        self.plotElementsGroup = @"Variables";
+        self.plotElementsDisplayed = !self.isPlotElementsDisplayed;
+        [self updatePlotElementsTableView];
+    }
+    
+}
 
+- (IBAction)hivesButton:(id)sender {
+    if (self.isPlotElementsDisplayed) { //Table is already showing
+        if([self.plotElementsGroup isEqualToString:@"Hives"]){ //Button click to de-select
+            self.plotElementsDisplayed = !self.isPlotElementsDisplayed;
+            [self updatePlotElementsTableView];
+        } else { // Variables table is currently displayed, switch to Hives Table
+            self.plotElementsGroup = @"Hives";
+            [self updatePlotElementsTableView];
+        }
+    } else { // Plot Elements TableView is hidden, show and set elemets
+        self.plotElementsGroup =@"Hives";
+        self.plotElementsDisplayed = !self.isPlotElementsDisplayed;
+        [self updatePlotElementsTableView];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -80,6 +137,16 @@
     [self configureGraph];
     [self configurePlots];
     [self configureAxes];
+}
+
+-(void)updatePlotData{
+    
+    //self.graph = nil;
+    
+    [self configureGraph];
+    [self configurePlots];
+    [self configureAxes];
+    //[self configureLegend];
 }
 
 -(void)configureHost {
@@ -122,9 +189,38 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0; //tableArray.count;
+    return self.tableArray.count; //tableArray.count;
 }
 
-
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *cellIdentifier = @"plotElementCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    //cell.textLabel.text = [self.tableArray objectAtIndex:indexPath.row];
+    
+    
+    if ([self.plotElementsGroup isEqualToString:@"Hives"]) {
+        cell.textLabel.text = @"a"; //[variablesArray objectAtIndex:indexPath.row];
+        
+        //if the indexPath was found among the selected ones, set the checkmark on the cell
+        //cell.accessoryType = ([self isRowSelectedOnTableView:tableView atIndexPath:indexPath]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        return cell;
+        
+    } else {
+        cell.textLabel.text = [hivesArray objectAtIndex:indexPath.row];
+        
+        //if the indexPath was found among the selected ones, set the checkmark on the cell
+        //cell.accessoryType = ([self isRowSelectedOnTableView:tableView atIndexPath:indexPath]) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        return cell;
+        
+        //
+    }
+    
+    //return cell;
+}
 
 @end

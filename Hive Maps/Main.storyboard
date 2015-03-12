@@ -2304,7 +2304,7 @@
                             <toolbar opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCa-iH-CjT">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="PQt-W1-UbY"/>
+                                    <constraint firstAttribute="height" constant="44" id="Oz6-6j-icX"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem title="Back" id="ws7-Dp-Gq2">
@@ -2328,7 +2328,7 @@
                                             <action selector="eventsButton:" destination="uNd-5o-jIy" id="1sZ-17-CZ3"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="J8H-uh-EUk"/>
+                                    <barButtonItem width="25" style="plain" systemItem="fixedSpace" id="J8H-uh-EUk"/>
                                 </items>
                                 <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="800" height="44"/>
@@ -2337,20 +2337,21 @@
                                     <outlet property="delegate" destination="uNd-5o-jIy" id="XTc-7m-rzg"/>
                                 </connections>
                             </toolbar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubj-dF-imn" userLabel="Plot Window" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="44" width="800" height="307"/>
-                                </variation>
-                            </view>
                             <tableView opaque="NO" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y48-QH-ULr">
                                 <rect key="frame" x="0.0" y="44" width="194" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="194" id="oVs-aq-Uct"/>
+                                    <constraint firstAttribute="width" constant="194" id="MlU-Mx-L31"/>
                                 </constraints>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="ubj-dF-imn" userLabel="Plot Window" customClass="CPTGraphHostingView">
+                                    <rect key="frame" x="0.0" y="66" width="194" height="507"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <gestureRecognizers/>
+                                    <variation key="heightClass=compact-widthClass=regular" fixedFrame="YES">
+                                        <rect key="frame" x="0.0" y="44" width="800" height="307"/>
+                                    </variation>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="plotElementCell" textLabel="afj-L9-GsK" style="IBUITableViewCellStyleDefault" id="MbT-TD-dnV">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -2381,27 +2382,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ubj-dF-imn" firstAttribute="leading" secondItem="rCa-iH-CjT" secondAttribute="leading" id="1WY-JB-f5H"/>
-                            <constraint firstItem="rCa-iH-CjT" firstAttribute="top" secondItem="Tx5-pI-lTc" secondAttribute="top" id="9dX-C9-P2p"/>
-                            <constraint firstItem="ubj-dF-imn" firstAttribute="top" secondItem="rCa-iH-CjT" secondAttribute="bottom" id="NPv-WB-Iip"/>
-                            <constraint firstItem="rCa-iH-CjT" firstAttribute="trailing" secondItem="ubj-dF-imn" secondAttribute="trailing" id="OzC-8r-YtR"/>
-                            <constraint firstAttribute="trailing" secondItem="rCa-iH-CjT" secondAttribute="trailing" id="UFj-I9-QlL"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="leading" secondItem="ubj-dF-imn" secondAttribute="leading" id="XaZ-YM-8kF"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="leading" secondItem="Tx5-pI-lTc" secondAttribute="leading" id="eJP-Pj-i81"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="bottom" secondItem="kJ9-eV-KZX" secondAttribute="top" id="oDr-cD-zV8"/>
-                            <constraint firstItem="y48-QH-ULr" firstAttribute="top" secondItem="ubj-dF-imn" secondAttribute="top" id="pbJ-pU-pTi"/>
-                            <constraint firstItem="ubj-dF-imn" firstAttribute="bottom" secondItem="kJ9-eV-KZX" secondAttribute="top" id="zZQ-o9-GgP"/>
+                            <constraint firstItem="rCa-iH-CjT" firstAttribute="top" secondItem="Tx5-pI-lTc" secondAttribute="top" id="627-5Y-qw1"/>
+                            <constraint firstItem="rCa-iH-CjT" firstAttribute="leading" secondItem="Tx5-pI-lTc" secondAttribute="leading" id="KIW-fl-6ca"/>
+                            <constraint firstItem="y48-QH-ULr" firstAttribute="leading" secondItem="Tx5-pI-lTc" secondAttribute="leading" id="bkK-RX-LRZ"/>
+                            <constraint firstItem="y48-QH-ULr" firstAttribute="top" secondItem="rCa-iH-CjT" secondAttribute="bottom" id="dpe-by-yGq"/>
+                            <constraint firstItem="kJ9-eV-KZX" firstAttribute="top" secondItem="y48-QH-ULr" secondAttribute="bottom" id="hQY-46-yF9"/>
+                            <constraint firstAttribute="trailing" secondItem="rCa-iH-CjT" secondAttribute="trailing" id="sH0-vp-Ms5"/>
                         </constraints>
-                        <variation key="heightClass=compact">
-                            <mask key="subviews">
-                                <include reference="y48-QH-ULr"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=regular">
-                            <mask key="subviews">
-                                <include reference="ubj-dF-imn"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Explore Hive" id="UQS-FN-PaN" userLabel="Explore Hive"/>
                     <connections>
@@ -2983,37 +2970,11 @@
                                     <rect key="frame" x="207" y="44" width="593" height="507"/>
                                 </variation>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncs-O3-jKI">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem style="done" systemItem="done" id="EOB-fF-sAp">
-                                        <connections>
-                                            <segue destination="gEl-f9-CAq" kind="unwind" unwindAction="unwindToHiveDetails:" id="TaG-i2-lrU"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="40" style="plain" systemItem="flexibleSpace" id="dPr-hh-lkR"/>
-                                    <barButtonItem title="Hives" id="gwe-ar-iTq">
-                                        <connections>
-                                            <action selector="hivesButton:" destination="c9B-FE-YmO" id="KWW-Ui-79b"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Variable" id="I9q-gN-1g8">
-                                        <connections>
-                                            <action selector="variablesButton:" destination="c9B-FE-YmO" id="iku-Mh-acf"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="44"/>
-                                </variation>
-                            </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-0L-Y3U">
-                                <rect key="frame" x="0.0" y="44" width="320" height="507"/>
+                            <tableView clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rZs-0L-Y3U">
+                                <rect key="frame" x="0.0" y="44" width="194" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="8YM-Rf-Dpg"/>
-                                    <constraint firstAttribute="width" constant="150" id="nVv-Gd-ghV"/>
-                                    <constraint firstAttribute="width" constant="199" id="obm-1a-4XP"/>
+                                    <constraint firstAttribute="width" constant="194" id="f4o-ag-Lo9"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="plotElementCell" textLabel="ktX-pJ-ZZC" style="IBUITableViewCellStyleDefault" id="Cu3-CN-TPv">
@@ -3034,43 +2995,55 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="nVv-Gd-ghV"/>
-                                        <exclude reference="obm-1a-4XP"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="nVv-Gd-ghV"/>
-                                    </mask>
-                                </variation>
                                 <variation key="widthClass=regular" ambiguous="YES">
                                     <rect key="frame" x="0.0" y="44" width="199" height="507"/>
-                                    <mask key="constraints">
-                                        <exclude reference="8YM-Rf-Dpg"/>
-                                    </mask>
                                 </variation>
-                                <variation key="heightClass=compact-widthClass=regular">
-                                    <mask key="constraints">
-                                        <exclude reference="nVv-Gd-ghV"/>
-                                        <include reference="obm-1a-4XP"/>
-                                    </mask>
-                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="c9B-FE-YmO" id="Hkw-mD-Mpx"/>
+                                    <outlet property="delegate" destination="c9B-FE-YmO" id="l4G-2D-7yK"/>
+                                </connections>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncs-O3-jKI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="iBy-MK-27a"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Back" id="EOB-fF-sAp">
+                                        <connections>
+                                            <segue destination="gEl-f9-CAq" kind="unwind" unwindAction="unwindToHiveDetails:" id="TaG-i2-lrU"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="40" style="plain" systemItem="flexibleSpace" id="dPr-hh-lkR"/>
+                                    <barButtonItem title="Hives" id="gwe-ar-iTq">
+                                        <connections>
+                                            <action selector="hivesButton:" destination="c9B-FE-YmO" id="KWW-Ui-79b"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Variable" id="I9q-gN-1g8">
+                                        <connections>
+                                            <action selector="variablesButton:" destination="c9B-FE-YmO" id="iku-Mh-acf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="25" style="plain" systemItem="fixedSpace" id="BFm-uR-3Ed"/>
+                                </items>
+                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="44"/>
+                                </variation>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d25-ae-MxT" firstAttribute="top" secondItem="rZs-0L-Y3U" secondAttribute="top" id="1F7-dp-org"/>
-                            <constraint firstItem="d25-ae-MxT" firstAttribute="trailing" secondItem="Ncs-O3-jKI" secondAttribute="trailing" id="5Vl-K5-38r"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="ARL-PJ-6FI"/>
-                            <constraint firstItem="d25-ae-MxT" firstAttribute="leading" secondItem="rZs-0L-Y3U" secondAttribute="leading" id="Aqs-tU-JaO"/>
-                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="Did-hy-snG"/>
-                            <constraint firstItem="d25-ae-MxT" firstAttribute="bottom" secondItem="jpv-Bd-L7u" secondAttribute="top" id="Iyv-0D-t9e"/>
+                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="ElP-NZ-W43"/>
+                            <constraint firstItem="d25-ae-MxT" firstAttribute="top" secondItem="Ncs-O3-jKI" secondAttribute="bottom" id="Eo2-lp-8Fo"/>
                             <constraint firstItem="Ncs-O3-jKI" firstAttribute="top" secondItem="9nK-00-ywB" secondAttribute="top" id="NED-yx-1uO"/>
                             <constraint firstAttribute="trailing" secondItem="Ncs-O3-jKI" secondAttribute="trailing" id="PIv-2r-AHk"/>
-                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="bottom" secondItem="jpv-Bd-L7u" secondAttribute="top" id="ZMa-Ik-Ahx"/>
-                            <constraint firstItem="Ncs-O3-jKI" firstAttribute="leading" secondItem="rZs-0L-Y3U" secondAttribute="leading" id="oRe-WL-bKq"/>
+                            <constraint firstItem="jpv-Bd-L7u" firstAttribute="top" secondItem="rZs-0L-Y3U" secondAttribute="bottom" id="QTi-uw-xad"/>
+                            <constraint firstItem="jpv-Bd-L7u" firstAttribute="top" secondItem="d25-ae-MxT" secondAttribute="bottom" id="UMP-4a-8CU"/>
+                            <constraint firstItem="rZs-0L-Y3U" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="e47-7X-904"/>
+                            <constraint firstAttribute="trailing" secondItem="d25-ae-MxT" secondAttribute="trailing" id="fbP-pZ-P72"/>
+                            <constraint firstItem="d25-ae-MxT" firstAttribute="leading" secondItem="9nK-00-ywB" secondAttribute="leading" id="zBY-i2-XSc"/>
                         </constraints>
                         <variation key="heightClass=compact">
                             <mask key="subviews">
@@ -3085,16 +3058,13 @@
                                 <exclude reference="ARL-PJ-6FI"/>
                                 <exclude reference="NED-yx-1uO"/>
                                 <exclude reference="PIv-2r-AHk"/>
-                                <exclude reference="oRe-WL-bKq"/>
-                                <exclude reference="Did-hy-snG"/>
-                                <exclude reference="ZMa-Ik-Ahx"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Compare Hives" id="a1Q-MN-KPI"/>
                     <connections>
                         <outlet property="hivesButton" destination="gwe-ar-iTq" id="TcI-J2-Pfz"/>
-                        <outlet property="plotElementsTV" destination="rZs-0L-Y3U" id="oIQ-Gp-kxM"/>
+                        <outlet property="plotElementsTableView" destination="rZs-0L-Y3U" id="Zhv-Fg-bMs"/>
                         <outlet property="plotSpaceUIView" destination="d25-ae-MxT" id="hqQ-8F-hFp"/>
                         <outlet property="toolbar" destination="Ncs-O3-jKI" id="xA0-CA-fjq"/>
                         <outlet property="variablesButton" destination="I9q-gN-1g8" id="EIq-q4-5hq"/>

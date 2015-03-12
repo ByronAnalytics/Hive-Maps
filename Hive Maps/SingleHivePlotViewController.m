@@ -90,11 +90,9 @@ float maxYValue;
     
     //Set plotting Elements:
     variablesArray = @[@"Brood Frames", @"Honey Frames", @"Queen Performance", @"Worker Frames"];
-    //variablesSelectedArray = [[NSMutableArray alloc] init];
     variablesSelectedCellsArray = [[NSMutableArray alloc] init];
     
     weatherArray = @[@"Temperature", @"Humidity", @"Pressure", @"Wind Speed"];
-    //weatherSelectedArray  = [[NSMutableArray alloc] init];
     weatherSelectedCellsArray  = [[NSMutableArray alloc] init];
     
     eventsArray = @[@"Re-queened", @"Illness", @"Drone Cells", @"Insurance Cups", @"Swarming"];

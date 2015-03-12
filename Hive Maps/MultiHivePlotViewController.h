@@ -17,7 +17,7 @@
 // View Setup
 @property (nonatomic, strong) CPTGraphHostingView *hostView;
 @property (weak, nonatomic) IBOutlet UIView *plotSpaceUIView;
-@property (weak, nonatomic) IBOutlet UITableView *plotElementsTV;
+@property (weak, nonatomic) IBOutlet UITableView *plotElementsTableView;
 
 // Toolbar Setup
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -29,9 +29,18 @@
 - (IBAction)variablesButton:(id)sender;
 
 
-//############ Move to Private Variables
+//############ Move to Private Variables ############
+//Table View
+@property (nonatomic, strong) NSArray *tableArray;
+@property (strong, nonatomic) NSArray *variablesArray;  //This might need to be a local variable and selectedVariables the only global...
+@property (strong, nonatomic) NSArray *hivesArray; //ditto
 
-@property (strong, nonatomic) NSArray *allHives;
+//Data
+@property (strong, nonatomic) NSMutableDictionary *hiveData; //key: hiveID Value: ProcessDataObj
+
+//User Controls
+@property (nonatomic, assign, getter=isPlotElementsDisplayed) BOOL plotElementsDisplayed;
+@property (nonatomic, strong) NSString *plotElementsGroup; //assigns which tableview was selected
 
 
 @end

@@ -78,10 +78,10 @@
     </entity>
     <elements>
         <element name="BoxData" positionX="-191" positionY="-135" width="128" height="103"/>
-        <element name="HiveDetails" positionX="-191" positionY="144" width="128" height="193"/>
-        <element name="HiveBox" positionX="-2" positionY="-169" width="128" height="148"/>
         <element name="BoxObservation" positionX="0" positionY="9" width="128" height="178"/>
-        <element name="HiveObservation" positionX="196" positionY="9" width="128" height="328"/>
-        <element name="WeatherObservation" positionX="378" positionY="38" width="128" height="268"/>
+        <element name="HiveBox" positionX="-2" positionY="-169" width="128" height="148"/>
+        <element name="HiveDetails" positionX="-191" positionY="50" width="128" height="193"/>
+        <element name="HiveObservation" positionX="214" positionY="-72" width="128" height="328"/>
+        <element name="WeatherObservation" positionX="396" positionY="-43" width="128" height="268"/>
     </elements>
 </model>
