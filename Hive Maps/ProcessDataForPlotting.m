@@ -9,7 +9,7 @@ Data arrays for each variable are created and stored in instance for this class 
  
  
  */
-#import "CorePlot-CocoaTouch.h"
+#import <CorePlot/iOS/CorePlot-CocoaTouch.h>
 
 #import "ProcessDataForPlotting.h"
 #import "HiveObservation.h"

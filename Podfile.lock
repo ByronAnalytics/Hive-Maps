@@ -18,14 +18,16 @@ PODS:
   - AFNetworking/UIKit (2.2.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CorePlot (1.5.1)
+  - CorePlot (1.6)
 
 DEPENDENCIES:
   - AFNetworking (= 2.2.1)
   - CorePlot (~> 1.4)
 
 SPEC CHECKSUMS:
-  AFNetworking: 8dde8c8a6597ad95dac332a593c27e541bc87371
-  CorePlot: b15cb1a9a687b9576545104248d6e22033e678bb
+  AFNetworking: 59a0b8e9ecd4e194d64b4967232cd2cc83490113
+  CorePlot: 820901f6c147f2d84549ffa1f0902869f980d74d
 
-COCOAPODS: 0.35.0
+PODFILE CHECKSUM: 897f4cbef21fe102eede76f06bdedc2f6368cd47
+
+COCOAPODS: 1.2.1

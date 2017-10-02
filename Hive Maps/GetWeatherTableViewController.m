@@ -42,7 +42,7 @@
 NSString *weatherAPI = @"api.openweathermap.org";
 
 // OpenWeatherMap API Key
-NSString *APPID = @"aced8d32f3a99cbe735019eb4f8e5bf0";
+NSString *APPID = @"05ed9421d659f844bd16e4e9c90df9a4";
 //from openweathermap.org/my key for HiveSavers, kwbyron@byronanalytics.com
 //service is free upto 3000 calls/min 4 mil/day
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CorePlot-CocoaTouch.h"
+#import <CorePlot/ios/CorePlot-CocoaTouch.h>
 
 @interface MultiHivePlotViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CPTScatterPlotDataSource>
 

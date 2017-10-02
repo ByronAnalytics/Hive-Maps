@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		407820629A32CB4547FBEE69 /* libPods-Hive Maps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */; };
+		0B767D7BF4FBAE47100C6C97 /* libPods-Hive Maps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE280C8D11E304C770F0199 /* libPods-Hive Maps.a */; };
 		5202236C1A7189D6008C8553 /* Hive_Maps.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5202236A1A7189D6008C8553 /* Hive_Maps.xcdatamodeld */; };
 		520223781A7192C6008C8553 /* WeatherObservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 520223771A7192C6008C8553 /* WeatherObservation.m */; };
 		5202237B1A7192C6008C8553 /* BoxData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5202237A1A7192C6008C8553 /* BoxData.m */; };
@@ -46,6 +46,7 @@
 		52CEE2201A6EEFF300CEB07D /* Old Code Storage.m in Sources */ = {isa = PBXBuildFile; fileRef = 52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */; };
 		52DE3EF91A95310E00859679 /* 180X180HiveMaps2015.png in Resources */ = {isa = PBXBuildFile; fileRef = 52DE3EF81A95310E00859679 /* 180X180HiveMaps2015.png */; };
 		52EDB79A1A7045F60074377A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52EDB7991A7045F60074377A /* CoreLocation.framework */; };
+		9DC8BAB6A62F1DD1E0EEEEF9 /* libPods-Hive MapsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20AC526FED9F77F4CBCCFACE /* libPods-Hive MapsTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +60,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hive Maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20AC526FED9F77F4CBCCFACE /* libPods-Hive MapsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hive MapsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AE280C8D11E304C770F0199 /* libPods-Hive Maps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hive Maps.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E79452DB8AC6F9AA54E8FE2 /* Pods-Hive MapsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive MapsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hive MapsTests/Pods-Hive MapsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		345C88762B2DF6989403986A /* Pods-Hive MapsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive MapsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hive MapsTests/Pods-Hive MapsTests.release.xcconfig"; sourceTree = "<group>"; };
 		5202236B1A7189D6008C8553 /* Hive_Maps.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hive_Maps.xcdatamodel; sourceTree = "<group>"; };
 		520223761A7192C6008C8553 /* WeatherObservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherObservation.h; sourceTree = "<group>"; };
 		520223771A7192C6008C8553 /* WeatherObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherObservation.m; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		520223861A719363008C8553 /* HiveObservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveObservation.m; sourceTree = "<group>"; };
 		520223881A71BFB0008C8553 /* HiveDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiveDetails.h; sourceTree = "<group>"; };
 		520223891A71BFB0008C8553 /* HiveDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HiveDetails.m; sourceTree = "<group>"; };
+		5207D5E01AD337B800573CFB /* Hive Maps.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Hive Maps.entitlements"; sourceTree = "<group>"; };
 		521CCDC21A7FE70500133FF3 /* DataLuggage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLuggage.h; sourceTree = "<group>"; };
 		521CCDC31A7FE70500133FF3 /* DataLuggage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLuggage.m; sourceTree = "<group>"; };
 		521CCDCB1A805CDE00133FF3 /* TabBarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarNavigationController.h; sourceTree = "<group>"; };
@@ -124,8 +129,8 @@
 		52CEE21F1A6EEFF300CEB07D /* Old Code Storage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Old Code Storage.m"; sourceTree = "<group>"; };
 		52DE3EF81A95310E00859679 /* 180X180HiveMaps2015.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 180X180HiveMaps2015.png; path = Images.xcassets/AppIcon.appiconset/180X180HiveMaps2015.png; sourceTree = "<group>"; };
 		52EDB7991A7045F60074377A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		7F6C319CB264F916C862B7B9 /* Pods-Hive Maps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive Maps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps.debug.xcconfig"; sourceTree = "<group>"; };
-		87FE16095083AC6A89238EC2 /* Pods-Hive Maps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive Maps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps.release.xcconfig"; sourceTree = "<group>"; };
+		8AB1F373D967E06750A856B1 /* Pods-Hive Maps.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive Maps.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps.release.xcconfig"; sourceTree = "<group>"; };
+		BA9338B357BF128B7D6251F8 /* Pods-Hive Maps.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hive Maps.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +141,7 @@
 				528A3B421A7AA939007F2BFC /* MessageUI.framework in Frameworks */,
 				52EDB79A1A7045F60074377A /* CoreLocation.framework in Frameworks */,
 				52593AB91A5A01EE00EB5A1D /* CoreData.framework in Frameworks */,
-				407820629A32CB4547FBEE69 /* libPods-Hive Maps.a in Frameworks */,
+				0B767D7BF4FBAE47100C6C97 /* libPods-Hive Maps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,12 +149,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC8BAB6A62F1DD1E0EEEEF9 /* libPods-Hive MapsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43C95DE322F57A21B707CFFE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA9338B357BF128B7D6251F8 /* Pods-Hive Maps.debug.xcconfig */,
+				8AB1F373D967E06750A856B1 /* Pods-Hive Maps.release.xcconfig */,
+				2E79452DB8AC6F9AA54E8FE2 /* Pods-Hive MapsTests.debug.xcconfig */,
+				345C88762B2DF6989403986A /* Pods-Hive MapsTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5234F03A1A79BDC60038E298 /* Worker Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,8 +228,8 @@
 				5270C6B51A59FBA000F0C1B0 /* Hive MapsTests */,
 				5270C6971A59FBA000F0C1B0 /* Products */,
 				52593AB81A5A01EE00EB5A1D /* CoreData.framework */,
-				684613173CD0A3E2833EBB51 /* Pods */,
 				566956A89C49E9DF1B29C1C2 /* Frameworks */,
+				43C95DE322F57A21B707CFFE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -228,6 +245,7 @@
 		5270C6981A59FBA000F0C1B0 /* Hive Maps */ = {
 			isa = PBXGroup;
 			children = (
+				5207D5E01AD337B800573CFB /* Hive Maps.entitlements */,
 				528C34541A5A1DEE00DB9539 /* Main.storyboard */,
 				5270C69D1A59FBA000F0C1B0 /* AppDelegate.h */,
 				5270C69E1A59FBA000F0C1B0 /* AppDelegate.m */,
@@ -313,18 +331,10 @@
 			children = (
 				528A3B411A7AA939007F2BFC /* MessageUI.framework */,
 				52EDB7991A7045F60074377A /* CoreLocation.framework */,
-				13A0099B7257EDAC4E3C65C1 /* libPods-Hive Maps.a */,
+				2AE280C8D11E304C770F0199 /* libPods-Hive Maps.a */,
+				20AC526FED9F77F4CBCCFACE /* libPods-Hive MapsTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		684613173CD0A3E2833EBB51 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7F6C319CB264F916C862B7B9 /* Pods-Hive Maps.debug.xcconfig */,
-				87FE16095083AC6A89238EC2 /* Pods-Hive Maps.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,12 +344,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5270C6BC1A59FBA000F0C1B0 /* Build configuration list for PBXNativeTarget "Hive Maps" */;
 			buildPhases = (
-				FCA07888EF8693F6AC1085A9 /* Check Pods Manifest.lock */,
+				C1376EB21CFDC2ACC8B640B6 /* [CP] Check Pods Manifest.lock */,
 				5270C6921A59FBA000F0C1B0 /* Sources */,
 				5270C6931A59FBA000F0C1B0 /* Frameworks */,
 				5270C6941A59FBA000F0C1B0 /* Resources */,
 				52F7A00B1A707959009B7400 /* Update Build Version */,
-				A086B4ED09309D8FE85E1CC3 /* Copy Pods Resources */,
+				24071BAF45C7D9F0B9445C47 /* [CP] Embed Pods Frameworks */,
+				6D57DB169161D89A02F37648 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -354,9 +365,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5270C6BF1A59FBA000F0C1B0 /* Build configuration list for PBXNativeTarget "Hive MapsTests" */;
 			buildPhases = (
+				E61B6660338A8DD7CCA88014 /* [CP] Check Pods Manifest.lock */,
 				5270C6AE1A59FBA000F0C1B0 /* Sources */,
 				5270C6AF1A59FBA000F0C1B0 /* Frameworks */,
 				5270C6B01A59FBA000F0C1B0 /* Resources */,
+				B516A2BE8432B192AB38A679 /* [CP] Embed Pods Frameworks */,
+				5E6EF5CE8AF415AFCD7CA999 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,10 +393,16 @@
 				TargetAttributes = {
 					5270C6951A59FBA000F0C1B0 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = B68V74EU8K;
+						DevelopmentTeam = DUPSRB9398;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					5270C6B11A59FBA000F0C1B0 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = DUPSRB9398;
 						TestTargetID = 5270C6951A59FBA000F0C1B0;
 					};
 				};
@@ -433,6 +453,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		24071BAF45C7D9F0B9445C47 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		52F7A00B1A707959009B7400 /* Update Build Version */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -447,14 +482,29 @@
 			shellPath = /bin/bash;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\")\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n";
 		};
-		A086B4ED09309D8FE85E1CC3 /* Copy Pods Resources */ = {
+		5E6EF5CE8AF415AFCD7CA999 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hive MapsTests/Pods-Hive MapsTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D57DB169161D89A02F37648 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,19 +512,49 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hive Maps/Pods-Hive Maps-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FCA07888EF8693F6AC1085A9 /* Check Pods Manifest.lock */ = {
+		B516A2BE8432B192AB38A679 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hive MapsTests/Pods-Hive MapsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1376EB21CFDC2ACC8B640B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E61B6660338A8DD7CCA88014 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -622,16 +702,19 @@
 		};
 		5270C6BD1A59FBA000F0C1B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F6C319CB264F916C862B7B9 /* Pods-Hive Maps.debug.xcconfig */;
+			baseConfigurationReference = BA9338B357BF128B7D6251F8 /* Pods-Hive Maps.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "Hive Maps/Hive Maps.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = DUPSRB9398;
 				INFOPLIST_FILE = "Hive Maps/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.HiveMaps3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -640,16 +723,19 @@
 		};
 		5270C6BE1A59FBA000F0C1B0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87FE16095083AC6A89238EC2 /* Pods-Hive Maps.release.xcconfig */;
+			baseConfigurationReference = 8AB1F373D967E06750A856B1 /* Pods-Hive Maps.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "Hive Maps/Hive Maps.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = DUPSRB9398;
 				INFOPLIST_FILE = "Hive Maps/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.HiveMaps3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -658,8 +744,10 @@
 		};
 		5270C6C01A59FBA000F0C1B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E79452DB8AC6F9AA54E8FE2 /* Pods-Hive MapsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = DUPSRB9398;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -677,8 +765,10 @@
 		};
 		5270C6C11A59FBA000F0C1B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 345C88762B2DF6989403986A /* Pods-Hive MapsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = DUPSRB9398;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
