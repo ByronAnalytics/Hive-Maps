@@ -13,17 +13,18 @@ This project is functional for a single bee keeper, however, implimentation of a
 (and properly anonymization of the data) is still pending. 
 
 The project utalizes several Cocoa Pods: AFNetworking and CorePlot, which have been updated to run in XCode 9. 
-
-Below are some application screen shots:  
-Home screen, a tableview of hives user manages.  
-<img src="https://github.com/ByronAnalytics/Hive-Maps/blob/Plotting/IMG_1981.PNG" height="600" />  
   
-Hive overview screen  
+## Below are some application screen shots:  
+  
+**Home screen, a tableview of hives user manages.**    
+<img src="https://github.com/ByronAnalytics/Hive-Maps/blob/Plotting/IMG_1981.PNG" height="600" />  
+   
+**Hive overview screen**  
 <img src="https://github.com/ByronAnalytics/Hive-Maps/blob/Plotting/IMG_1983.PNG" height="600" />
-
-Data Collection screen w/ custom rating input   
+  
+**Data Collection screen w/ custom rating input**   
 <img src="https://github.com/ByronAnalytics/Hive-Maps/blob/Plotting/IMG_1984.PNG" height="600" />  
-
-Plotting screen for viewing Hive trends over time  
+  
+**Plotting screen for viewing Hive trends over time**  
 <img src="https://github.com/ByronAnalytics/Hive-Maps/blob/Plotting/IMG_1982.PNG" Width="600" />  
 
